@@ -7,6 +7,7 @@
 *.obj
 *.elf
 *.img
+!kernel/src/memory/mm_malloc.o
 
 # Linker output
 *.ilk

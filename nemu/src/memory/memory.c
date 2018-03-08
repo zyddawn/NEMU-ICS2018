@@ -53,8 +53,8 @@ void init_mem() {
 	memset(hw_mem, 0, MEM_SIZE_B);
 
 #ifdef TLB_ENABLED
-	init_all_tlb();
 	make_all_tlb();
+	init_all_tlb();
 #endif
 }
 

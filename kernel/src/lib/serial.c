@@ -14,5 +14,6 @@ serial_idle(void) {
 void
 serial_printc(char ch) {
 	while (!serial_idle()); // wait untile serial is idle
-	panic("please print \'ch\' via out instruction");
+	// panic("please print \'ch\' via out instruction");
+	HIT_BAD_TRAP;
 }
