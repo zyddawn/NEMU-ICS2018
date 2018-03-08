@@ -1,8 +1,8 @@
 LIB_COMMON_DIR = ../include
 NEWLIBC_DIR = $(LIB_COMMON_DIR)/newlib
 
-#GAME = typing
-GAME = nemu-pal
+GAME = typing
+#GAME = nemu-pal
 
 CC = gcc
 CFLAGS = -m32 -MMD -Wall -Werror -Wno-format\
