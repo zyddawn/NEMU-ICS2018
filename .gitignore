@@ -37,7 +37,7 @@ nemu/nemu
 kernel/kernel
 game/game
 testcase/bin/
-testcase/src/
+testcase/src/*
 !testcase/src/*.c
 game/src/nemu-pal/data/
 
