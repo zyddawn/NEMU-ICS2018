@@ -39,6 +39,7 @@ game/game
 testcase/bin/
 testcase/src/*
 !testcase/src/*.c
+!testcase/src/*.S
 game/src/nemu-pal/data/
 
 
