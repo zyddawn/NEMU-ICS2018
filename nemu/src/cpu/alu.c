@@ -4,19 +4,16 @@ uint32_t alu_add(uint32_t src, uint32_t dest) {
 	uint32_t res = 0;
 	res = src + dest;
 	// ZF
-	if(res == 0)
-		cpu.eflags.ZF = 1;
-	else
-		cpu.eflags.ZF = 0;
+	cpu.eflags.ZF = (res==0)? 1 : 0;
 	// PF
 	int count1 = 0;
 	uint32_t temp = res;
 	while(temp > 0) {
-		if(temp%2==1)
+		if(temp & 0x1)   // last digit is 1
 			count1 += 1;
-		temp /= 2;
+		temp >>= 1;
 	}
-	cpu.eflags.PF = (count1%2==1);
+	cpu.eflags.PF = (count1 & 0x1);  // count1 is odd
 	// CF
 	
 	
