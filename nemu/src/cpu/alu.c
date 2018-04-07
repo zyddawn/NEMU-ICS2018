@@ -6,20 +6,26 @@ uint32_t alu_add(uint32_t src, uint32_t dest) {
 	// ZF
 	cpu.eflags.ZF = (res==0)? 1 : 0;
 	// PF
-	int count1 = 0;
-	uint32_t temp = res;
+	uint32_t cnt1 = 0, temp = res;
 	while(temp > 0) {
 		if(temp & 0x1)   // last digit is 1
-			++ count1;
+			++ cnt1;
 		temp >>= 1;
 	}
-	cpu.eflags.PF = (count1 & 0x1);  // count1 is odd
+	cpu.eflags.PF = (cnt1 & 0x1);  // count1 is odd
 	// SF
 	cpu.eflags.SF = (res >> 31) & 0x1;
 	// CF
-	
+	uint32_t Cin, A, B, Cout=0, \
+		 temp_src = src, temp_dest = dest;
+	for(int cnt_bit=0; cnt_bit<32; ++cnt_bit) {
+		A = temp_src & 0x1, B = temp_dest & 0x1, Cin = Cout;
+		temp_src >>= 1, temp_dest >>= 1;
+		Cout = (A&B) | (A&Cin) | (B&Cin);
+	}
+	cpu.eflags.CF = Cout;
 	// OF
-	
+	cpu.eflags.OF = ((src>>31)==(dest>>31)) && ((src>>31)^(res>>31));
 	return res;
 }
 
