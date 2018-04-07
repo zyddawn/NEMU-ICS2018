@@ -1,9 +1,26 @@
 #include "cpu/cpu.h"
 
 uint32_t alu_add(uint32_t src, uint32_t dest) {
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	assert(0);
-	return 0;
+	uint32_t res = 0;
+	res = src + dest;
+	// ZF
+	if(res == 0)
+		cpu.eflags.ZF = 1;
+	else
+		cpu.eflags.ZF = 0;
+	// PF
+	int count1 = 0;
+	uint32_t temp = res;
+	while(temp > 0) {
+		if(temp%2==1)
+			count1 += 1;
+		temp /= 2;
+	}
+	cpu.eflags.PF = (count1%2==1);
+	// CF
+	
+	
+	return res;
 }
 
 uint32_t alu_adc(uint32_t src, uint32_t dest) {
