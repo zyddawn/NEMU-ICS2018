@@ -10,12 +10,15 @@ uint32_t alu_add(uint32_t src, uint32_t dest) {
 	uint32_t temp = res;
 	while(temp > 0) {
 		if(temp & 0x1)   // last digit is 1
-			count1 += 1;
+			++ count1;
 		temp >>= 1;
 	}
 	cpu.eflags.PF = (count1 & 0x1);  // count1 is odd
+	// SF
+	cpu.eflags.SF = (res >> 31) & 0x1;
 	// CF
 	
+	// OF
 	
 	return res;
 }
