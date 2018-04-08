@@ -1,5 +1,15 @@
 #include "cpu/cpu.h"
 
+uint32_t cnt_one_in_digits(uint32_t x, uint32_t upper_bound) {
+	uint32_t cnt=0;
+	for(uint32_t i=0; i<upper_bound; ++i) {
+		if(x & 0x1)
+			++cnt;
+		x >>= 1;
+	}
+	return cnt;
+}
+
 uint32_t alu_add(uint32_t src, uint32_t dest) {
 	uint32_t res = 0;
 	res = src + dest;
@@ -8,12 +18,7 @@ uint32_t alu_add(uint32_t src, uint32_t dest) {
 	// ZF
 	cpu.eflags.ZF = (res==0)? 1 : 0;
 	// PF
-	uint32_t cnt1 = 0, temp = res;
-	for(int cnt_bit=0; cnt_bit<8; ++cnt_bit) {
-		if(temp & 0x1)   // last digit is 1
-			++cnt1;
-		temp >>= 1;
-	}
+	uint32_t cnt1 = cnt_one_in_digits(res, 8);
 	cpu.eflags.PF = (cnt1 & 0x1)==0;  // cnt1 is odd
 	// SF
 	cpu.eflags.SF = (res >> 31) & 0x1;
@@ -102,9 +107,16 @@ int32_t alu_imod(int64_t src, int64_t dest) {
 }
 
 uint32_t alu_and(uint32_t src, uint32_t dest) {
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	assert(0);
-	return 0;
+	uint32_t res = src & dest;
+	// OF & CF
+	cpu.eflags.OF = cpu.eflags.CF = 0;
+	// PF
+	cpu.eflags.PF = (cnt_one_in_digits(res, 8) & 0x1)==0;
+	// ZF
+	cpu.eflags.ZF = (res==0);
+	// SF
+	cpu.eflags.SF = (res>>31) & 0x1;
+	return res;
 }
 
 uint32_t alu_xor(uint32_t src, uint32_t dest) {
