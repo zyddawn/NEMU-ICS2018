@@ -504,7 +504,8 @@ void alu_test_xor() {
 	
 			//printf("oracle eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", test_eflags.CF, test_eflags.PF, test_eflags.ZF, test_eflags.SF, test_eflags.OF);
 			//printf("nemu   eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", cpu.eflags.CF, cpu.eflags.PF, cpu.eflags.ZF, cpu.eflags.SF, cpu.eflags.OF);
-			//printf("a = %d, b= %d, res = %d, res_asm = %d\n", a, b, res, res_asm);
+			//printf("a = 0x%08x, b= 0x%08x\n", a, b);
+		       	//printf("res = 0x%08x, res_asm = 0x%08x\n\n", res, res_asm);
 
 			assert(res == res_asm);
 			assert(cpu.eflags.CF == test_eflags.CF);
@@ -584,9 +585,10 @@ void alu_test_shl() {
 
 				test_eflags.val = res_eflags;
 	
-				//printf("oracle eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", test_eflags.CF, test_eflags.PF, test_eflags.ZF, test_eflags.SF, test_eflags.OF);
-				//printf("nemu   eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", cpu.eflags.CF, cpu.eflags.PF, cpu.eflags.ZF, cpu.eflags.SF, cpu.eflags.OF);
-				//printf("a = %d, b= %d, res = %d, res_asm = %d\n", a, b, res, res_asm);
+				printf("oracle eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", test_eflags.CF, test_eflags.PF, test_eflags.ZF, test_eflags.SF, test_eflags.OF);
+				printf("nemu   eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", cpu.eflags.CF, cpu.eflags.PF, cpu.eflags.ZF, cpu.eflags.SF, cpu.eflags.OF);
+				printf("a = 0x%08x, b= 0x%08x, data_size=%d\n", a, b, data_sizes[n]);
+				printf("res = 0x%08x, res_asm = 0x%08x\n\n", res, res_asm);
 
 				assert(res == res_asm);
 				assert(cpu.eflags.CF == test_eflags.CF);
@@ -597,7 +599,8 @@ void alu_test_shl() {
 		}
 
 		srand(time(0));
-		for(i = 0 ; i < 1000000 ; i++) {
+		// 1000000
+		for(i = 0 ; i < 1000 ; i++) {
 			for(j = 0 ; j < nb ; j++) {
 				a = rand();
 				b = inputb[j];
@@ -629,7 +632,12 @@ void alu_test_shl() {
 				}
 				
 				test_eflags.val = res_eflags;
-	
+				
+				printf("oracle eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", test_eflags.CF, test_eflags.PF, test_eflags.ZF, test_eflags.SF, test_eflags.OF);
+				printf("nemu   eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", cpu.eflags.CF, cpu.eflags.PF, cpu.eflags.ZF, cpu.eflags.SF, cpu.eflags.OF);
+				printf("a = 0x%08x, b= 0x%08x, data_size=%d\n", a, b, data_sizes[n]);
+				printf("res = 0x%08x, res_asm = 0x%08x\n\n", res, res_asm);
+
 				assert(res == res_asm);
 				assert(cpu.eflags.CF == test_eflags.CF);
 				assert(cpu.eflags.PF == test_eflags.PF);
