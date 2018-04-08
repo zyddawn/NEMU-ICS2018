@@ -109,9 +109,10 @@ void alu_test_adc() {
 				: "a" (a), "c" (b));
 				test_eflags.val = res_eflags;
 	
-			printf("oracle eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", test_eflags.CF, test_eflags.PF, test_eflags.ZF, test_eflags.SF, test_eflags.OF);
-			printf("nemu   eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", cpu.eflags.CF, cpu.eflags.PF, cpu.eflags.ZF, cpu.eflags.SF, cpu.eflags.OF);
-			printf("a = %d, b= %d, res = %d, res_asm = %d\n", a, b, res, res_asm);
+			//printf("oracle eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", test_eflags.CF, test_eflags.PF, test_eflags.ZF, test_eflags.SF, test_eflags.OF);
+			//printf("nemu   eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", cpu.eflags.CF, cpu.eflags.PF, cpu.eflags.ZF, cpu.eflags.SF, cpu.eflags.OF);
+			//printf("a = 0x%08x, b= 0x%08x\n", a, b);
+		       	//printf("res = %d, res_asm = %d\n\n", res, res_asm);
 
 			assert(res == res_asm);
 			assert(cpu.eflags.CF == test_eflags.CF);
@@ -139,7 +140,8 @@ void alu_test_adc() {
 	
 			//printf("oracle eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", test_eflags.CF, test_eflags.PF, test_eflags.ZF, test_eflags.SF, test_eflags.OF);
 			//printf("nemu   eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", cpu.eflags.CF, cpu.eflags.PF, cpu.eflags.ZF, cpu.eflags.SF, cpu.eflags.OF);
-			//printf("a = %d, b= %d, res = %d, res_asm = %d\n", a, b, res, res_asm);
+			//printf("a = 0x%08x, b= 0x%08x\n", a, b);
+			//printf("res = %d, res_asm = %d\n\n", res, res_asm);
 
 			assert(res == res_asm);
 			assert(cpu.eflags.CF == test_eflags.CF);
