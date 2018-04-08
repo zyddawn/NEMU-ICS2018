@@ -165,8 +165,24 @@ uint32_t alu_shl(uint32_t src, uint32_t dest, size_t data_size) {
 }
 
 uint32_t alu_shr(uint32_t src, uint32_t dest, size_t data_size) {
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	assert(0);
+	uint32_t upper_bound = data_size - 1;
+	uint32_t low_bits = (1<<upper_bound) - 1 + (1<<upper_bound);
+	low_bits &= dest;
+	//uint32_t sign = (low_bits>>upper_bound);
+	uint32_t high_bits = dest - low_bits;
+	printf("high=0x%08x, low=0x%08x\n", high_bits, low_bits);
+	for(int i=0; i<src; ++i) {
+		low_bits >>= 1;
+		//low_bits |= (sign<<upper_bound);
+		if(i == src-1) {
+			cpu.eflags.CF = low_bits & 0x1;
+			cpu.eflags.OF = (low_bits & (low_bits>>1)) & 0x1;
+		}
+	}
+	cpu.eflags.PF = (cnt_one_in_digits(low_bits) & 0x1)==0;
+	cpu.eflags.SF = (low_bits>>upper_bound);
+	cpu.eflags.ZF = (low_bits==0);
+	return (high_bits | low_bits);
 }
 
 uint32_t alu_sar(uint32_t src, uint32_t dest, size_t data_size) {
