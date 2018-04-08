@@ -45,9 +45,12 @@ uint32_t alu_adc(uint32_t src, uint32_t dest) {
 
 
 uint32_t alu_sub(uint32_t src, uint32_t dest) {
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	assert(0);
-	return 0;
+	uint32_t res, compl_src = 0xFFFFFFFF-src+1;
+	res = alu_add(compl_src, dest);
+	// CF
+	cpu.eflags.CF = (dest<src)? 1 : 0;
+	// cpu.eflags.CF = cpu.eflags.CF^sub;  // CF in add is Cout, while in sub should be Cout^sub
+	return res;
 }
 
 uint32_t alu_sbb(uint32_t src, uint32_t dest) {
