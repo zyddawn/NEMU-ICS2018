@@ -3,24 +3,24 @@
 uint32_t alu_add(uint32_t src, uint32_t dest) {
 	uint32_t res = 0;
 	res = src + dest;
+	//printf("my_src = 0x%08x, my_dest = 0x%08x\n", src, dest);
+	//printf("my_res = 0x%08x\n", res);
 	// ZF
 	cpu.eflags.ZF = (res==0)? 1 : 0;
 	// PF
 	uint32_t cnt1 = 0, temp = res;
-	while(temp > 0) {
+	for(int cnt_bit=0; cnt_bit<8; ++cnt_bit) {
 		if(temp & 0x1)   // last digit is 1
-			++ cnt1;
+			++cnt1;
 		temp >>= 1;
 	}
-	cpu.eflags.PF = (cnt1 & 0x1);  // count1 is odd
+	cpu.eflags.PF = (cnt1 & 0x1)==0;  // cnt1 is odd
 	// SF
 	cpu.eflags.SF = (res >> 31) & 0x1;
 	// CF
-	uint32_t Cin, A, B, Cout=0, \
-		 temp_src = src, temp_dest = dest;
+	uint32_t Cin, A, B, Cout=0;
 	for(int cnt_bit=0; cnt_bit<32; ++cnt_bit) {
-		A = temp_src & 0x1, B = temp_dest & 0x1, Cin = Cout;
-		temp_src >>= 1, temp_dest >>= 1;
+		A = (src>>cnt_bit) & 0x1, B = (dest>>cnt_bit) & 0x1, Cin = Cout;
 		Cout = (A&B) | (A&Cin) | (B&Cin);
 	}
 	cpu.eflags.CF = Cout;
