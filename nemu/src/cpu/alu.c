@@ -1,7 +1,7 @@
 #include "cpu/cpu.h"
 
-uint32_t cnt_one_in_digits(uint32_t x, uint32_t upper_bound) {
-	uint32_t cnt=0;
+uint32_t cnt_one_in_digits(uint32_t x) {
+	uint32_t cnt=0, upper_bound=8;
 	for(uint32_t i=0; i<upper_bound; ++i) {
 		if(x & 0x1)
 			++cnt;
@@ -18,7 +18,7 @@ uint32_t alu_add(uint32_t src, uint32_t dest) {
 	// ZF
 	cpu.eflags.ZF = (res==0)? 1 : 0;
 	// PF
-	uint32_t cnt1 = cnt_one_in_digits(res, 8);
+	uint32_t cnt1 = cnt_one_in_digits(res);
 	cpu.eflags.PF = (cnt1 & 0x1)==0;  // cnt1 is odd
 	// SF
 	cpu.eflags.SF = (res >> 31) & 0x1;
@@ -111,7 +111,7 @@ uint32_t alu_and(uint32_t src, uint32_t dest) {
 	// OF & CF
 	cpu.eflags.OF = cpu.eflags.CF = 0;
 	// PF
-	cpu.eflags.PF = (cnt_one_in_digits(res, 8) & 0x1)==0;
+	cpu.eflags.PF = (cnt_one_in_digits(res) & 0x1)==0;
 	// ZF
 	cpu.eflags.ZF = (res==0);
 	// SF
@@ -126,9 +126,13 @@ uint32_t alu_xor(uint32_t src, uint32_t dest) {
 }
 
 uint32_t alu_or(uint32_t src, uint32_t dest) {
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	assert(0);
-	return 0;
+	uint32_t res = src | dest;
+	// LIKE IN alu_and
+	cpu.eflags.OF = cpu.eflags.CF = 0;
+	cpu.eflags.PF = (cnt_one_in_digits(res) & 0x1)==0;
+	cpu.eflags.ZF = (res==0);
+	cpu.eflags.SF = (res>>31) & 0x1;
+	return res;
 }
 
 uint32_t alu_shl(uint32_t src, uint32_t dest, size_t data_size) {
