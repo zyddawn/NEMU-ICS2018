@@ -1095,13 +1095,13 @@ void alu_test_mul() {
 				: "a" (a), "c" (b));
 				test_eflags.val = res_eflags;
 	
-			printf("oracle eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", test_eflags.CF, test_eflags.PF, test_eflags.ZF, test_eflags.SF, test_eflags.OF);
-			printf("nemu   eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", cpu.eflags.CF, cpu.eflags.PF, cpu.eflags.ZF, cpu.eflags.SF, cpu.eflags.OF);
-			printf("a = 0x%08x, b= 0x%08x\n", a, b);
+			//printf("oracle eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", test_eflags.CF, test_eflags.PF, test_eflags.ZF, test_eflags.SF, test_eflags.OF);
+			//printf("nemu   eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", cpu.eflags.CF, cpu.eflags.PF, cpu.eflags.ZF, cpu.eflags.SF, cpu.eflags.OF);
+			//printf("a = 0x%08x, b= 0x%08x, data_size=32\n", a, b);
 			temp_a = res_asm_a;
 			temp_d = res_asm_d;
 			res_asm = (temp_a | (temp_d<<32));
-			printf("res = 0x%16llx, res_asm = 0x%16llx\n\n", res, res_asm);
+			//printf("res = 0x%16llx, res_asm = 0x%16llx\n\n", res, res_asm);
 			//assert(res == (temp_a | (temp_d << 32)));
 			assert(res == res_asm);
 			assert(cpu.eflags.CF == test_eflags.CF);

@@ -71,13 +71,18 @@ uint32_t alu_sbb(uint32_t src, uint32_t dest) {
 
 
 uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size) {
-	uint64_t res, temp_src = src, temp_dest = dest;
+	uint64_t res, temp_src = src, temp_dest = dest, high_bits;
+	uint32_t low_bits;
 	res = temp_src * temp_dest;
-	
-	uint64_t high_bits, low_bits;
-	low_bits = (())
-
-
+	size_t lower_bound = data_size-1, upper_bound = 2*data_size-1;
+	low_bits = ((1<<lower_bound)-1+(1<<lower_bound)) & res;
+	high_bits = ((1<<upper_bound)-1+(1<<upper_bound)) & res;
+	high_bits -= low_bits;
+	cpu.eflags.CF = (high_bits != 0);
+	cpu.eflags.OF = cpu.eflags.CF;
+	cpu.eflags.PF = (cnt_one_in_digits(high_bits|low_bits) & 0x1)==0;
+	cpu.eflags.ZF = (high_bits==0) && (low_bits==0);
+	cpu.eflags.SF = (high_bits>>upper_bound);
 	return res;
 }
 
