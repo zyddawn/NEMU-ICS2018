@@ -71,7 +71,13 @@ uint32_t alu_sbb(uint32_t src, uint32_t dest) {
 
 
 uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size) {
-	uint64_t res = src * dest;
+	uint64_t res, temp_src = src, temp_dest = dest;
+	res = temp_src * temp_dest;
+	
+	uint64_t high_bits, low_bits;
+	low_bits = (())
+
+
 	return res;
 }
 
@@ -139,7 +145,7 @@ uint32_t alu_or(uint32_t src, uint32_t dest) {
 }
 
 uint32_t alu_shl(uint32_t src, uint32_t dest, size_t data_size) {
-	uint32_t upper_bound = data_size-1;
+	size_t upper_bound = data_size-1;
 	uint32_t low_bits = (1<<upper_bound) - 1 + (1<<upper_bound);
 	low_bits &= dest;
 	uint32_t high_bits = dest - low_bits;
@@ -164,7 +170,7 @@ uint32_t alu_shl(uint32_t src, uint32_t dest, size_t data_size) {
 }
 
 uint32_t alu_shr(uint32_t src, uint32_t dest, size_t data_size) {
-	uint32_t upper_bound = data_size - 1;
+	size_t upper_bound = data_size - 1;
 	uint32_t low_bits = (1<<upper_bound) - 1 + (1<<upper_bound);
 	low_bits &= dest;
 	//uint32_t sign = (low_bits>>upper_bound);
@@ -185,7 +191,7 @@ uint32_t alu_shr(uint32_t src, uint32_t dest, size_t data_size) {
 }
 
 uint32_t alu_sar(uint32_t src, uint32_t dest, size_t data_size) {
-	uint32_t upper_bound = data_size - 1;
+	size_t upper_bound = data_size - 1;
 	uint32_t low_bits = (1<<upper_bound) - 1 + (1<<upper_bound);
        	low_bits &= dest;
 	uint32_t sign = (low_bits>>upper_bound);
