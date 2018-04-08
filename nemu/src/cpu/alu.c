@@ -140,10 +140,10 @@ uint32_t alu_or(uint32_t src, uint32_t dest) {
 }
 
 uint32_t alu_shl(uint32_t src, uint32_t dest, size_t data_size) {
-	uint32_t low_bits = (1<<data_size)-1, high_bits = (dest>>data_size)<<data_size;
-	low_bits &= dest;
 	uint32_t upper_bound = data_size-1;
-	cpu.eflags.OF = cpu.eflags.CF = 0;  // initialize OF and CF
+	uint32_t low_bits = (1<<upper_bound) - 1 + (1<<upper_bound);
+	low_bits &= dest;
+	uint32_t high_bits = dest - low_bits;
 	for(uint32_t i=0; i<src; ++i) {
 		uint32_t sign = ((low_bits>>upper_bound) & 0x1), \
 			 high_bit = ((low_bits>>(upper_bound-1)) & 0x1);
@@ -152,9 +152,9 @@ uint32_t alu_shl(uint32_t src, uint32_t dest, size_t data_size) {
 			cpu.eflags.OF = sign ^ high_bit;
 			cpu.eflags.CF = sign;
 		}
-		low_bits <<= 1;		
+		low_bits <<= 1;	
 	}
-	low_bits &= ((1<<data_size)-1);
+	low_bits &= ((1<<upper_bound) -1  + (1<<upper_bound));
 	// PF
 	cpu.eflags.PF = (cnt_one_in_digits(low_bits) & 0x1)==0;
 	// SF
