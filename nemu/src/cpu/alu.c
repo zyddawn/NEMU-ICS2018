@@ -12,7 +12,7 @@ uint32_t cnt_one_in_digits(uint32_t x) {
 void set_ZF(uint32_t res) {
 	cpu.eflags.ZF = (res==0);
 }
-uint32_t Sign64(uint64_t res, size_t data_size) {
+uint32_t Sign_64(uint64_t res, size_t data_size) {
 	return ((res>>(data_size-1)) & 0x1);
 }
 uint32_t Sign(uint32_t res, size_t data_size) {
@@ -77,6 +77,12 @@ uint32_t alu_sbb(uint32_t src, uint32_t dest) {
 	return res;
 }
 
+void set_ZF_64(uint64_t res) {
+	cpu.eflags.ZF = (res==0);
+}
+void set_SF_64(uint64_t res, size_t data_size) {
+	cpu.eflags.SF = Sign_64(res, data_size);
+}
 
 uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size) {
 	uint64_t res, temp_src = src, temp_dest = dest, high_bits;
@@ -88,9 +94,9 @@ uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size) {
 	high_bits -= low_bits;
 	cpu.eflags.CF = (high_bits != 0);
 	cpu.eflags.OF = cpu.eflags.CF;
-	cpu.eflags.PF = (cnt_one_in_digits(high_bits|low_bits) & 0x1)==0;
-	cpu.eflags.ZF = (high_bits==0) && (low_bits==0);
-	cpu.eflags.SF = (high_bits>>upper_bound);
+	set_PF(low_bits);
+	set_ZF_64(high_bits|low_bits);
+	set_SF_64(high_bits, 64);
 	return res;
 }
 
