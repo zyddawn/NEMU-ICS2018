@@ -9,28 +9,38 @@ uint32_t cnt_one_in_digits(uint32_t x) {
 	}
 	return cnt;
 }
+void set_ZF(uint32_t res) {
+	cpu.eflags.ZF = (res==0);
+}
+uint32_t Sign64(uint64_t res, size_t data_size) {
+	return ((res>>(data_size-1)) & 0x1);
+}
+uint32_t Sign(uint32_t res, size_t data_size) {
+	return ((res>>(data_size-1)) & 0x1);
+}
+void set_PF(uint32_t res) {
+	uint32_t cnt1 = cnt_one_in_digits(res);
+	cpu.eflags.PF = (cnt1 & 0x1)==0;
+}
+void set_SF(uint32_t res, size_t data_size) {	// data_size in {8, 16, 32, 64}
+	cpu.eflags.SF = Sign(res, data_size);
+}
+
+void set_OF_add(uint32_t src, uint32_t dest, uint32_t res) {
+	cpu.eflags.OF = (Sign(src, 32)==Sign(dest, 32)) && (Sign(src, 32)^Sign(res, 32));
+}
+
+void set_CF_add(uint32_t src, uint32_t res) {
+	cpu.eflags.CF = (res < src);
+}
 
 uint32_t alu_add(uint32_t src, uint32_t dest) {
-	uint32_t res = 0;
-	res = src + dest;
-	//printf("my_src = 0x%08x, my_dest = 0x%08x\n", src, dest);
-	//printf("my_res = 0x%08x\n", res);
-	// ZF
-	cpu.eflags.ZF = (res==0)? 1 : 0;
-	// PF
-	uint32_t cnt1 = cnt_one_in_digits(res);
-	cpu.eflags.PF = (cnt1 & 0x1)==0;  // cnt1 is odd
-	// SF
-	cpu.eflags.SF = (res >> 31) & 0x1;
-	// CF
-	uint32_t Cin, A, B, Cout=0;
-	for(int cnt_bit=0; cnt_bit<32; ++cnt_bit) {
-		A = (src>>cnt_bit) & 0x1, B = (dest>>cnt_bit) & 0x1, Cin = Cout;
-		Cout = (A&B) | (A&Cin) | (B&Cin);
-	}
-	cpu.eflags.CF = Cout;
-	// OF
-	cpu.eflags.OF = ((src>>31)==(dest>>31)) && ((src>>31)^(res>>31));
+	uint32_t res = src + dest;
+	set_ZF(res);
+	set_PF(res);
+	set_SF(res, 32);
+	set_OF_add(src, dest, res);
+	set_CF_add(src, res);
 	return res;
 }
 
