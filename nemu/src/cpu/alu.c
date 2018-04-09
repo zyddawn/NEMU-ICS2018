@@ -58,12 +58,10 @@ uint32_t alu_adc(uint32_t src, uint32_t dest) {
 	return res;
 }
 
-
 uint32_t alu_sub(uint32_t src, uint32_t dest) {
 	uint32_t res, compl_src = 0xFFFFFFFF-src+1;
 	res = alu_add(compl_src, dest);
-	// CF
-	cpu.eflags.CF = (dest<src)? 1 : 0;
+	cpu.eflags.CF = (dest<src);
 	return res;
 }
 
@@ -128,14 +126,10 @@ int32_t alu_imod(int64_t src, int64_t dest) {
 
 uint32_t alu_and(uint32_t src, uint32_t dest) {
 	uint32_t res = src & dest;
-	// OF & CF
 	cpu.eflags.OF = cpu.eflags.CF = 0;
-	// PF
-	cpu.eflags.PF = (cnt_one_in_digits(res) & 0x1)==0;
-	// ZF
-	cpu.eflags.ZF = (res==0);
-	// SF
-	cpu.eflags.SF = (res>>31) & 0x1;
+	set_PF(res);
+	set_ZF(res);
+	set_SF(res, 32);
 	return res;
 }
 
