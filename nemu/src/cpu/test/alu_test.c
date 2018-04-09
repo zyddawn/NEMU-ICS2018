@@ -1265,6 +1265,8 @@ void alu_test_div() {
 			quo = alu_div(b, a, 32);
 			rem = alu_mod(b, a);
 			asm ("divl %%ecx" : "=a" (quo_asm), "=d" (rem_asm) : "a" (aa.low), "d" (aa.high), "c" ((uint32_t)b));
+			//printf("a = %lld, b= %d, quo=%d, quo_asm=%d, rem=%d, rem_asm=%d\n", a, b, quo, quo_asm,rem, rem_asm);
+
 			assert(quo == quo_asm);
 			assert(rem == rem_asm);
 		}
