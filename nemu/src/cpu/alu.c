@@ -137,9 +137,9 @@ uint32_t alu_xor(uint32_t src, uint32_t dest) {
 	uint32_t res = src ^ dest;
 	// LIKE IN alu_and
 	cpu.eflags.OF = cpu.eflags.CF = 0;
-	cpu.eflags.PF = (cnt_one_in_digits(res) & 0x1)==0;
-	cpu.eflags.ZF = (res==0);
-	cpu.eflags.SF = (res>>31) & 0x1;
+	set_PF(res);
+        set_ZF(res);
+	set_SF(res, 32);
 	return res;
 }
 
@@ -147,9 +147,9 @@ uint32_t alu_or(uint32_t src, uint32_t dest) {
 	uint32_t res = src | dest;
 	// LIKE IN alu_and
 	cpu.eflags.OF = cpu.eflags.CF = 0;
-	cpu.eflags.PF = (cnt_one_in_digits(res) & 0x1)==0;
-	cpu.eflags.ZF = (res==0);
-	cpu.eflags.SF = (res>>31) & 0x1;
+	set_PF(res);
+	set_ZF(res);
+	set_SF(res, 32);
 	return res;
 }
 
