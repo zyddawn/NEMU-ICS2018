@@ -66,7 +66,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 			sticky = sticky | (sig_grs & 0x1);
 			sig_grs >>= 1;
 			sig_grs |= sticky;
-			//++ exp;
+			//++ exp;    // no need to add exp!!!
 		}
 	} else if(exp == 0 && sig_grs >> (23 + 3) == 1) {
 		// two denormals result in a normal
@@ -221,7 +221,8 @@ uint32_t internal_float_mul(uint32_t b, uint32_t a) {
 			return corner_mul[i].res;
 	}
 
-	if(a == P_NAN_F || a == N_NAN_F || b == P_NAN_F || b == N_NAN_F) return a == P_NAN_F || b == P_NAN_F ? P_NAN_F : N_NAN_F;
+	if(a == P_NAN_F || a == N_NAN_F || b == P_NAN_F || b == N_NAN_F) 
+		return a == P_NAN_F || b == P_NAN_F ? P_NAN_F : N_NAN_F;
 
 	FLOAT fa, fb, f;
 	fa.val = a;
@@ -232,9 +233,6 @@ uint32_t internal_float_mul(uint32_t b, uint32_t a) {
 	if(b == P_ZERO_F || b == N_ZERO_F) return fa.sign ^ fb.sign ? N_ZERO_F : P_ZERO_F;
 	if(a == P_INF_F || a == N_INF_F) return fa.sign ^ fb.sign ? N_INF_F : P_INF_F;
 	if(b == P_INF_F || b == N_INF_F) return fa.sign ^ fb.sign ? N_INF_F : P_INF_F;
-
-
-
 
 	uint64_t sig_a, sig_b, sig_res;
 	sig_a = fa.fraction;
@@ -249,8 +247,8 @@ uint32_t internal_float_mul(uint32_t b, uint32_t a) {
 	uint32_t exp_res = 0;
 
 	/* TODO: exp_res = ? leave space for GRS bits. */
-	printf("\e[0;31mPlease implement me at fpu.c\e[0m\n");
-	assert(0);
+	exp_res = fa.exponent + fb.exponent;
+	
 	return internal_normalize(f.sign, exp_res, sig_res);
 }
 
