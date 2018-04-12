@@ -42,7 +42,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 			sticky = sticky | (sig_grs & 0x1);
 			sig_grs >>= 1;
 			sig_grs |= sticky;
-			++ exp;
+			//++ exp;	// no need to add exp for denormals!!!
 		}
 		if(exp < 0) { 
 			/* TODO: assign the number to zero */
@@ -87,7 +87,6 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 		}
 		sig_grs >>= 3;
 		sig_grs &= 0x7fffff;  // eliminate hidden bit
-		
 	}
 
 	FLOAT f;

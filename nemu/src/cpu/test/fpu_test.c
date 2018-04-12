@@ -117,19 +117,19 @@ void fpu_test_mul() {
 		10000000, 1.2, 1.1, 1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.5, -0.6, -0.7, -0.8, -0.9, -1, -10000000};
 	FLOAT a, b, res, res_fpu;
 	int i, j;
-	int count = 0;
+	//int count = 0;
 	for(i = 0 ; i < sizeof(input)/sizeof(float) ; i++) {
 		for(j = 0 ; j < sizeof(input)/sizeof(float) ; j++) {
-			printf(" == %d ==\n", count++);
+			//printf(" == %d ==\n", count++);
 			a.fval = input[i];
 			b.fval = input[j];
 			res.fval = a.fval * b.fval;
 			res_fpu.val = internal_float_mul(b.val, a.val);
-			printf("float mul a = %f, b = %f, ua = %x, ub = %x, res = %x, res_fpu = %x, res = %f, res_fpu = %f\n", a.fval, b.fval, a.val, b.val, res.val, res_fpu.val, res.fval, res_fpu.fval);
-			printf("a       sign %x, exp %x, %d, sig %x\n", a.sign, a.exponent, a.exponent, a.fraction);
-			printf("b       sign %x, exp %x, %d, sig %x\n", b.sign, b.exponent, b.exponent, b.fraction);
-			printf("res     sign %x, exp %x, %d, sig %x\n", res.sign, res.exponent, res.exponent, res.fraction);
-			printf("res_fpu sign %x, exp %x, %d, sig %x\n", res_fpu.sign, res_fpu.exponent, res_fpu.exponent, res_fpu.fraction);
+			//printf("float mul a = %f, b = %f, ua = %x, ub = %x, res = %x, res_fpu = %x, res = %f, res_fpu = %f\n", a.fval, b.fval, a.val, b.val, res.val, res_fpu.val, res.fval, res_fpu.fval);
+			//printf("a       sign %x, exp %x, %d, sig %x\n", a.sign, a.exponent, a.exponent, a.fraction);
+			//printf("b       sign %x, exp %x, %d, sig %x\n", b.sign, b.exponent, b.exponent, b.fraction);
+			//printf("res     sign %x, exp %x, %d, sig %x\n", res.sign, res.exponent, res.exponent, res.fraction);
+			//printf("res_fpu sign %x, exp %x, %d, sig %x\n", res_fpu.sign, res_fpu.exponent, res_fpu.exponent, res_fpu.fraction);
 			assert(res_fpu.val == res.val);
 		}
 	}
