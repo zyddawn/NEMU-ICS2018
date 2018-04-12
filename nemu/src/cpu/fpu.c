@@ -441,3 +441,5 @@ void fpu_cmpi(uint32_t idx) {
 		cpu.eflags.ZF = 1;
 	}
 }
+
+// GOODBYE PA 1-3
