@@ -66,7 +66,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 			sticky = sticky | (sig_grs & 0x1);
 			sig_grs >>= 1;
 			sig_grs |= sticky;
-			++ exp;
+			//++ exp;
 		}
 	} else if(exp == 0 && sig_grs >> (23 + 3) == 1) {
 		// two denormals result in a normal
@@ -75,6 +75,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 
 	if(!overflow) {
 		/* TODO: round up and remove the GRS bits */
+		/* DONE */
 		uint32_t grs = sig_grs & 0x7;
 		if(grs > 0x4)
 			sig_grs += 0x8;
