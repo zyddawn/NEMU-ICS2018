@@ -19,7 +19,7 @@ make_instr_impl_2op(mov, a, o, v)
 make_instr_impl_2op(mov, o, a, b)
 make_instr_impl_2op(mov, o, a, v)
 
-
+/*
 make_instr_func(mov_r2rm_b) {
 	src.data_size = 8;
 	dest.data_size = 8;
@@ -37,11 +37,11 @@ make_instr_func(mov_r2rm_b) {
 	//operand_write(&rm);
 	execute();
 	return len;
-}
+}*/
 
 
 
-make_instr_func(mov_r2rm_v) {
+/*make_instr_func(mov_r2rm_v) {
 	OPERAND r, rm;
 	r.data_size = data_size;
 	rm.data_size = data_size;
@@ -231,7 +231,7 @@ make_instr_func(mov_a2off_v) {
 	operand_write(&m);
 	return 5;
 }
-
+*/
 
 make_instr_func(mov_zrm82r_v) {
 	int len = 1;
