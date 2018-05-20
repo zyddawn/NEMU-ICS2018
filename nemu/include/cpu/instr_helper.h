@@ -191,7 +191,8 @@ static inline bool inv_cc();
 	inv_cc()
 
 #define condition_np \
-	inv_cc()
+	printf("condition_np called!!!!!!!!!!!"); \
+	inv_cc();
 
 #define condition_ns \
 	inv_cc()
