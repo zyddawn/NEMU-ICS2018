@@ -22,13 +22,6 @@ extern uint8_t data_size;
 #include "cpu/instr/x87.h"
 
 /* TODO: add more instructions here */
-#define mov_r2rm_b make_instr_impl_2op(mov, r, rm, b)
-#define mov_r2rm_v make_instr_impl_2op(mov, r, rm ,v)
-#define mov_rm2r_b make_instr_impl_2op(mov, rm, r, b)
-#define mov_rm2r_v make_instr_impl_2op(mov, rm, r, v)
-
-
-
 
 
 #endif
