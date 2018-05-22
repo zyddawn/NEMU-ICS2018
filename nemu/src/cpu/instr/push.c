@@ -1,5 +1,5 @@
 #include "cpu/instr.h"
-
+#include "cpu/reg.h"
 
 static void instr_execute() {
 	if (opr_dest.data_size == 16)
