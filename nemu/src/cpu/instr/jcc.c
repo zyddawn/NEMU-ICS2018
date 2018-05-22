@@ -28,3 +28,7 @@ static void instr_execute_1op_cc_fail() {/* Do nothing */}
 jcc_helper(near)
 jcc_helper(short_)
 make_instr_impl_1op_cc(j, i, short_, ecxz)
+
+//JNP
+
+
