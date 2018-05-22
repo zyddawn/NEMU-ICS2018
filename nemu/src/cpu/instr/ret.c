@@ -11,7 +11,7 @@ make_instr_func(ret_near) {
 	bool success=false;
 	int esp = get_reg_val("%esp", &success);
 	if (success)
-		printf("before ret %esp = 0x%x\n", esp);
+		printf("before ret esp = 0x%x\n", esp);
 #endif
 	if (data_size == 16) {
 		pop_eip.addr = REG_SP;
@@ -27,7 +27,7 @@ make_instr_func(ret_near) {
 	}
 	esp = get_reg_val("%esp", &success);
 	if (success)
-		printf("after ret %esp = 0x%x\n", esp);
+		printf("after ret esp = 0x%x\n", esp);
 	return 0;
 }
 
