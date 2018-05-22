@@ -47,7 +47,6 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		concat3(decode_operand, _, concat3(src_type, 2, dest_type)) \
 		print_asm_2(#inst_name, opr_dest.data_size == 8 ? "b" : (opr_dest.data_size == 16 ? "w" : "l"), len, &opr_src, &opr_dest); \
 		instr_execute_2op(); \
-		printf("****************** 2op len = %d\n", len); \
 		return len; \
 	}
 
@@ -78,6 +77,7 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 			opr_dest.addr = REG_ESP; \
 			opr_src.addr = concat(REG_E, reg_addr); } \
 		operand_read(&opr_src); \
+		opr_dest.val = opr_src.val; \
 		operand_write(&opr_dest); \
 		return len; \
 	}
