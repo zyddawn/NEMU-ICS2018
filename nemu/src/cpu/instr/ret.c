@@ -7,7 +7,7 @@ make_instr_func(ret_near) {
 		pop_eip.addr = REG_SP;
 		operand_read(&pop_eip);
 		cpu.esp += 2;
-		cpu.eip = pop_eip.val & 0x0000FFFF;
+		cpu.eip = pop_eip.val;
 	}
 	else {
 		pop_eip.addr = REG_ESP;
