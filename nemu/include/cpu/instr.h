@@ -23,5 +23,7 @@ extern uint8_t data_size;
 
 /* TODO: add more instructions here */
 #include "cpu/instr/jcc.h"
+#include "cpu/instr/cmp.h"
+
 
 #endif
