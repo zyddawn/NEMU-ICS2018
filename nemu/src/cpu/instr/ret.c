@@ -8,6 +8,7 @@ make_instr_func(ret_near) {
 	pop_eip.data_size = data_size;
 	
 #ifdef DEBUG
+	printf("Before ret: \n");
 	print_reg();
 #endif
 	if (data_size == 16) {
@@ -23,7 +24,9 @@ make_instr_func(ret_near) {
 		cpu.eip = pop_eip.val;
 	}
 #ifdef DEBUG
+	printf("\nAfter ret: \n");
 	print_reg();
+	printf("\n");
 #endif
 	
 	return 0;

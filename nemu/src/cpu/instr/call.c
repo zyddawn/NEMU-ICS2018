@@ -13,6 +13,7 @@ make_instr_func(call_near_r_v) {
 	operand_read(&disp);
 	eip += (1 + data_size / 8);
 #ifdef DEBUG
+	printf("Before call: \n");
 	print_reg();
 #endif
 	// push eip
@@ -31,7 +32,9 @@ make_instr_func(call_near_r_v) {
 		cpu.eip = eip + disp.val;
 	}
 #ifdef DEBUG
+	printf("\nAfter call: \n");
 	print_reg();
+	printf("\n");
 #endif
 	return 0;
 }
