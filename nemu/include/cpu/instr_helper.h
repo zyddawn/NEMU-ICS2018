@@ -73,7 +73,7 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		instr_execute(); \
 		if (data_size == 16) { \
 			opr_dest.addr = REG_SP; \
-			opr_src.addr = concat(REG, reg_addr); } \
+			opr_src.addr = concat(REG_, reg_addr); } \
 		else {\
 			opr_dest.addr = REG_ESP; \
 			opr_src.addr = concat(REG_E, reg_addr); } \
