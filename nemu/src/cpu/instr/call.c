@@ -13,6 +13,7 @@ make_instr_func(call_near_r_v) {
 	operand_read(&disp);
 	eip += (1 + data_size / 8);
 #ifdef DEBUG
+	printf("Data_size = %d\n", data_size);
 	printf("Before call: \n");
 	print_reg();
 #endif
