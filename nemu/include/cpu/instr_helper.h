@@ -65,6 +65,24 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		return len; \
 	}
 
+// macro for generating the implementation of pop/push instruction
+ #define push_pop_reg_helper(instr_name, reg_name, reg_addr, suffix) \
+	make_instr_func(concat3(instr_name, reg_name, suffix)) {\
+		int len = 1; \
+		decode_data_size_v \
+		instr_execute(); \
+		if (data_size == 16) { \
+			opr_dest.addr = REG_SP; \
+			opr_src.addr = concat(REG, reg_addr); } \
+		else {\
+			opr_dest.addr = REG_ESP; \
+			opr_src.addr = concat(REG_E, reg_addr);} \
+		operand_read(&opr_src); \
+		operand_write(&opr_dest); \
+		return len; \
+	}
+
+
 // determine the data size of operands
 // possible sizes b, w, l, v, bv, short, near
 #define decode_data_size_b opr_src.data_size = opr_dest.data_size = 8;

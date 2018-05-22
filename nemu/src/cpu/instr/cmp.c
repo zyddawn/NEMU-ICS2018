@@ -17,6 +17,7 @@ make_instr_impl_2op(cmp, r, rm, v)
 make_instr_impl_2op(cmp, rm, r, b)
 make_instr_impl_2op(cmp, rm, r, v)
 
+
 make_instr_func(cmp_si2rm_bv) {
 	int len = 1;
 	OPERAND opr_src, opr_dest;
