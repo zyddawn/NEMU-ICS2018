@@ -30,4 +30,7 @@ extern uint8_t data_size;
 #include "cpu/instr/add.h"
 
 
+
+#define DEBUG
+
 #endif

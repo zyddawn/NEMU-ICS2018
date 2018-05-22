@@ -1,6 +1,7 @@
 #include "cpu/instr.h"
 #include "cpu/reg.h"
 
+
 make_instr_func(call_near_r_v) {
 	OPERAND disp, push_eip;
 	disp.data_size = push_eip.data_size = data_size;
@@ -11,8 +12,9 @@ make_instr_func(call_near_r_v) {
 	// read call address
 	operand_read(&disp);
 	eip += (1 + data_size / 8);
+#ifdef DEBUG
 	print_reg();
-	printf("before call eip = 0x%x\n", eip);
+#endif
 	// push eip
 	if (data_size == 16) {
 		cpu.esp -= 2;
@@ -28,8 +30,9 @@ make_instr_func(call_near_r_v) {
 		operand_write(&push_eip);
 		cpu.eip = eip + disp.val;
 	}
+#ifdef DEBUG
 	print_reg();
-	printf("after call eip = 0x%x\n", cpu.eip);
+#endif
 	return 0;
 }
 
