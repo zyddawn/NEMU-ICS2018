@@ -33,6 +33,7 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		concat3(decode_operand, _, src_type) \
 		print_asm_1(#inst_name, #cc, len, &opr_src); \
 		if(concat(condition_, cc)) \
+			printf("### Condition satisfied. ###\n"); \
 			instr_execute_1op_cc_pass(); \
 		else \
 			instr_execute_1op_cc_fail(); \
