@@ -8,6 +8,7 @@
 #include "cpu/operand.h"
 #include "cpu/instr_helper.h"
 #include "memory/memory.h"
+#include "cpu/reg.h"
 
 #include <stdio.h>
  

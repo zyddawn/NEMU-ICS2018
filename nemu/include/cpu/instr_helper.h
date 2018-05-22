@@ -69,6 +69,7 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 	make_instr_func(concat4(inst_name, _, reg_name, _v)) {\
 		int len = 1; \
 		decode_data_size_v \
+		print_reg(); \
 		instr_execute(); \
 		if (data_size == 16) { \
 			opr_dest.addr = REG_SP; \
@@ -79,6 +80,9 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		operand_read(&opr_src); \
 		opr_dest.val = opr_src.val; \
 		operand_write(&opr_dest); \
+		printf("After push reg: \n"); \
+		print_reg(); \
+		printf("\n"); \
 		return len; \
 	}
 
