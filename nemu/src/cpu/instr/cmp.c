@@ -2,14 +2,25 @@
 #include "cpu/alu.h" 
 
 static void instr_execute_2op() {
-	uint32_t dest = opr_dest.val,
-		 src = opr_src.val;
-	printf("src = 0x%x\n", src);
-	printf("dest = 0x%x\n", dest);
-	alu_sub(src, dest);
-	// opr_dest // reg
-	// opr_src // imm
+	operand_read(&opr_src);
+	operand_read(&opr_dest);
+	alu_sub(opr_src.val, opr_dest.val)
 }
 
 make_instr_impl_2op(cmp, i, rm, v)
 
+
+
+
+make_instr_func(cmp_si2rm_bv) {
+	int len = 1;
+	OPERAND opr_src, opr_dest;
+	decode_data_size_bv
+	decode_operand_i2rm
+	print_asm_2("cmp", "bv", len, &opr_src, &opr_dest);
+	operand_read(&opr_src);
+	operand_read(&opr_dest);
+	opr_src.val = sign_ext(opr_src.val, 8);
+	alu_sub(opr_src.val, opr_dest.val);
+	return len;
+}
