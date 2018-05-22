@@ -6,12 +6,6 @@ static void instr_execute_2op() {
 	operand_write(&opr_dest);
 }
 
-
-//MOV-CMP
-
-
-
-// MOV
 make_instr_impl_2op(mov, r, rm, b)
 make_instr_impl_2op(mov, r, rm, v)
 make_instr_impl_2op(mov, rm, r, b)
