@@ -24,3 +24,4 @@ make_instr_impl_2op_cc(cmov, rm, r, v, o)
 make_instr_impl_2op_cc(cmov, rm, r, v, p)
 make_instr_impl_2op_cc(cmov, rm, r, v, s)
 make_instr_impl_2op_cc(cmov, rm, r, v, e)
+

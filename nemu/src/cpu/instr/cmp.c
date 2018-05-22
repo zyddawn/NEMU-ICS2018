@@ -1,7 +1,6 @@
 #include "cpu/instr.h"
 #include "cpu/alu.h" 
 
-
 static void instr_execute_2op() {
 	uint32_t dest = opr_dest.val,
 		 src = opr_src.val;
