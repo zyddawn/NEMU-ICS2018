@@ -9,7 +9,7 @@ make_instr_func(ret_near) {
 	
 #ifdef DEBUG
 	bool success=false;
-	int esp = get_reg_val("%esp", success);
+	int esp = get_reg_val("%esp", &success);
 	if (success)
 		printf("before ret %esp = 0x%x\n", esp);
 #endif
@@ -25,7 +25,7 @@ make_instr_func(ret_near) {
 		cpu.esp += 4;
 		cpu.eip = pop_eip.val;
 	}
-	esp = get_reg_val("%esp", success);
+	esp = get_reg_val("%esp", &success);
 	if (success)
 		printf("after ret %esp = 0x%x\n", esp);
 	return 0;
