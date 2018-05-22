@@ -76,7 +76,7 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 			opr_src.addr = concat(REG, reg_addr); } \
 		else {\
 			opr_dest.addr = REG_ESP; \
-			opr_src.addr = concat(REG_E, reg_addr);} \
+			opr_src.addr = concat(REG_E, reg_addr); } \
 		operand_read(&opr_src); \
 		operand_write(&opr_dest); \
 		return len; \
