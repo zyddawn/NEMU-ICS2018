@@ -4,6 +4,8 @@
 static void instr_execute_2op() {
 	uint32_t dest = opr_dest.val,
 		 src = opr_src.val;
+	printf("src = 0x%x\n", src);
+	printf("dest = 0x%x\n", dest);
 	alu_sub(src, dest);
 	// opr_dest // reg
 	// opr_src // imm
