@@ -9,21 +9,13 @@ static void instr_execute() {
 }
 
 
-push_pop_reg_helper(push, eax, AX, v)
-push_pop_reg_helper(push, ecx, CX, v)
-push_pop_reg_helper(push, edx, DX, v)
-push_pop_reg_helper(push, ebx, BX, v)
-push_pop_reg_helper(push, esp, SP, v)
-push_pop_reg_helper(push, ebp, BP, v)
-push_pop_reg_helper(push, esi, SI, v)
-push_pop_reg_helper(push, edi, DI, v)
-
-
-
-
-
-
-
-
+push_pop_reg_helper(push, eax, AX)
+push_pop_reg_helper(push, ecx, CX)
+push_pop_reg_helper(push, edx, DX)
+push_pop_reg_helper(push, ebx, BX)
+push_pop_reg_helper(push, esp, SP)
+push_pop_reg_helper(push, ebp, BP)
+push_pop_reg_helper(push, esi, SI)
+push_pop_reg_helper(push, edi, DI)
 
 
