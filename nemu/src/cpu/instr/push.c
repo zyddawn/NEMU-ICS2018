@@ -2,10 +2,7 @@
 #include "cpu/reg.h"
 
 static void instr_execute() {
-	if (opr_dest.data_size == 16)
-		cpu.esp -= 2;
-	else
-		cpu.esp -= 4;
+	cpu.esp -= data_size / 8;
 }
 
 push_pop_reg_helper(push, eax, AX)
