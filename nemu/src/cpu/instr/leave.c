@@ -15,7 +15,7 @@ make_instr_func(leave) {
 	// esp = ebp
 	operand_read(&opr_ebp);
 	opr_esp.val = opr_ebp.val;
-	operand_write(&opr_esp)
+	operand_write(&opr_esp);
 	// ebp = pop()
 	opr_ebp.type = OPR_MEM;
 	operand_read(&opr_ebp);
