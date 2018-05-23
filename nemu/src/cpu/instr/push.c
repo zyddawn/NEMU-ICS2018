@@ -8,6 +8,8 @@ static void instr_execute() {
 		cpu.esp -= 4;
 }
 
+// bug lies in the operand type!!!!
+
 
 push_pop_reg_helper(push, eax, AX)
 push_pop_reg_helper(push, ecx, CX)
