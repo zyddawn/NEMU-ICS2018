@@ -15,6 +15,11 @@ make_instr_func(leave) {
 	// esp = ebp
 	operand_read(&opr_ebp);
 	opr_esp.val = opr_ebp.val;
+
+// BUG LIES IN THE OPERAND TYPE AND OPERAND_READ !!!
+
+
+
 	operand_write(&opr_esp);
 	// ebp = pop()
 	opr_esp.type = OPR_MEM;
