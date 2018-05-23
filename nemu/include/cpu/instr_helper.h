@@ -80,6 +80,7 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 			opr_src.addr = concat(REG_E, reg_addr); } \
 		operand_read(&opr_src); \
 		opr_dest.val = opr_src.val; \
+		printf("It should be 0x%x\n", opr_dest.val); \
 		operand_write(&opr_dest); \
 		printf("\nAfter push reg: \n"); \
 		print_reg(); \
