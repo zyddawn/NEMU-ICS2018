@@ -3,7 +3,6 @@
 static void instr_execute_1op_cc_pass() {
 	operand_read(&opr_src);
 	cpu.eip += sign_ext(opr_src.val, opr_src.data_size);
-	printf("jcc eip = 0x%x\n", cpu.eip);
 }
 
 static void instr_execute_1op_cc_fail() {/* Do nothing */}
@@ -30,3 +29,4 @@ jcc_helper(near)
 jcc_helper(short_)
 make_instr_impl_1op_cc(j, i, short_, ecxz)
 
+ 
