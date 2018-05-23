@@ -45,6 +45,12 @@ make_instr_func(call_near_r_v) {
 	printf("\nAfter call: \n");
 	print_reg();
 	printf("\n");
+	OPERAND temp;
+	temp.data_size = data_size;
+	temp.addr = REG_ESP;
+	temp.type = OPR_MEM;
+	operand_read(&temp);
+	printf("Stored eip = 0x%x\n", temp.val);
 #endif
 	return 0;
 }
