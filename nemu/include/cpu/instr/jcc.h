@@ -1,7 +1,7 @@
 #ifndef __INSTR_JCC_H__
 #define __INSTR_JCC_H__
 
-make_instr_func(jecxz_short_)
+make_instr_func(jecxz_short_);
 // short
 make_instr_func(je_short_);
 make_instr_func(ja_short_);
