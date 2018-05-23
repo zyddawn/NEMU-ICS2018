@@ -25,7 +25,7 @@ make_instr_func(add_si2rm_bv) {
 	
 	operand_read(&opr_src);
 	operand_read(&opr_dest);
-	opr_src.val = sign_ext(opr_src, 8);
+	opr_src.val = sign_ext(opr_src.val, 8);
 	opr_dest.val = alu_add(opr_src.val, opr_dest.val);
 	operand_write(&opr_dest);
 	return len;
