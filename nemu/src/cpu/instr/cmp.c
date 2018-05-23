@@ -23,7 +23,7 @@ make_instr_func(cmp_si2rm_bv) {
 	OPERAND opr_src, opr_dest;
 	decode_data_size_bv
 	decode_operand_i2rm
-	print_asm_2("cmp", "bv", len, &opr_src, &opr_dest);
+	// print_asm_2("cmp", "bv", len, &opr_src, &opr_dest);
 	operand_read(&opr_src);
 	operand_read(&opr_dest);
 	opr_src.val = sign_ext(opr_src.val, 8);
