@@ -26,7 +26,6 @@ make_instr_func(cmp_si2rm_bv) {
 	// print_asm_2("cmp", "bv", len, &opr_src, &opr_dest);
 	operand_read(&opr_src);
 	operand_read(&opr_dest);
-	opr_src.val = sign_ext(opr_src.val, 8);
-	alu_sub(opr_src.val, opr_dest.val);
+	alu_sub(sign_ext(opr_src.val, 8), opr_dest.val);
 	return len;
 }
