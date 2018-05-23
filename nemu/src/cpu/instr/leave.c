@@ -21,6 +21,8 @@ make_instr_func(leave) {
 	operand_read(&opr_esp);
 	cpu.ebp = opr_esp.val;
 	cpu.esp += data_size / 8;
+	print_reg();
+	printf("\n");
 	return 1;
 }
 
