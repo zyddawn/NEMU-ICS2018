@@ -1,6 +1,4 @@
 #include "cpu/instr.h"
-#include "cpu/reg.h"
-
 
 make_instr_func(call_near_r_v) {
 	OPERAND disp, push_eip;
@@ -18,14 +16,6 @@ make_instr_func(call_near_r_v) {
 	printf("Before call: \n");
 	print_reg();
 #endif
-
-
-
-// BUG LIES IN OPERAND TYPE!!!!!!!!!!!!!!!!!
-
-
-
-
 	// push eip
 	if (data_size == 16) {
 		cpu.esp -= 2;

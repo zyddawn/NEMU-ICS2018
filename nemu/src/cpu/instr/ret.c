@@ -1,7 +1,4 @@
 #include "cpu/instr.h"
-#include "cpu/reg.h"
-
-#define DEBUG
 
 make_instr_func(ret_near) {
 	OPERAND pop_eip;
@@ -28,8 +25,7 @@ make_instr_func(ret_near) {
 	print_reg();
 	printf("\n");
 	printf("ret eip = 0x%x\n", cpu.eip);
-#endif
-	
+#endif	
 	return 0;
 }
 
