@@ -84,6 +84,11 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		printf("After push reg: \n"); \
 		print_reg(); \
 		printf("\n"); \
+		OPERAND temp; \
+		temp.addr = REG_ESP; \
+		temp.type = OPR_MEM; \
+		operand_read(&temp); \
+		printf("read esp = 0x%x\n", temp.val); \
 		return len; \
 	}
 
