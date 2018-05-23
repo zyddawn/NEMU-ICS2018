@@ -6,7 +6,7 @@
 make_instr_func(ret_near) {
 	OPERAND pop_eip;
 	pop_eip.data_size = data_size;
-	
+	pop_eip.type = OPR_MEM;
 #ifdef DEBUG
 	printf("Before ret: \n");
 	print_reg();
@@ -27,6 +27,7 @@ make_instr_func(ret_near) {
 	printf("\nAfter ret: \n");
 	print_reg();
 	printf("\n");
+	printf("ret eip = 0x%x\n", cpu.eip);
 #endif
 	
 	return 0;
