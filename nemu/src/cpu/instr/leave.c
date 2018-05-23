@@ -17,11 +17,10 @@ make_instr_func(leave) {
 	opr_esp.val = opr_ebp.val;
 	operand_write(&opr_esp);
 	// ebp = pop()
-	opr_ebp.type = OPR_MEM;
-	operand_read(&opr_ebp);
-	cpu.ebp = opr_ebp.val;
+	opr_esp.type = OPR_MEM;
+	operand_read(&opr_esp);
+	cpu.ebp = opr_esp.val;
 	cpu.esp += data_size / 8;
-
 	return 1;
 }
 
