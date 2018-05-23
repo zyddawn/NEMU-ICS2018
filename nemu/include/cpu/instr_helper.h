@@ -71,6 +71,7 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		decode_data_size_v \
 		print_reg(); \
 		instr_execute(); \
+		opr_dest.type = OPR_MEM; \
 		if (data_size == 16) { \
 			opr_dest.addr = REG_SP; \
 			opr_src.addr = concat(REG_, reg_addr); } \
