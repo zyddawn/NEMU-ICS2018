@@ -14,6 +14,10 @@
  
 // #define DEBUG
 
+#ifdef DEBUG
+#undef DEBUG
+#endif
+
 extern uint8_t data_size;
 
 #include "cpu/instr/mov.h"
