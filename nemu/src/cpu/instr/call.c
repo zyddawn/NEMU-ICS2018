@@ -8,6 +8,7 @@ make_instr_func(call_near_r_v) {
 	disp.type = OPR_IMM;
 	disp.addr = eip + 1;
 	disp.sreg = SREG_CS;
+	push_eip.type = OPR_MEM;
 
 	// read call address
 	operand_read(&disp);
