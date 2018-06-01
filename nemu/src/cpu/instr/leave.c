@@ -17,9 +17,10 @@ make_instr_func(leave) {
 	opr_esp.val = opr_ebp.val;
 
 // BUG LIES IN THE OPERAND TYPE AND OPERAND_READ !!!
+#ifdef DEBUG
+	printf("ebp value = 0x%x\n", opr_ebp.val);
 
-
-
+#endif
 	operand_write(&opr_esp);
 	// ebp = pop()
 	opr_esp.type = OPR_MEM;
