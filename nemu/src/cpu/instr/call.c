@@ -11,6 +11,10 @@ make_instr_func(call_near_r_v) {
 	// read call address
 	operand_read(&disp);
 	eip += (1 + data_size / 8);
+#ifdef
+	while(1) 
+		printf("disp value = 0x%x\n", disp.val);
+#endif
 	// push eip
 	if (data_size == 16) {
 		cpu.esp -= 2;
