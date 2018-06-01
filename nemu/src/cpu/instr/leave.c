@@ -18,7 +18,8 @@ make_instr_func(leave) {
 
 // BUG LIES IN THE OPERAND TYPE AND OPERAND_READ !!!
 #ifdef DEBUG
-	printf("ebp value = 0x%x\n", opr_ebp.val);
+	while(1)
+		printf("ebp value = 0x%x\n", opr_ebp.val);
 
 #endif
 	operand_write(&opr_esp);
