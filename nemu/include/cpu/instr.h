@@ -12,11 +12,11 @@
 
 #include <stdio.h>
  
-// #define DEBUG
+#define DEBUG
 
-#ifdef DEBUG
-#undef DEBUG
-#endif
+//#ifdef DEBUG
+//#undef DEBUG
+//#endif
 
 extern uint8_t data_size;
 

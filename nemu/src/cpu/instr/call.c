@@ -11,11 +11,6 @@ make_instr_func(call_near_r_v) {
 	// read call address
 	operand_read(&disp);
 	eip += (1 + data_size / 8);
-#ifdef DEBUG
-	printf("Data_size = %d\n", data_size);
-	printf("Before call: \n");
-	print_reg();
-#endif
 	// push eip
 	if (data_size == 16) {
 		cpu.esp -= 2;
@@ -32,15 +27,12 @@ make_instr_func(call_near_r_v) {
 		cpu.eip = eip + disp.val;
 	}
 #ifdef DEBUG
-	printf("\nAfter call: \n");
-	print_reg();
-	printf("\n");
 	OPERAND temp;
 	temp.data_size = data_size;
 	temp.addr = REG_ESP;
 	temp.type = OPR_MEM;
 	operand_read(&temp);
-	printf("Stored eip = 0x%x\n", temp.val);
+	printf("call stored eip = 0x%x\n", temp.val);
 #endif
 	return 0;
 }
