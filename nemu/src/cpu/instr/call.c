@@ -33,7 +33,7 @@ make_instr_func(call_near_r_v) {
 #endif
 
 
-#ifdef DEBUG
+#ifdef xx
 	OPERAND temp;
 	temp.data_size = data_size;
 	temp.addr = REG_ESP;
