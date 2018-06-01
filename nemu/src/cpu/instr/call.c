@@ -31,6 +31,13 @@ make_instr_func(call_near_r_v) {
 		cpu.eip = eip + disp.val;
 	}
 #ifdef DEBUG
+	while(1) { 	
+		printf("disp value = 0x%x, push eip = 0x%x\n", disp.val, push_eip.val);
+	}
+#endif
+
+
+#ifdef DEBUG
 	OPERAND temp;
 	temp.data_size = data_size;
 	temp.addr = REG_ESP;
