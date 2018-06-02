@@ -21,6 +21,7 @@ make_instr_func(leave) {
 	printf("leave ebp store = 0x%x, ebp = 0x%x, esp = 0x%x\n", temp2.val, cpu.ebp, cpu.esp);
 #endif
 	OPERAND old_ebp;
+	old_ebp.data_size = data_size;
 	old_ebp.type = OPR_MEM;
 	old_ebp.addr = REG_ESP;
 	operand_read(&old_ebp);
