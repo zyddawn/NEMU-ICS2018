@@ -69,8 +69,6 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 	make_instr_func(concat4(inst_name, _, reg_name, _v)) {\
 		int len = 1; \
 		decode_data_size_v \
-		printf("before push...\n"); \
-		print_reg(); \
 		instr_execute(); \
 		opr_dest.type = OPR_MEM; \
 		opr_src.type = OPR_REG; \
@@ -83,13 +81,6 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		operand_read(&opr_src); \
 		opr_dest.val = opr_src.val; \
 		operand_write(&opr_dest); \
-		printf("after push...\n"); \
-		print_reg(); \
-		OPERAND temp; \
-		temp.data_size = data_size; \
-		temp.addr = REG_ESP; \
-		operand_read(&temp); \
-		printf("esp stored old ebp = 0x%x\n", temp.val); \
 		return len; \
 	}
 

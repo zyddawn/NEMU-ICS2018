@@ -6,21 +6,8 @@ make_instr_func(leave) {
 	printf("before leave cpu.eip = 0x%x, ebp = 0x%x, esp = 0x%x\n", cpu.eip, cpu.ebp, cpu.esp);
 	print_reg();
 #endif
-	OPERAND opr_esp, opr_ebp;
-	opr_esp.data_size = opr_ebp.data_size = data_size;
-	opr_esp.type = opr_ebp.type = OPR_REG;
-	if (data_size == 16) {
-		opr_esp.addr = REG_SP;
-		opr_ebp.addr = REG_BP;
-	}
-	else {
-		opr_esp.addr = REG_ESP;
-		opr_ebp.addr = REG_EBP;
-	}
 	// esp = ebp
-	operand_read(&opr_ebp);
-	printf("opr_ebp = 0x%x\n", opr_ebp.val);
-	opr_esp.val = opr_ebp.val;
+	cpu.esp = cpu.ebp;
 
 // BUG LIES IN THE OPERAND TYPE AND OPERAND_READ !!!
 #ifdef DEBUG
@@ -33,16 +20,14 @@ make_instr_func(leave) {
 	operand_read(&temp2);
 	printf("leave ebp store = 0x%x, ebp = 0x%x, esp = 0x%x\n", temp2.val, cpu.ebp, cpu.esp);
 #endif
-	operand_write(&opr_esp);
+	OPERAND old_ebp;
+	old_ebp.type = OPR_MEM;
+	old_ebp.addr = REG_ESP;
+	operand_read(&old_ebp);
 	// ebp = pop()
-	opr_esp.type = OPR_MEM;
-	operand_read(&opr_esp);
-	cpu.ebp = opr_esp.val;
+	cpu.ebp = old_ebp.val;
 	cpu.esp += data_size / 8;
-	// print_reg();
 	
-	printf("\n after leave ebp = 0x%x, esp = 0x%x\n", cpu.ebp, cpu.esp);
-	printf("leave end...\n\n");
 	return 1;
 }
 
