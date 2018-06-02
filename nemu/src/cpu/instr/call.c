@@ -27,9 +27,7 @@ make_instr_func(call_near_r_v) {
 		cpu.eip = eip + disp.val;
 	}
 #ifdef DEBUG
-	while(1) { 	
-		printf("data size = %d, push eip = 0x%x, cur_eip = 0x%x\n", data_size, push_eip.val, cpu.eip);
-	}
+	printf("data size = %d, push eip = 0x%x, cur_eip = 0x%x\n", data_size, push_eip.val, cpu.eip);
 #endif
 
 
