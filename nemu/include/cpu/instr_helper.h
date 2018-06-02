@@ -90,7 +90,7 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		temp.addr = REG_ESP; \
 		temp.type = OPR_MEM; \
 		operand_read(&temp); \
-		printf("Pushed value = 0x%x\n", temp.val); \
+		printf("esp = 0x%x, Pushed value = 0x%x\n", cpu.esp, temp.val); \
 		return len; \
 	}
 

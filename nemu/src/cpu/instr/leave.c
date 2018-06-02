@@ -19,6 +19,7 @@ make_instr_func(leave) {
 	old_ebp.type = OPR_MEM;
 	old_ebp.addr = REG_ESP;
 	operand_read(&old_ebp);
+	printf("esp = 0x%x, esp value = 0x%x\n", cpu.esp, old_ebp.val);
 	// ebp = pop()
 	cpu.ebp = old_ebp.val;
 	cpu.esp += data_size / 8;
