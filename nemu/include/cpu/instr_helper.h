@@ -85,6 +85,12 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		operand_write(&opr_dest); \
 		printf("\nafter push:\n"); \
 		print_reg(); \
+		OPERAND temp; \
+		temp.data_size = data_size; \
+		temp.addr = REG_ESP; \
+		temp.type = OPR_MEM; \
+		operand_read(&temp); \
+		printf("Pushed value = 0x%x\n", temp.val); \
 		return len; \
 	}
 
