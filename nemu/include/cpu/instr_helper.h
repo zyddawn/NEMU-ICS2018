@@ -73,6 +73,7 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		opr_dest.type = OPR_MEM; \
 		opr_src.type = OPR_REG; \
 		printf("push value = 0x%x\n", concat3(cpu., reg_name)); \
+		while(1) ; \ 
 		if (data_size == 16) { \
 			opr_dest.addr = REG_SP; \
 			opr_src.addr = concat(REG_, reg_addr); } \
