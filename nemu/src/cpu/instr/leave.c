@@ -36,7 +36,7 @@ make_instr_func(leave) {
 	operand_read(&opr_esp);
 	cpu.ebp = opr_esp.val;
 	cpu.esp += data_size / 8;
-	print_reg();
+	// print_reg();
 	
 	printf("\n after leave ebp = 0x%x, esp = 0x%x\n", cpu.ebp, cpu.esp);
 	while(1)
