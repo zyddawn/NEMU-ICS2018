@@ -8,6 +8,8 @@ make_instr_func(call_near_r_v) {
 	disp.sreg = SREG_CS;
 	push_eip.type = OPR_MEM;
 	
+	printf("Before call: \n");
+	print_reg();
 	// read call address
 	operand_read(&disp);
 	eip += (1 + data_size / 8);
