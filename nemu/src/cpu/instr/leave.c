@@ -14,12 +14,11 @@ make_instr_func(leave) {
 	cpu.esp = cpu.ebp;
 	print_reg();
 
-	OPERAND old_ebp, new_ebp;
+	OPERAND old_ebp;
 	old_ebp.data_size = new_ebp.data_size = data_size;
 	old_ebp.type = OPR_MEM;
-	new_ebp.type = OPR_REG;
 	old_ebp.addr = REG_ESP;
-	new_ebp.addr = REG_EBP;
+	old_ebp.sreg = SREG_SS;
 	operand_read(&old_ebp);
 	printf("esp = 0x%x, esp value = 0x%x\n", cpu.esp, old_ebp.val);
 	

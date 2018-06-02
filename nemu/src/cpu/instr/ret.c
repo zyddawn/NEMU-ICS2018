@@ -4,6 +4,7 @@ make_instr_func(ret_near) {
 	OPERAND pop_eip;
 	pop_eip.data_size = data_size;
 	pop_eip.type = OPR_MEM;
+	pop_eip.sreg = SREG_SS;
 
 	if (data_size == 16) {
 		pop_eip.addr = REG_SP;
