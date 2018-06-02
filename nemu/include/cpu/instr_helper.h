@@ -81,6 +81,8 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		operand_read(&opr_src); \
 		opr_dest.val = opr_src.val; \
 		operand_write(&opr_dest); \
+		printf("\nafter push:\n"); \
+		print_reg(); \
 		return len; \
 	}
 
