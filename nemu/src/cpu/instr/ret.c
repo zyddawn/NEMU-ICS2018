@@ -20,9 +20,8 @@ make_instr_func(ret_near) {
 		cpu.esp += 4;
 		cpu.eip = pop_eip.val;
 	}
-#ifdef DEBUG
-	while(1)
-		printf("after ret eip = 0x%x, cpu.esp = 0x%x\n", cpu.eip, cpu.esp);
+#ifdef DEBUG	
+	printf("after ret eip = 0x%x, cpu.esp = 0x%x\n", cpu.eip, cpu.esp);
 	OPERAND temp1, temp2;
 	temp1.data_size = temp2.data_size = data_size;
 	temp1.addr = REG_ESP;
@@ -30,7 +29,8 @@ make_instr_func(ret_near) {
 	temp1.type = temp2.type = OPR_MEM;
 	operand_read(&temp1);
 	operand_read(&temp2);
-	printf("ret ebp = 0x%x, esp = 0x%x\n", temp2.val, temp1.val);
+	while(1)
+		printf("ret ebp = 0x%x, esp = 0x%x\n", temp2.val, temp1.val);
 #endif	
 	return 0;
 }
