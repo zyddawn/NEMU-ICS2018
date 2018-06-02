@@ -25,9 +25,9 @@ make_instr_func(ret_near) {
 	else {
 		pop_eip.addr = REG_ESP;
 		operand_read(&pop_eip);
+		printf("before add esp = 0x%x\n", cpu.esp);
 		cpu.esp += 4;
 		cpu.eip = pop_eip.val;
-		printf("")
 	}
 #ifdef DEBUG	
 	printf("after ret eip = 0x%x, cpu.esp = 0x%x\n", cpu.eip, cpu.esp);
