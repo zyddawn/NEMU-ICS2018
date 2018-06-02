@@ -17,6 +17,8 @@ make_instr_func(leave) {
 	
 	printf("After leave: \n");
 	print_reg();
+	while(1)
+		;
 	return 1;
 }
 
