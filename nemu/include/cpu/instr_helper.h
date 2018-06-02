@@ -69,6 +69,8 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 	make_instr_func(concat4(inst_name, _, reg_name, _v)) {\
 		int len = 1; \
 		decode_data_size_v \
+		printf("before push...\n"); \
+		print_reg(); \
 		instr_execute(); \
 		opr_dest.type = OPR_MEM; \
 		opr_src.type = OPR_REG; \
@@ -79,12 +81,10 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 			opr_dest.addr = REG_ESP; \
 			opr_src.addr = concat(REG_E, reg_addr); } \
 		operand_read(&opr_src); \
-		if (opr_src.addr == REG_ESP) {\
-			printf("reg value = 0x%x\n", opr_src.val); \
-			print_reg(); \
-			while(1) ; }\
 		opr_dest.val = opr_src.val; \
 		operand_write(&opr_dest); \
+		printf("after push...\n"); \
+		print_reg(); \
 		return len; \
 	}
 
