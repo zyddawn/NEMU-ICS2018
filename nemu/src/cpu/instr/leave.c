@@ -33,9 +33,7 @@ make_instr_func(leave) {
 
 
 	// ebp = pop()
-        new_ebp.val = old_ebp.val;
-	operand_write(&new_ebp);
-
+        cpu.ebp = old_ebp.val;
         cpu.esp += data_size / 8;
 	
 	printf("After leave: \n");
