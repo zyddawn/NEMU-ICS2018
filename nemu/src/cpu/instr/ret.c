@@ -39,8 +39,8 @@ make_instr_func(ret_near) {
 	operand_read(&temp1);
 	operand_read(&temp2);	
 	printf("ret ebp store = 0x%x, esp store = 0x%x\n", temp2.val, temp1.val);
-	while(temp1.val == 0x30010)
-		;
+	// while(temp1.val == 0x30010)
+	//	;
 #endif	
 	return 0;
 }
