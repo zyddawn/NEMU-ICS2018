@@ -1,7 +1,7 @@
 #include "cpu/instr.h"
 
 make_instr_func(leave) {
-	printf("before leave: ");
+	printf("before leave: \n");
 	print_reg();
 	// esp = ebp
 	cpu.esp = cpu.ebp;
@@ -15,7 +15,7 @@ make_instr_func(leave) {
 	cpu.ebp = old_ebp.val;
 	cpu.esp += data_size / 8;
 	
-	printf("After leave:\n");
+	printf("After leave: \n");
 	print_reg();
 	return 1;
 }
