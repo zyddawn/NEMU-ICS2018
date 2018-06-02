@@ -4,12 +4,12 @@ make_instr_func(call_near_r_v) {
 #ifdef DEBUG
 	printf("\ncall start...\n");
 #endif
-	OPERAND disp, push_eip, old_ebp;
-	disp.data_size = push_eip.data_size = old_ebp.data_size = data_size;
+	OPERAND disp, push_eip;
+	disp.data_size = push_eip.data_size = data_size;
 	disp.type = OPR_IMM;
 	disp.addr = eip + 1;
 	disp.sreg = SREG_CS;
-	push_eip.type = old_ebp.type = OPR_MEM;
+	push_eip.type = OPR_MEM;
 	
 	// read call address
 	operand_read(&disp);
@@ -21,10 +21,6 @@ make_instr_func(call_near_r_v) {
 		push_eip.addr = REG_SP;
 		operand_write(&push_eip);
 		cpu.eip = (eip + disp.val) & 0x0000FFFF;
-		
-		cpu.esp -= 2;
-		old_ebp.val = cpu.ebp & 0x0000FFFF;
-		old_ebp.addr = REG_SP;
 	}
 	else {
 		cpu.esp -= 4;
@@ -32,15 +28,7 @@ make_instr_func(call_near_r_v) {
 		push_eip.addr = REG_ESP;
 		operand_write(&push_eip);
 		cpu.eip = eip + disp.val;
-		
-		cpu.esp -= 4;
-		old_ebp.val = cpu.ebp;
-		old_ebp.addr = REG_ESP;
-		operand_write(&old_ebp);
 	}
-	operand_write(&old_ebp);
-	cpu.ebp = cpu.esp;
-	
 
 #ifdef DEBUG
 	OPERAND temp;
