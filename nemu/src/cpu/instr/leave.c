@@ -15,6 +15,7 @@ make_instr_func(leave) {
 	// ebp = pop()
         cpu.ebp = old_ebp.val;
         cpu.esp += data_size / 8;
+	printf("\n");
 	print_reg();
 	while(1)
 		;
