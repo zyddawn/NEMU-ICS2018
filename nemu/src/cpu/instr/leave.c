@@ -1,7 +1,7 @@
 #include "cpu/instr.h"
 
 make_instr_func(leave) {
-	printf("leave cpu.eip = 0x%x, esp = 0x%x\n", cpu.eip, cpu.esp);
+	printf("before leave cpu.eip = 0x%x, ebp = 0x%x, esp = 0x%x\n", cpu.eip, cpu.ebp, cpu.esp);
 	print_reg();
 	OPERAND opr_esp, opr_ebp;
 	opr_esp.data_size = opr_ebp.data_size = data_size;
@@ -37,7 +37,7 @@ make_instr_func(leave) {
 	cpu.esp += data_size / 8;
 	print_reg();
 	
-	printf("\n after leave esp = 0x%x\n", cpu.esp);
+	printf("\n after leave ebp = 0x%x, esp = 0x%x\n", cpu.ebp, cpu.esp);
 	while(1)
 		;
 	printf("\n");
