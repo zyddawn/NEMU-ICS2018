@@ -20,9 +20,20 @@ make_instr_func(leave) {
 	old_ebp.addr = REG_ESP;
 	operand_read(&old_ebp);
 	printf("esp = 0x%x, esp value = 0x%x\n", cpu.esp, old_ebp.val);
+	
+	OPERAND tmps, tmpb;
+	tmps.data_size = tmpb.data_size = data_size;
+	tmps.type = tmpb.type = OPR_MEM;
+	tmps.addr = REG_ESP;
+	tmpb.addr = REG_EBP;
+	operand_read(&tmps);
+	operand_read(&tmpb);
+	printf("ebp store = 0x%x, esp store = 0x%x\n\n", tmpb.val, tmps.val);
+
+
 	// ebp = pop()
-	cpu.ebp = old_ebp.val;
-	cpu.esp += data_size / 8;
+        cpu.ebp = old_ebp.val;
+        cpu.esp += data_size / 8;
 	
 	printf("After leave: \n");
 	print_reg();
