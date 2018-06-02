@@ -15,7 +15,7 @@ make_instr_func(leave) {
 	print_reg();
 
 	OPERAND old_ebp;
-	old_ebp.data_size = new_ebp.data_size = data_size;
+	old_ebp.data_size = data_size;
 	old_ebp.type = OPR_MEM;
 	old_ebp.addr = REG_ESP;
 	old_ebp.sreg = SREG_SS;
