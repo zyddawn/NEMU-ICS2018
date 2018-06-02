@@ -12,6 +12,7 @@ make_instr_func(leave) {
 
 	// esp = ebp
 	cpu.esp = cpu.ebp;
+	print_reg();
 
 	OPERAND old_ebp;
 	old_ebp.data_size = data_size;
