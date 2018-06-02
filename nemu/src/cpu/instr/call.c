@@ -1,20 +1,16 @@
 #include "cpu/instr.h"
 
 make_instr_func(call_near_r_v) {
-	OPERAND disp, push_eip;
-	disp.data_size = push_eip.data_size = data_size;
+	OPERAND disp, push_eip, old_ebp;
+	disp.data_size = push_eip.data_size = old_ebp.data_size = data_size;
 	disp.type = OPR_IMM;
 	disp.addr = eip + 1;
 	disp.sreg = SREG_CS;
-	push_eip.type = OPR_MEM;
+	push_eip.type = old_ebp.type = OPR_MEM;
 	
 	// read call address
 	operand_read(&disp);
 	eip += (1 + data_size / 8);
-#ifdef DEBUG
-	printf("before CALL esp = 0x%x\n", cpu.esp);
-	print_reg();
-#endif
 	// push eip
 	if (data_size == 16) {
 		cpu.esp -= 2;
@@ -22,6 +18,10 @@ make_instr_func(call_near_r_v) {
 		push_eip.addr = REG_SP;
 		operand_write(&push_eip);
 		cpu.eip = (eip + disp.val) & 0x0000FFFF;
+		
+		cpu.esp -= 2;
+		old_ebp.val = cpu.ebp & 0x0000FFFF;
+		old_eip.addr = REG_SP;
 	}
 	else {
 		cpu.esp -= 4;
@@ -29,10 +29,15 @@ make_instr_func(call_near_r_v) {
 		push_eip.addr = REG_ESP;
 		operand_write(&push_eip);
 		cpu.eip = eip + disp.val;
+		
+		cpu.esp -= 4;
+		old_ebp.val = cpu.ebp;
+		old_ebp.addr = REG_ESP;
+		operand_write(&old_ebp);
 	}
-#ifdef DEBUG
-	printf("\nCALL push eip = 0x%x, cur_eip = 0x%x, esp = 0x%x\n", push_eip.val, cpu.eip, cpu.esp);
-#endif
+	operand_write(&old_ebp);
+	cpu.ebp = cpu.esp;
+	
 
 #ifdef DEBUG
 	OPERAND temp;
