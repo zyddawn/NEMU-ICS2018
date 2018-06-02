@@ -40,8 +40,6 @@ make_instr_func(call_near_r_v) {
 	temp.type = OPR_MEM;
 	operand_read(&temp); 
 	printf("call stored eip = 0x%x\n", temp.val);
-	while(1)
-		;
 #endif
 	return 0;
 }
