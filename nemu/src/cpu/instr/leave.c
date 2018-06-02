@@ -3,6 +3,13 @@
 make_instr_func(leave) {
 	printf("before leave: \n");
 	print_reg();
+	OPERAND temp;
+	temp.data_size = data_size;
+	temp.addr = REG_EBP;
+	temp.type = OPR_MEM;
+	operand_read(&temp);
+	printf("current ebp store = 0x%x\n", temp.val);
+
 	// esp = ebp
 	cpu.esp = cpu.ebp;
 
