@@ -28,6 +28,7 @@ make_instr_func(call_near_r_v) {
 		operand_write(&push_eip);
 		cpu.eip = eip + disp.val;
 	}
+
 	return 0;
 }
 

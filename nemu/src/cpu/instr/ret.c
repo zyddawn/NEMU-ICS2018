@@ -17,7 +17,7 @@ make_instr_func(ret_near) {
 		cpu.esp += 4;
 		cpu.eip = pop_eip.val;
 	}
-
+	printf("after RET eip = 0x%x\n", cpu.eip);
 	return 0;
 }
 
