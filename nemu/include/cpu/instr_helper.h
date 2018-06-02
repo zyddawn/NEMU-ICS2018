@@ -85,6 +85,11 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		operand_write(&opr_dest); \
 		printf("after push...\n"); \
 		print_reg(); \
+		OPERAND temp; \
+		temp.data_size = data_size; \
+		temp.addr = REG_ESP; \
+		operand_read(&temp); \
+		printf("esp stored old ebp = 0x%x\n", temp.val); \
 		return len; \
 	}
 
