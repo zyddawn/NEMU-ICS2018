@@ -6,16 +6,21 @@ make_instr_func(leave) {
 	print_reg();
 	
 	int n=5;
-	OPERAND temp;
-	temp.data_size = data_size;
+	OPERAND temp, change_esp;
+	temp.data_size = change_esp.data_size = data_size;
 	temp.type = OPR_MEM;
+	change_esp.type = OPR_REG;
 	temp.addr = REG_ESP;
+	change_esp.addr = REG_ESP;
 	temp.sreg = SREG_SS;
+	temp.sreg = SREG_DS;
 	while(n--) {
 		printf("n = %d\n", n);
 		operand_read(&temp);
 		printf("esp = 0x%x, esp store = 0x%x\n", cpu.esp, temp.val);
-		cpu.esp -= 4;
+		operand_read(&change_esp);
+		change_esp.val -= 4;
+		operand_write(&change_esp);
 	}
 
 	OPERAND old_ebp;
