@@ -5,8 +5,8 @@ make_instr_func(ret_near) {
 	pop_eip.data_size = data_size;
 	pop_eip.type = OPR_MEM;
 #ifdef DEBUG
-	while(1)
-		printf("before ret esp = 0x%x\n", cpu.esp);
+	
+	printf("before ret esp = 0x%x\n", cpu.esp);
 #endif
 	if (data_size == 16) {
 		pop_eip.addr = REG_SP;
@@ -21,7 +21,7 @@ make_instr_func(ret_near) {
 		cpu.eip = pop_eip.val;
 	}
 #ifdef DEBUG
-	printf("ret eip = 0x%x, cpu.esp = 0x%x\n", cpu.eip, cpu.esp);
+	printf("after ret eip = 0x%x, cpu.esp = 0x%x\n", cpu.eip, cpu.esp);
 	OPERAND temp1, temp2;
 	temp1.data_size = temp2.data_size = data_size;
 	temp1.addr = REG_ESP;
