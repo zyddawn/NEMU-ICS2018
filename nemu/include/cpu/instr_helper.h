@@ -79,10 +79,10 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 			opr_dest.addr = REG_ESP; \
 			opr_src.addr = concat(REG_E, reg_addr); } \
 		operand_read(&opr_src); \
-		if (opr_src.addr == 0x4) {\
+		if (opr_src.addr == REG_ESP) {\
 			printf("reg value = 0x%x\n", opr_src.val); \
 			print_reg(); \
-			while(1) ; } \
+			while(1) ; }\
 		opr_dest.val = opr_src.val; \
 		operand_write(&opr_dest); \
 		return len; \
