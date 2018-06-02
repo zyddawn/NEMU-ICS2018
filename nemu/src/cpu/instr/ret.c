@@ -18,6 +18,16 @@ make_instr_func(ret_near) {
 		cpu.eip = pop_eip.val;
 	}
 	printf("after RET eip = 0x%x\n", cpu.eip);
+	
+	OPERAND temp1, temp2;
+	temp1.data_size = temp2.data_size = data_size;
+	temp1.addr = cpu.ebp;
+	temp2.addr = cpu.ebp - 4;
+	temp1.type = temp2.type = OPR_MEM;
+	operand_read(&temp1);
+	operand_read(&temp2);
+	printf("ebp store = 0x%x, ebp-4 store = 0x%x\n", temp1.val, temp2.val);
+
 	return 0;
 }
 
