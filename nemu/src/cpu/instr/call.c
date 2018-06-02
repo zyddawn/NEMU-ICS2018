@@ -11,8 +11,9 @@ make_instr_func(call_near_r_v) {
 	// read call address
 	operand_read(&disp);
 	eip += (1 + data_size / 8);
-#ifdef xx
-	printf("before CALL esp = 0x%x\n", cpu.esp);
+#ifdef DEBUG
+	while(1)
+		printf("before CALL esp = 0x%x\n", cpu.esp);
 #endif
 	// push eip
 	if (data_size == 16) {
