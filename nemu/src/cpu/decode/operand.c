@@ -7,7 +7,7 @@ OPERAND opr_src, opr_dest;
 void operand_read(OPERAND * opr) {
 	switch(opr->type) {
 		case OPR_MEM:
-			assert(opr->sreg == SREG_DS || opr->sreg == SREG_SS);
+			//assert(opr->sreg == SREG_DS || opr->sreg == SREG_SS);
 			opr->val = vaddr_read(opr->addr, opr->sreg, 4);
 			break;
 		case OPR_IMM: 
@@ -57,7 +57,7 @@ void operand_write(OPERAND * opr) {
 	switch(opr->type) {
 	case OPR_MEM:
 		// data size here
-		assert(opr->sreg == SREG_DS || opr->sreg == SREG_SS);
+		//assert(opr->sreg == SREG_DS || opr->sreg == SREG_SS);
 		vaddr_write(opr->addr, opr->sreg, opr->data_size / 8, opr->val);
 		break;
 	case OPR_REG:

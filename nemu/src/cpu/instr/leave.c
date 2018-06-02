@@ -2,8 +2,21 @@
 
 make_instr_func(leave) {
 	// esp = ebp
-	cpu.esp = cpu.ebp;
+	// cpu.esp = cpu.ebp;
 	print_reg();
+	
+	int n=5;
+	OPERAND temp;
+	temp.data_size = data_size;
+	temp.type = OPR_MEM;
+	temp.addr = REG_ESP;
+	temp.sreg = SREG_SS;
+	while(n--) {
+		printf("n = %d\n", n);
+		operand_read(&temp);
+		printf("esp = 0x%x, esp store = 0x%x\n", cpu.esp, temp.val);
+		cpu.esp -= 4;
+	}
 
 	OPERAND old_ebp;
 	old_ebp.data_size = data_size;
