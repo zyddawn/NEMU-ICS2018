@@ -68,8 +68,6 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 #define push_REG_helper(inst_name, reg_name, reg_addr) \
 	make_instr_func(concat4(inst_name, _, reg_name, _v)) {\
 		int len = 1; \
-		printf("\nBefore push: \n"); \
-		print_reg(); \
 		decode_data_size_v \
 		cpu.esp -= data_size / 8; \
 		opr_dest.type = OPR_MEM; \
@@ -85,14 +83,6 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		operand_read(&opr_src); \
 		opr_dest.val = opr_src.val; \
 		operand_write(&opr_dest); \
-		printf("\nafter push:\n"); \
-		print_reg(); \
-		OPERAND temp; \
-		temp.data_size = data_size; \
-		temp.addr = REG_ESP; \
-		temp.type = OPR_MEM; \
-		operand_read(&temp); \
-		printf("esp = 0x%x, Pushed value = 0x%x\n", cpu.esp, temp.val); \
 		return len; \
 	}
 
