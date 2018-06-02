@@ -21,7 +21,8 @@ make_instr_func(ret_near) {
 		cpu.eip = pop_eip.val;
 	}
 #ifdef DEBUG
-	printf("after ret eip = 0x%x, cpu.esp = 0x%x\n", cpu.eip, cpu.esp);
+	while(1)
+		printf("after ret eip = 0x%x, cpu.esp = 0x%x\n", cpu.eip, cpu.esp);
 	OPERAND temp1, temp2;
 	temp1.data_size = temp2.data_size = data_size;
 	temp1.addr = REG_ESP;
