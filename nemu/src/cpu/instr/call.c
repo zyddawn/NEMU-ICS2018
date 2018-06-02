@@ -30,7 +30,7 @@ make_instr_func(call_near_r_v) {
 		cpu.eip = eip + disp.val;
 	}
 #ifdef DEBUG
-	printf("CALL push eip = 0x%x, cur_eip = 0x%x, esp = 0x%x\n", push_eip.val, cpu.eip, cpu.esp);
+	printf("\nCALL push eip = 0x%x, cur_eip = 0x%x, esp = 0x%x\n", push_eip.val, cpu.eip, cpu.esp);
 #endif
 
 #ifdef DEBUG
