@@ -73,7 +73,9 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		decode_data_size_v \
 		cpu.esp -= data_size / 8; \
 		opr_dest.type = OPR_MEM; \
+		opr_dest.sreg = SREG_SS; \
 		opr_src.type = OPR_REG; \
+		opr_src.sreg = SREG_DS; \
 		if (data_size == 16) { \
 			opr_dest.addr = REG_SP; \
 			opr_src.addr = concat(REG_, reg_addr); } \

@@ -7,7 +7,7 @@ make_instr_func(call_near_r_v) {
 	disp.addr = eip + 1;
 	disp.sreg = SREG_CS;
 	push_eip.type = OPR_MEM;
-	
+
 	printf("\nBefore call: \n");
 	print_reg();
 	// read call address
