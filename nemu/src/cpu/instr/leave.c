@@ -16,6 +16,7 @@ make_instr_func(leave) {
 	}
 	// esp = ebp
 	operand_read(&opr_ebp);
+	printf("opr_ebp = 0x%x\n", opr_ebp.val);
 	opr_esp.val = opr_ebp.val;
 
 // BUG LIES IN THE OPERAND TYPE AND OPERAND_READ !!!
