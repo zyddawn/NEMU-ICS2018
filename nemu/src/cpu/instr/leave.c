@@ -25,7 +25,7 @@ make_instr_func(leave) {
 	temp1.type = temp2.type = OPR_MEM;
 	operand_read(&temp1);
 	operand_read(&temp2);
-	printf("leave ebp = 0x%x\n", temp2.val);
+	printf("leave ebp store = 0x%x, ebp = 0x%x, esp = 0x%x\n", temp2.val, cpu.ebp, cpu.esp);
 #endif
 	operand_write(&opr_esp);
 	// ebp = pop()
@@ -33,7 +33,7 @@ make_instr_func(leave) {
 	operand_read(&opr_esp);
 	cpu.ebp = opr_esp.val;
 	cpu.esp += data_size / 8;
-	print_reg();
+	// print_reg();
 	printf("\n");
 	return 1;
 }
