@@ -25,7 +25,7 @@ make_instr_func(call_near_r_v) {
 		cpu.esp -= 4;
 		push_eip.val = eip;
 		push_eip.addr = REG_ESP;
-		printf("call push eip = 0x%x, esp = 0x%x\n", eip, cpu.esp);
+		printf("\ncall push eip = 0x%x, esp = 0x%x\n", eip, cpu.esp);
 		operand_write(&push_eip);
 		cpu.eip = eip + disp.val;
 	}
