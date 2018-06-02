@@ -71,7 +71,7 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		printf("\nBefore push: \n"); \
 		print_reg(); \
 		decode_data_size_v \
-		instr_execute(); \
+		cpu.esp -= data_size / 8; \
 		opr_dest.type = OPR_MEM; \
 		opr_src.type = OPR_REG; \
 		if (data_size == 16) { \
