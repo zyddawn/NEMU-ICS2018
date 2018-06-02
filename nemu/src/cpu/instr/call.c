@@ -21,7 +21,7 @@ make_instr_func(call_near_r_v) {
 		
 		cpu.esp -= 2;
 		old_ebp.val = cpu.ebp & 0x0000FFFF;
-		old_eip.addr = REG_SP;
+		old_ebp.addr = REG_SP;
 	}
 	else {
 		cpu.esp -= 4;
