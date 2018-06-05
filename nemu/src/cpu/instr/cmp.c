@@ -27,6 +27,6 @@ make_instr_func(cmp_si2rm_bv) {
 	operand_read(&opr_src);
 	operand_read(&opr_dest);
 	alu_sub(sign_ext(opr_src.val, 8), opr_dest.val);
-	printf("cmp cur eip = 0x%x, next eip = 0x%x\n", cpu.eip, cpu.eip+len);
+	// printf("cmp cur eip = 0x%x, next eip = 0x%x\n", cpu.eip, cpu.eip+len);
 	return len;
 }
