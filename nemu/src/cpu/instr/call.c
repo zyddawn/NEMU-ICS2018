@@ -29,6 +29,14 @@ make_instr_func(call_near_r_v) {
 	printf("call pushed eip = 0x%x, current eip = 0x%x\n", push_eip.val, cpu.eip);
 	print_reg();
 	// }
+	
+	OPERAND temp;
+	temp.data_size = 32;
+	temp.type = OPR_MEM;
+	temp.addr = cpu.esp;
+	temp.sreg = SREG_SS;
+	operand_read(&temp);
+	printf("after call check esp = 0x%x, esp store = 0x%x\n\n", cpu.esp, temp.val);
 	return 0;
 }
 
