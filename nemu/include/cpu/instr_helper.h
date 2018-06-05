@@ -70,7 +70,7 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		int len = 1; \
 		opr_src.data_size = data_size; \
 		opr_dest.data_size = 32; \
-		cpu.esp -= 4; \
+		instr_execute(); \
 		opr_dest.type = OPR_MEM; \
 		opr_dest.sreg = SREG_SS; \
 		opr_src.type = OPR_REG; \
