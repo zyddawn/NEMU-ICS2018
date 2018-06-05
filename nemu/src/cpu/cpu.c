@@ -120,14 +120,15 @@ int exec_inst() {
 	// instruction decode and execution
 	int len = opcode_entry[opcode](cpu.eip, opcode);
 #ifdef DEBUG
-	OPERAND temp;
+	OPERAND temp, srg;
 	temp.type = OPR_MEM;
-	temp.data_size = 32;
+	srg.type = OPR_SREG;
+	srg.data_size = temp.data_size = 32;
 	temp.addr = REG_ESP;
+	srg.addr = SREG_SS;
 	operand_read(&temp);
-	if(opcode == 0xe9)
-		printf("call...\n");
-	printf("eip = 0x%x, esp = 0x%x, esp store = 0x%x\n", cpu.eip, cpu.esp, temp.val);
+	operand_read(&srg);
+	printf("eip = 0x%x, sreg_ss = 0x%x, esp = 0x%x, esp store = 0x%x\n", cpu.eip, srg.val, cpu.esp, temp.val);
 
 #endif
 
