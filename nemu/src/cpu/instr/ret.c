@@ -1,6 +1,7 @@
 #include "cpu/instr.h"
 
 make_instr_func(ret_near) {
+	printf("ret...\n");
 	OPERAND pop_eip;
 	pop_eip.data_size = data_size;
 	pop_eip.type = OPR_MEM;
