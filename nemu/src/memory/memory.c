@@ -22,12 +22,12 @@ void hw_mem_write(paddr_t paddr, size_t len, uint32_t data) {
 	memcpy(hw_mem + paddr, &data, len);
 	printf("before write: \n");
 	for(int i = paddr; i < paddr + 16; i += 4) {
-		printf("0x%x: 0x%x\n", i, hw_mem[i]);
+		printf("0x%x: 0x%x 0x%x 0x%x 0x%x\n", i, hw[i+3], hw_mem[i+2], hw_mem[i+1], hw_mem[i]);
 	}
 	printf("paddr (write) = 0x%x, data = 0x%x\n", paddr, data);
 	printf("after write: \n");
 	for(int i = paddr; i < paddr + 16; i += 4) {
-		printf("0x%x: 0x%x\n", i, hw_mem[i]);
+		printf("0x%x: 0x%x 0x%x 0x%x 0x%x\n", i, hw_mem[i+3], hw_mem[i+2], hw_mem[i+1], hw_mem[i]);
 	}
 	printf("\n");
 }
