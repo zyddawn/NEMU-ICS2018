@@ -69,7 +69,7 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 	make_instr_func(concat4(inst_name, _, reg_name, _v)) {\
 		int len = 1; \
 		opr_src.data_size = data_size; \
-		opr_dest.data_size = 32\
+		opr_dest.data_size = 32; \
 		cpu.esp -= 4; \
 		opr_dest.type = OPR_MEM; \
 		opr_dest.sreg = SREG_SS; \
