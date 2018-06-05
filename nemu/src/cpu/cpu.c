@@ -121,8 +121,11 @@ int exec_inst() {
 	int len = opcode_entry[opcode](cpu.eip, opcode);
 #ifdef DEBUG
 	OPERAND temp;
-	temp.addr = 
-	printf("eip = 0x%x, esp = 0x%x, esp store = 0x%x\n", cpu.eip, cpu.esp, );
+	temp.type = OPR_MEM;
+	temp.data_size = 32;
+	temp.addr = REG_ESP;
+	operand_read(&temp);
+	printf("eip = 0x%x, esp = 0x%x, esp store = 0x%x\n", cpu.eip, cpu.esp, temp.val);
 
 #endif
 
