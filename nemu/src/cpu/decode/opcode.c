@@ -77,7 +77,7 @@ instr_func group_1_v_entry[8] =
 
 /* 0x83 */
 instr_func group_1_bv_entry[8] =
-{add_si2rm_bv, inv, adc_i2rm_bv, inv, and_si2rm_bv, sub_si2rm_bv, inv, cmp_si2rm_bv};
+{add_si2rm_bv, inv, adc_si2rm_bv, inv, and_si2rm_bv, sub_si2rm_bv, inv, cmp_si2rm_bv};
 
 /* 0xc0 */
 instr_func group_2_b_entry[8] =
