@@ -17,7 +17,7 @@ make_instr_impl_2op(and, rm, r, b)
 make_instr_impl_2op(and, rm, r, b)
 
 
-make_instr_impl_2op(and_si2rm_bv) {
+make_instr_func(and_si2rm_bv) {
 	int len = 1;
 	OPERAND opr_src, opr_dest;
 	decode_data_size_bv
