@@ -12,11 +12,7 @@
 
 #include <stdio.h>
  
-#define DEBUG
-
-//#ifdef DEBUG
-//#undef DEBUG
-//#endif
+// #define DEBUG
 
 extern uint8_t data_size;
 
@@ -38,7 +34,7 @@ extern uint8_t data_size;
 #include "cpu/instr/test.h"
 #include "cpu/instr/sub.h"
 #include "cpu/instr/leave.h"
-
+#include "cpu/instr/lea.h"
 
 
 
