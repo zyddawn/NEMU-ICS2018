@@ -122,13 +122,11 @@ int exec_inst() {
 #ifdef DEBUG
 	OPERAND temp, srg;
 	temp.type = OPR_MEM;
-	srg.type = OPR_SREG;
-	srg.data_size = temp.data_size = 32;
+	temp.data_size = 32;
 	temp.addr = REG_ESP;
-	srg.addr = SREG_SS;
+	temp.sreg = SREG_SS;
 	operand_read(&temp);
-	operand_read(&srg);
-	printf("eip = 0x%x, sreg_ss = 0x%x, esp = 0x%x, esp store = 0x%x\n", cpu.eip, srg.val, cpu.esp, temp.val);
+	printf("eip = 0x%x, esp = 0x%x, esp store = 0x%x\n", cpu.eip, cpu.esp, temp.val);
 
 #endif
 
