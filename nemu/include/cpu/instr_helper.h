@@ -65,8 +65,27 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 	}
 
 // macro for generating the implementation of pop/push instruction
-#define push_REG_helper(inst_name, reg_name, reg_addr) \
-	make_instr_func(concat4(inst_name, _, reg_name, _v)) {\
+#define push_REG_helper(reg_name, reg_addr) \
+	make_instr_func(concat3(push_, reg_name, _v)) {\
+		int len = 1; \
+		opr_src.data_size = data_size; \
+		opr_dest.data_size = 32; \
+		instr_execute(); \
+		opr_dest.type = OPR_MEM; \
+		opr_dest.sreg = SREG_SS; \
+		opr_src.type = OPR_REG; \
+		opr_src.sreg = SREG_DS; \
+		opr_dest.addr = cpu.esp; \
+		opr_src.addr = concat(REG_E, reg_addr); \
+		operand_read(&opr_src); \
+		opr_dest.val = sign_ext(opr_src.val, data_size); \
+		operand_write(&opr_dest); \
+		return len; \
+	}
+
+
+#define pop_REG_helper(reg_name, reg_addr) \
+	make_instr_func(concat4(pop_, reg_name, _v)) {\
 		int len = 1; \
 		opr_src.data_size = data_size; \
 		opr_dest.data_size = 32; \

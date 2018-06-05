@@ -45,13 +45,13 @@ static void restart(const uint32_t init_eip) {
 
 static char * testcases[] = {
 #ifndef IA32_PAGE
-	"mov",
-	"mov-cmp",
+	"mov",		// good
+	"mov-cmp",	// good
 #endif
-	"mov-c",
-	"mov-jcc",
-	"add",
-	"add-longlong",
+	"mov-c",	// bad (bug)
+	"mov-jcc",	// bad (bug)
+	"add",		// bug
+	"add-longlong", //
 	"if-else",
 	"fib",
 	"bubble-sort",
