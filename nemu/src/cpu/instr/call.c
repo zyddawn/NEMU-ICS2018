@@ -9,7 +9,6 @@ make_instr_func(call_near_r_v) {
 	disp.sreg = SREG_CS;
 	push_eip.type = OPR_MEM;
 	push_eip.sreg = SREG_SS;
-	push_eip.addr = cpu.esp;
 
 	// read call address
 	operand_read(&disp);
@@ -23,6 +22,7 @@ make_instr_func(call_near_r_v) {
 	}
 	else {*/
 	cpu.esp -= 4;
+	push_eip.addr = cpu.esp;
 	push_eip.val = eip;
 	operand_write(&push_eip);
 	cpu.eip = eip + disp.val;
