@@ -1,10 +1,6 @@
 #include "cpu/instr.h"
 
 make_instr_func(call_near_r_v) {
-#ifdef DEBUG
-	printf("call...\n");
-#endif
-	
 	OPERAND disp, push_eip;
 	disp.data_size = push_eip.data_size = data_size;
 	disp.type = OPR_IMM;
