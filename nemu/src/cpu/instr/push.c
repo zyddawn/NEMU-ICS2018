@@ -1,9 +1,4 @@
 #include "cpu/instr.h"
-#include "cpu/reg.h"
-
-/*static void instr_execute() {
-	cpu.esp -= data_size / 8;
-}*/
 
 push_REG_helper(push, eax, AX)
 push_REG_helper(push, ecx, CX)

@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <assert.h>
 
+#define DEBUG
+
 CPU_STATE cpu;
 FPU fpu;
 int nemu_state;
@@ -45,6 +47,7 @@ void exec(uint32_t n) {
 	while( n > 0 && nemu_state == NEMU_RUN) {
 
 #ifdef DEBUG
+		verbose = 1;	// FOR DEBUG
 		if(verbose) clear_operand_mem_addr(&opr_src);
 		if(verbose) clear_operand_mem_addr(&opr_dest);
 #endif
@@ -116,7 +119,7 @@ int exec_inst() {
 	// printf("opcode = 0x%x\n",opcode);
 	// instruction decode and execution
 	int len = opcode_entry[opcode](cpu.eip, opcode);
-	// printf("eip = 0x%x, len = %d\n", cpu.eip, len);
+	printf("");
 	return len;
 }
 
