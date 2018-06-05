@@ -125,7 +125,7 @@ int exec_inst() {
 	temp.data_size = 32;
 	temp.addr = REG_ESP;
 	operand_read(&temp);
-	if(opcode == 82)
+	if(opcode == 0xe9)
 		printf("call...\n");
 	printf("eip = 0x%x, esp = 0x%x, esp store = 0x%x\n", cpu.eip, cpu.esp, temp.val);
 
