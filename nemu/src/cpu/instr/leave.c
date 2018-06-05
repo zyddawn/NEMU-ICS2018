@@ -3,7 +3,6 @@
 make_instr_func(leave) {
 	// esp = ebp
 	cpu.esp = cpu.ebp;
-	print_reg();
 	
 	OPERAND old_ebp;
 	old_ebp.data_size = data_size;
@@ -15,10 +14,6 @@ make_instr_func(leave) {
 	// ebp = pop()
         cpu.ebp = old_ebp.val;
         cpu.esp += data_size / 8;
-	printf("\n");
-	print_reg();
-	while(1)
-		;
 	return 1;
 }
 

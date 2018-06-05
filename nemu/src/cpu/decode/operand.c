@@ -8,15 +8,15 @@ void operand_read(OPERAND * opr) {
 	switch(opr->type) {
 		case OPR_MEM:
 			//assert(opr->sreg == SREG_DS || opr->sreg == SREG_SS);
-			printf("OPR_MEM read...\n");
+			// printf("OPR_MEM read...\n");
 			opr->val = vaddr_read(opr->addr, opr->sreg, 4);
 			break;
 		case OPR_IMM: 
-			printf("OPR_IMM read...\n");
+			// printf("OPR_IMM read...\n");
 			opr->val = vaddr_read(opr->addr, SREG_CS, 4);
 			break;
 		case OPR_REG:
-			printf("OPR_REG read...\n");
+			// printf("OPR_REG read...\n");
 			if(opr->data_size == 8) {
 				opr->val = cpu.gpr[opr->addr % 4]._8[opr->addr / 4];
 			} else {
@@ -24,7 +24,7 @@ void operand_read(OPERAND * opr) {
 			}
 			break;
 		case OPR_CREG:
-			printf("OPR_CREG read...\n");
+			// printf("OPR_CREG read...\n");
 			switch(opr->addr) {
 #ifdef IA32_SEG
 				case 0: opr->val = cpu.cr0.val; break;
