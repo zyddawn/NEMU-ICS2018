@@ -119,7 +119,13 @@ int exec_inst() {
 	// printf("opcode = 0x%x\n",opcode);
 	// instruction decode and execution
 	int len = opcode_entry[opcode](cpu.eip, opcode);
-	printf("");
+#ifdef DEBUG
+	OPERAND temp;
+	temp.addr = 
+	printf("eip = 0x%x, esp = 0x%x, esp store = 0x%x\n", cpu.eip, cpu.esp, );
+
+#endif
+
 	return len;
 }
 
