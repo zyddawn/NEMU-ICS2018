@@ -68,20 +68,17 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 #define push_REG_helper(inst_name, reg_name, reg_addr) \
 	make_instr_func(concat4(inst_name, _, reg_name, _v)) {\
 		int len = 1; \
-		decode_data_size_v \
-		cpu.esp -= data_size / 8; \
+		opr_src.data_size = data_size; \
+		opr_dest.data_size = 32\
+		cpu.esp -= 4; \
 		opr_dest.type = OPR_MEM; \
 		opr_dest.sreg = SREG_SS; \
 		opr_src.type = OPR_REG; \
 		opr_src.sreg = SREG_DS; \
-		if (data_size == 16) { \
-			opr_dest.addr = REG_SP; \
-			opr_src.addr = concat(REG_, reg_addr); } \
-		else {\
-			opr_dest.addr = REG_ESP; \
-			opr_src.addr = concat(REG_E, reg_addr); } \
+		opr_dest.addr = REG_ESP; \
+		opr_src.addr = concat(REG_E, reg_addr); \
 		operand_read(&opr_src); \
-		opr_dest.val = opr_src.val; \
+		opr_dest.val = sign_ext(opr_src.val, data_size); \
 		operand_write(&opr_dest); \
 		return len; \
 	}
