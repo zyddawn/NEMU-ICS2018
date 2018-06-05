@@ -11,7 +11,10 @@ uint8_t hw_mem[MEM_SIZE_B];
 uint32_t hw_mem_read(paddr_t paddr, size_t len) {
 	uint32_t ret = 0;
 	memcpy(&ret, hw_mem + paddr, len);
-
+	printf("read: \n");
+	for(int i = paddr; i < paddr + 16; i += 4) {
+		printf("0x%08x: %02x %02x %02x %02x\n", i, hw_mem[i+3], hw_mem[i+2], hw_mem[i+1], hw_mem[i]);
+	}
 	uint32_t temp = 0;
 	memcpy(&temp, hw_mem + 0x7ffffe8, 4);
 	printf("paddr (read) = 0x%x, and 0x7ffffe8 store = 0x%x\n", paddr, temp);	
