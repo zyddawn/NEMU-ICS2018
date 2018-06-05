@@ -17,6 +17,7 @@ make_instr_func(ret_near) {
 	operand_read(&pop_eip);
 	cpu.esp += 4;
 	printf("ret before pop eip = 0x%x, current eip = 0x%x\n", cpu.eip, pop_eip.val);
+	print_reg();
 	cpu.eip = pop_eip.val;
 	//}
 	return 0;
