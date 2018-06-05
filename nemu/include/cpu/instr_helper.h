@@ -157,7 +157,6 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 	opr_src.sreg = SREG_DS; \
 	if(verbose) clear_operand_mem_addr(&opr_src);\
 	opr_src.addr = instr_fetch(eip + 1, 4); \
-	printf("o2a eip = 0x%x, src_addr = 0x%x\n", eip+1, opr_src.addr); \
 	if(verbose) opr_src.mem_addr.disp = opr_src.addr;\
 	opr_dest.type = OPR_REG; \
 	opr_dest.addr = REG_AL; \
