@@ -64,6 +64,16 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		return len; \
 	}
 
+// sign_ext macro
+#define make_SignExt_impl_si2rm_bv(inst_name) \
+	make_instr_func(concat2(inst_name, _si2rm_bv)) {\
+		int len = 1; \
+		decode_data_size_bv \
+		decode_operand_i2rm \
+		instr_execute_si2rm_bv(); \
+		return len; \
+	}
+
 // macro for generating the implementation of pop/push instruction
 #define push_REG_helper(reg_name, reg_addr) \
 	make_instr_func(concat3(push_, reg_name, _v)) {\
