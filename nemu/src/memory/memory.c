@@ -11,12 +11,13 @@ uint8_t hw_mem[MEM_SIZE_B];
 uint32_t hw_mem_read(paddr_t paddr, size_t len) {
 	uint32_t ret = 0;
 	memcpy(&ret, hw_mem + paddr, len);
-	// printf("paddr = 0x%x\n", paddr);	
+	printf("paddr (read) = 0x%x\n", paddr);	
 	return ret;
 }
 
 void hw_mem_write(paddr_t paddr, size_t len, uint32_t data) {
 	memcpy(hw_mem + paddr, &data, len);
+	printf("paddr (write) = 0x%x, data = 0x%x\n", paddr, data);
 }
 
 uint32_t paddr_read(paddr_t paddr, size_t len) {
