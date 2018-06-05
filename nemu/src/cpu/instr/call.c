@@ -33,7 +33,7 @@ make_instr_func(call_near_r_v) {
 	OPERAND temp;
 	temp.data_size = 32;
 	temp.type = OPR_MEM;
-	temp.addr = REG_ESP;
+	temp.addr = cpu.esp;
 	temp.sreg = SREG_SS;
 	operand_read(&temp);
 	printf("after call check esp = 0x%x, esp store = 0x%x\n\n", cpu.esp, temp.val);
