@@ -14,13 +14,22 @@ uint32_t hw_mem_read(paddr_t paddr, size_t len) {
 
 	uint32_t temp = 0;
 	memcpy(&temp, hw_mem + 0x7ffffe8, 4);
-	printf("paddr (read) = 0x%x  0x7ffffe8 store = 0x%x\n", paddr, temp);	
+	printf("paddr (read) = 0x%x, and 0x7ffffe8 store = 0x%x\n", paddr, temp);	
 	return ret;
 }
 
 void hw_mem_write(paddr_t paddr, size_t len, uint32_t data) {
 	memcpy(hw_mem + paddr, &data, len);
+	printf("before write: \n");
+	for(int i = paddr; i < paddr + 16; i += 4) {
+		printf("0x%x: 0x%x\n", i, hw_mem[i]);
+	}
 	printf("paddr (write) = 0x%x, data = 0x%x\n", paddr, data);
+	printf("after write: \n");
+	for(int i = paddr; i < paddr + 16; i += 4) {
+		printf("0x%x: 0x%x\n", i, hw_mem[i]);
+	}
+	printf("\n");
 }
 
 uint32_t paddr_read(paddr_t paddr, size_t len) {
