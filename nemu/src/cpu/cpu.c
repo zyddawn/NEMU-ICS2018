@@ -126,7 +126,7 @@ int exec_inst() {
 	temp.addr = REG_ESP;
 	temp.sreg = SREG_SS;
 	operand_read(&temp);
-	printf("eip = 0x%x, esp = 0x%x, esp store = 0x%x\n\n", cpu.eip, cpu.esp, temp.val);
+	printf("eip = 0x%x, esp = 0x%x, esp store = 0x%x\n", cpu.eip, cpu.esp, temp.val);
 
 #endif
 
