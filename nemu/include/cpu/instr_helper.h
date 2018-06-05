@@ -75,7 +75,7 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		opr_dest.sreg = SREG_SS; \
 		opr_src.type = OPR_REG; \
 		opr_src.sreg = SREG_DS; \
-		opr_dest.addr = REG_ESP; \
+		opr_dest.addr = cpu.esp; \
 		opr_src.addr = concat(REG_E, reg_addr); \
 		operand_read(&opr_src); \
 		opr_dest.val = sign_ext(opr_src.val, data_size); \

@@ -8,7 +8,7 @@ make_instr_func(leave) {
 	OPERAND old_ebp;
 	old_ebp.data_size = data_size;
 	old_ebp.type = OPR_MEM;
-	old_ebp.addr = REG_ESP;
+	old_ebp.addr = cpu.esp;
 	old_ebp.sreg = SREG_DS;
 	operand_read(&old_ebp);
 	
