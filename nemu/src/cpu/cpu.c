@@ -120,7 +120,7 @@ int exec_inst() {
 	// instruction decode and execution
 	int len = opcode_entry[opcode](cpu.eip, opcode);
 #ifdef DEBUG
-	OPERAND temp, srg;
+	OPERAND temp;
 	temp.type = OPR_MEM;
 	temp.data_size = 32;
 	temp.addr = REG_ESP;
