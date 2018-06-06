@@ -54,9 +54,9 @@ static char * testcases[] = {
 	"add-longlong", // bug
 	"if-else",	// BAD (bug)
 	"fib",		// GOOD
-	"bubble-sort",
-	"quick-sort",
-	"select-sort",
+	"bubble-sort",	// GOOD
+	"quick-sort",	// UNKNOWN BUG, infinite execution
+	"select-sort",	// 
 	"max",
 	"min3",
 	"pascal",
