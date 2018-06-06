@@ -68,7 +68,7 @@ static char * testcases[] = {
 	"leap-year",	// GOOD
 	"matrix-mul-small",	// GOOD
 	"matrix-mul",	// GOOD
-	"mul-longlong", // -bug
+	"mul-longlong", // -bug (group opcode)
 	"prime",	// --BAD (bug) 
 	"shuixianhua",	// --BAD (bug)
 	"sum",		// --BAD (bug)
