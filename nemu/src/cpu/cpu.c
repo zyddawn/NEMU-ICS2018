@@ -7,7 +7,10 @@
 #include <stdio.h>
 #include <assert.h>
 
-// #define DEBUG
+#ifdef DEBUG
+#undef DEBUG
+#endif
+
 
 CPU_STATE cpu;
 FPU fpu;
@@ -50,7 +53,7 @@ void exec(uint32_t n) {
 	while( n > 0 && nemu_state == NEMU_RUN) {
 
 #ifdef DEBUG
-		verbose = 1;	// FOR DEBUG
+		// verbose = 1;	// FOR DEBUG
 		if(verbose) clear_operand_mem_addr(&opr_src);
 		if(verbose) clear_operand_mem_addr(&opr_dest);
 #endif

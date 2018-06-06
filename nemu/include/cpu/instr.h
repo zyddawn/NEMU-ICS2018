@@ -12,7 +12,6 @@
 
 #include <stdio.h>
  
-// #define DEBUG
 
 extern uint8_t data_size;
 
