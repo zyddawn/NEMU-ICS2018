@@ -3,9 +3,10 @@
 static void instr_execute_2op() {
 	operand_read(&opr_src);
 	operand_read(&opr_dest);
-	opr_dest.val = opr_dest.val & opr_src.val;
-	operand_write(&opr_dest);
+	uint32_t temp = opr_dest.val & opr_src.val;
 	cpu.eflags.CF = cpu.eflags.OF = 0;
+	set_ZF(temp);
+	set_PF(temp);
 }
 
 make_instr_impl_2op(test, i, a, b)
