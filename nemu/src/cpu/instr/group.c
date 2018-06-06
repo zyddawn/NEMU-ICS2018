@@ -4,7 +4,7 @@
 	make_instr_func(name) { \
 		uint8_t op_code; \
 		modrm_opcode(eip + 1, &op_code); \
-		printf("inner group index = 0x%x\n", op_code)\
+		printf("inner group index = 0x%x\n", op_code); \
 		return concat(name, _entry)[op_code](eip, op_code); \
 	}
 
