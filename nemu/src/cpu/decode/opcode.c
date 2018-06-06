@@ -17,8 +17,8 @@ instr_func opcode_entry[256] = {
 /* 0x34 - 0x37*/	xor_i2a_b, xor_i2a_v, inv, inv,
 /* 0x38 - 0x3b*/	cmp_r2rm_b, cmp_r2rm_v, cmp_rm2r_b, cmp_rm2r_v,
 /* 0x3c - 0x3f*/	cmp_i2a_b, cmp_i2a_v, inv, inv,
-/* 0x40 - 0x43*/	inc1_r_v, inc1_r_v, inc1_r_v, inc1_r_v,
-/* 0x44 - 0x47*/	inc1_r_v, inc1_r_v, inc1_r_v, inc1_r_v,
+/* 0x40 - 0x43*/	inc_eax_v, inc_edx_v, inc_ecx_v, inc_ebx_v,
+/* 0x44 - 0x47*/	inc_esp_v, inc_ebp_v, inc_esi_v, inc_edi_v,
 /* 0x48 - 0x4b*/	inv, inv, inv, inv,
 /* 0x4c - 0x4f*/	inv, inv, inv, inv,
 /* 0x50 - 0x53*/	push_eax_v, push_ecx_v, push_edx_v, push_ebx_v,
@@ -64,7 +64,7 @@ instr_func opcode_entry[256] = {
 /* 0xf0 - 0xf3*/	inv, break_point, inv, rep_repe,
 /* 0xf4 - 0xf7*/	hlt, inv, group_3_b, group_3_v,
 /* 0xf8 - 0xfb*/	clc, inv, inv, inv,
-/* 0xfc - 0xff*/	cld, inv, inc1_rm_b, group_5_indirect,
+/* 0xfc - 0xff*/	cld, inv, inv, group_5_indirect,
 };
 
 /* 0x80 */
@@ -113,7 +113,7 @@ instr_func group_3_v_entry[8] =
 
 /* 0xff */
 instr_func group_5_indirect_entry[8] =
-{inc1_rm_v, inv, inv, inv, inv, inv, push_rm_v, inv};
+{inv, inv, inv, inv, inv, inv, push_rm_v, inv};
 
 instr_func group_7_entry[8] = 
 {inv, inv, inv, inv, inv, inv, inv, inv};
