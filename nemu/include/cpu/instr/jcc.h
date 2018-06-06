@@ -3,7 +3,7 @@
 
 make_instr_func(jecxz_short_);
 // short
-make_instr_func(je_short_);
+// make_instr_func(je_short_);
 make_instr_func(ja_short_);
 make_instr_func(jb_short_);
 make_instr_func(jg_short_);
