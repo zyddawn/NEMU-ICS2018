@@ -5,7 +5,6 @@ static void instr_execute_2op() {
 	operand_read(&opr_dest);
 	opr_dest.val = alu_and(opr_src.val, opr_dest.val);
 	operand_write(&opr_dest);
-	printf("and instr len = 0x%x\n", len);
 }
 
 static void instr_execute_si2rm_bv() {

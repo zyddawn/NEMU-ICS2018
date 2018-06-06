@@ -47,6 +47,8 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		concat3(decode_operand, _, concat3(src_type, 2, dest_type)) \
 		print_asm_2(#inst_name, opr_dest.data_size == 8 ? "b" : (opr_dest.data_size == 16 ? "w" : "l"), len, &opr_src, &opr_dest); \
 		instr_execute_2op(); \
+		if (opcode == 0x84) \
+			printf("and instr len = 0x%x\n", len); \
 		return len; \
 	}
 
