@@ -20,8 +20,8 @@ static void instr_execute_1op() {
 	return len;
 } */
 
-make_instr_impl_1op(inc_, r, v)
-make_instr_impl_1op(inc_, rm, v)
+make_instr_impl_1op(inc, r, v)
+make_instr_impl_1op(inc, rm, v)
 
 
 
