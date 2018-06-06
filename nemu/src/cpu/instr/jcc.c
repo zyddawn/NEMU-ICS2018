@@ -3,10 +3,9 @@
 static void instr_execute_1op_cc_pass() {
 	operand_read(&opr_src);
 	cpu.eip += sign_ext(opr_src.val, opr_src.data_size);
-	print_flags();
 }
 
-static void instr_execute_1op_cc_fail() {print_flags();/* Do nothing */}
+static void instr_execute_1op_cc_fail() {/* Do nothing */}
 
 #define jcc_helper(suffix) \
 	make_instr_impl_1op_cc(j, i, suffix, e) \
