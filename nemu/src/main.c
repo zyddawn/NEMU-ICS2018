@@ -53,7 +53,7 @@ static char * testcases[] = {
 	"add",		// bug
 	"add-longlong", // bug
 	"if-else",	// BAD (bug)
-	"fib",		// 
+	"fib",		// GOOD
 	"bubble-sort",
 	"quick-sort",
 	"select-sort",
