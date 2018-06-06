@@ -47,13 +47,11 @@ void exec(uint32_t n) {
 	while( n > 0 && nemu_state == NEMU_RUN) {
 
 #ifdef DEBUG
-		// verbose = 1;	// FOR DEBUG
+		verbose = 1;	// FOR DEBUG
 		if(verbose) clear_operand_mem_addr(&opr_src);
 		if(verbose) clear_operand_mem_addr(&opr_dest);
 #endif
-
-		instr_len = exec_inst();
-
+		instr_len = exec_inst();		
 		cpu.eip += instr_len;
 		n--;
 
@@ -118,19 +116,13 @@ int exec_inst() {
 	opcode = instr_fetch(cpu.eip, 1);
 	// printf("opcode = 0x%x\n",opcode);
 	// instruction decode and execution
-	int len = opcode_entry[opcode](cpu.eip, opcode);
-
 #ifdef DEBUG
-	OPERAND temp;
-	temp.type = OPR_MEM;
-	temp.data_size = 32;
-	temp.addr = REG_ESP;
-	temp.sreg = SREG_SS;
-	operand_read(&temp);
-	// printf("eip = 0x%x, esp = 0x%x, esp store = 0x%x\n", cpu.eip, cpu.esp, temp.val);
-
+	printf("cur_eip = 0x%x\n", cpu.eip);
 #endif
-
+	int len = opcode_entry[opcode](cpu.eip, opcode);
+#ifdef DEBUG
+	printf("instr len = 0x%x, next eip = 0x%x\n\n", len, cpu.eip + len);
+#endif
 	return len;
 }
 
