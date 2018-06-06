@@ -71,8 +71,8 @@ static char * testcases[] = {
 	"mul-longlong", // -bug
 	"prime",	// --BAD (bug) 
 	"shuixianhua",	// --BAD (bug)
-	"sum",		// 
-	"wanshu",
+	"sum",		// --BAD (bug)
+	"wanshu",	// 
 	"struct",
 	"string",
 	"hello-str", 
