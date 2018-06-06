@@ -5,6 +5,7 @@
 uint32_t cnt_one_in_digits(uint32_t x);
 void set_ZF(uint32_t x);
 void set_PF(uint32_t x);
+void set_SF(uint32_t x, size_t data_size);
 
 // dest + src
 uint32_t alu_add(uint32_t src, uint32_t dest);

@@ -7,6 +7,7 @@ static void instr_execute_2op() {
 	cpu.eflags.CF = cpu.eflags.OF = 0;
 	set_ZF(temp);
 	set_PF(temp);
+	set_SF(temp, data_size);
 }
 
 make_instr_impl_2op(test, i, a, b)
