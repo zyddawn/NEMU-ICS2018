@@ -48,16 +48,16 @@ static char * testcases[] = {
 	"mov",		// GOOD
 	"mov-cmp",	// GOOD
 #endif
-	"mov-c",	// BAD (bug)
-	"mov-jcc",	// BAD (bug)
-	"add",		// bug
-	"add-longlong", // bug
-	"if-else",	// BAD (bug)
+	"mov-c",	// --BAD (bug)
+	"mov-jcc",	// --BAD (bug)
+	"add",		// -bug
+	"add-longlong", // -bug
+	"if-else",	// --BAD (bug)
 	"fib",		// GOOD
 	"bubble-sort",	// GOOD
-	"quick-sort",	// UNKNOWN BUG, infinite execution
-	"select-sort",	// 
-	"max",
+	"quick-sort",	// ---UNKNOWN BUG, infinite execution
+	"select-sort",	// GOOD
+	"max",		// 
 	"min3",
 	"pascal",
 	"bit", 
