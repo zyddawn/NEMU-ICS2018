@@ -57,7 +57,10 @@ void exec(uint32_t n) {
 		if(verbose) clear_operand_mem_addr(&opr_src);
 		if(verbose) clear_operand_mem_addr(&opr_dest);
 #endif
-		instr_len = exec_inst();		
+		instr_len = exec_inst();	
+
+		printf("cur eip = 0x%x, instr len = 0x%x, next eip = 0x%x\n", cpu.eip, instr_len, cpu.eip + instr_len);	
+		
 		cpu.eip += instr_len;
 		n--;
 
