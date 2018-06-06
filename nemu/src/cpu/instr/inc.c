@@ -12,7 +12,7 @@ static void instr_execute_1op() {
 }
 
 // make_instr_impl_1op(inc, rm, b)
-make_instr_func(inc_r_v) {
+make_instr_func(inc1_r_v) {
 	int len = 1;
 	decode_data_size_v
 	decode_operand_rm
