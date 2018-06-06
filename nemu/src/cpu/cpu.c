@@ -128,11 +128,13 @@ int exec_inst() {
 	// printf("opcode = 0x%x\n",opcode);
 	// instruction decode and execution
 #ifdef DEBUG
-	printf("cur_eip = 0x%x, opcode = 0x%x\n", cpu.eip, opcode);
+	;
+	// printf("cur_eip = 0x%x, opcode = 0x%x\n", cpu.eip, opcode);
 #endif
 	int len = opcode_entry[opcode](cpu.eip, opcode);
 #ifdef DEBUG
-	printf("instr len = 0x%x, next eip = 0x%x\n\n", len, cpu.eip + len);
+	;
+	// printf("instr len = 0x%x, next eip = 0x%x\n\n", len, cpu.eip + len);
 #endif
 	return len;
 }
