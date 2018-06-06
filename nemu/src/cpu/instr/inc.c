@@ -9,25 +9,9 @@ static void instr_execute_1op() {
 	print_reg();
 }
 
-/* make_instr_impl_1op(inc, rm, b)
+make_instr_impl_1op(inc, rm, b)
 make_instr_impl_1op(inc, rm, v)
-make_instr_impl_1op(inc, r, v) */
-
-inc_REG_helper(eax, AX);
-inc_REG_helper(edx, DX);
-inc_REG_helper(ecx, CX);
-inc_REG_helper(ebx, BX);
-inc_REG_helper(esp, SP);
-inc_REG_helper(ebp, BP);
-inc_REG_helper(esi, SI);
-inc_REG_helper(edi, DI);
-
-
-
-
-
-
-
+make_instr_impl_1op(inc, r, v)
 
 
 

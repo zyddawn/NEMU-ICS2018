@@ -74,17 +74,6 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		return len; \
 	}
 
-// macro for inc
-#define inc_REG_helper(reg_name, reg_addr) \
-	make_instr_func(concat3(inc_, reg_name, _v)) {\
-		int len = 1; \
-		opr_src.data_size = data_size; \
-		opr_src.type = OPR_REG; \
-		opr_src.addr = concat2(REG_E, reg_addr); \
-		instr_execute_1op(); \
-		return len; \
-	}
-
 
 // macro for generating the implementation of pop/push instruction
 #define push_REG_helper(reg_name, reg_addr) \
