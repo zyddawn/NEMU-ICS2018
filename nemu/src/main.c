@@ -48,7 +48,7 @@ static char * testcases[] = {
 	"mov",		// GOOD
 	"mov-cmp",	// GOOD
 #endif
-	"mov-c",	// --BAD (bug)
+	"mov-c",	// GOOD
 	"mov-jcc",	// --BAD (bug)
 	"add",		// -bug
 	"add-longlong", // -bug
