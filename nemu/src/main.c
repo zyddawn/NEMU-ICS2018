@@ -67,8 +67,8 @@ static char * testcases[] = {
 	"gotbaha",	// GOOD
 	"leap-year",	// GOOD
 	"matrix-mul-small",	// GOOD
-	"matrix-mul",	// 
-	"mul-longlong", 
+	"matrix-mul",	// GOOD
+	"mul-longlong", // 
 	"prime",
 	"shuixianhua",
 	"sum",
