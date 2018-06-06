@@ -8,7 +8,7 @@ nemu:
 
 run: nemu do_not_call_me_testcase
 	$(call git_commit, "run")
-	./nemu/nemu -run movsx
+	./nemu/nemu -run sub-longlong
 
 test: nemu do_not_call_me_testcase
 	$(call git_commit, "test")
