@@ -45,7 +45,7 @@ void exec(uint32_t n) {
 
 	nemu_state = NEMU_RUN;
 
-	bool for_debug = False;
+	bool for_debug = false;
 
 	while( n > 0 && nemu_state == NEMU_RUN) {
 
@@ -60,7 +60,7 @@ void exec(uint32_t n) {
 
 #ifdef DEBUG
 		if(cpu.eip == 0x30005) {
-			for_debug = True;
+			for_debug = true;
 		}
 		if(for_debug)
 			printf("cur instr_len = 0x%x, next eip = 0x%x\n", instr_len, cpu.eip);
