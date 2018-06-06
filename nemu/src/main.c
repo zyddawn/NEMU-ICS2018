@@ -51,8 +51,8 @@ static char * testcases[] = {
 	"mov-c",	// bad (bug)
 	"mov-jcc",	// bad (bug)
 	"add",		// bug
-	"add-longlong", //
-	"if-else",
+	"add-longlong", // bug
+	"if-else",	// 
 	"fib",
 	"bubble-sort",
 	"quick-sort",
