@@ -81,7 +81,7 @@ static char * testcases[] = {
 	"hello-inline", // didn't understand
 #endif
 #if defined(IA32_INTR) && defined(HAS_DEVICE_SERIAL) && defined(HAS_DEVICE_KEYBOARD)
-	"echo",
+	"echo",		// didn't understand
 #endif
 };
 
