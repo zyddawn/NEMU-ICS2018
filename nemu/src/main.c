@@ -72,8 +72,8 @@ static char * testcases[] = {
 	"prime",	// --BAD (bug) 
 	"shuixianhua",	// --BAD (bug)
 	"sum",		// --BAD (bug)
-	"wanshu",	// 
-	"struct",
+	"wanshu",	// --BAD (bug)
+	"struct",	// 
 	"string",
 	"hello-str", 
 	"test-float",
