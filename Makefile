@@ -8,7 +8,7 @@ nemu:
 
 run: nemu do_not_call_me_testcase
 	$(call git_commit, "run")
-	./nemu/nemu -run matrix-mul-small
+	./nemu/nemu -run matrix-mul
 
 test: nemu do_not_call_me_testcase
 	$(call git_commit, "test")

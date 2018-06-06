@@ -64,10 +64,10 @@ static char * testcases[] = {
 	"movsx",	// GOOD
 	"sub-longlong",	// -bug
 	"fact",		// GOOD
-	"gotbaha",	// 
-	"leap-year",
-	"matrix-mul-small",
-	"matrix-mul",
+	"gotbaha",	// GOOD
+	"leap-year",	// GOOD
+	"matrix-mul-small",	// GOOD
+	"matrix-mul",	// 
 	"mul-longlong", 
 	"prime",
 	"shuixianhua",
