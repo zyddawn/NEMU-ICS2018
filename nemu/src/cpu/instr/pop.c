@@ -17,7 +17,7 @@ static void instr_execute_1op() {
 make_instr_impl_1op(pop, r, v)
 make_instr_impl_1op(pop, rm, v)
 
-
+/*
 static void instr_execute() {
 	cpu.esp += 4;
 }
@@ -29,26 +29,6 @@ pop_REG_helper(ebx, BX)
 pop_REG_helper(esp, SP)
 pop_REG_helper(ebp, BP)
 pop_REG_helper(esi, SI)
-pop_REG_helper(edi, DI)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+pop_REG_helper(edi, DI) */
 
 
