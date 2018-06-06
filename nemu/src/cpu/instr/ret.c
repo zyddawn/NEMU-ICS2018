@@ -8,19 +8,27 @@ make_instr_func(ret_near) {
 	pop_eip.sreg = SREG_SS;
 	pop_eip.addr = cpu.esp;
 
-	/*if (data_size == 16) {
-		operand_read(&pop_eip);
-		cpu.esp += 2;
-		cpu.eip = pop_eip.val;
-	}
-	else {*/
 	operand_read(&pop_eip);
 	cpu.esp += 4;
 	
-	/* printf("ret before pop eip = 0x%x, current eip = 0x%x\n", cpu.eip, pop_eip.val);
-	print_reg(); */
 	cpu.eip = pop_eip.val;
-	//}
+	return 0;
+}
+
+make_instr_func(ret_near_i) {
+	OPERAND opr_src, pop_eip;
+	opr_src.data_size = 16;
+	decode_operand_i
+	operand_read(&opr_src);
+	
+	pop_eip.data_size = 8 * opr_src.val;
+	pop_eip.type = OPR_MEM;
+	pop_eip.addr = cpu.esp;
+	
+	operand_read(&pop_eip);
+	cpu.esp += 4;
+
+	cpu.eip = pop_eip.val;
 	return 0;
 }
 
