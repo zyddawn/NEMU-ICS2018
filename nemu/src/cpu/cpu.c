@@ -48,7 +48,7 @@ void exec(uint32_t n) {
 
 	nemu_state = NEMU_RUN;
 
-	bool for_debug = false;
+	// bool for_debug = false; // FOR DEBUG
 
 	while( n > 0 && nemu_state == NEMU_RUN) {
 
