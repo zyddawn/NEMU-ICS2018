@@ -73,12 +73,12 @@ static char * testcases[] = {
 	"shuixianhua",	// --BAD (bug)
 	"sum",		// --BAD (bug)
 	"wanshu",	// --BAD (bug)
-	"struct",	// -bug (can't recognize implemented opcode)
-	"string",	// -bug (can't recognize implemented opcode)
+	"struct",	// GOOD
+	"string",	// --BAD (bug)
 	"hello-str", 	// -bug (undeclared opcode)
-	"test-float",
+	"test-float",	// --BAD (bug)
 #ifdef IA32_INTR
-	"hello-inline", 
+	"hello-inline", // didn't understand
 #endif
 #if defined(IA32_INTR) && defined(HAS_DEVICE_SERIAL) && defined(HAS_DEVICE_KEYBOARD)
 	"echo",
