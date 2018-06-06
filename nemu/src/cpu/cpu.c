@@ -59,7 +59,7 @@ void exec(uint32_t n) {
 #endif
 		instr_len = exec_inst();	
 
-		printf("cur eip = 0x%x, instr len = 0x%x, next eip = 0x%x\n", cpu.eip, instr_len, cpu.eip + instr_len);	
+		// printf("cur eip = 0x%x, instr len = 0x%x, next eip = 0x%x\n", cpu.eip, instr_len, cpu.eip + instr_len);	
 		
 		cpu.eip += instr_len;
 		n--;
@@ -131,7 +131,7 @@ int exec_inst() {
 	uint8_t opcode = 0;
 	// get the opcode
 	opcode = instr_fetch(cpu.eip, 1);
-	// printf("opcode = 0x%x\n",opcode);
+	printf("opcode = 0x%x\n",opcode);
 	// instruction decode and execution
 #ifdef DEBUG
 	;
