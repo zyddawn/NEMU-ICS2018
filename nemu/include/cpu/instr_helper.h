@@ -74,10 +74,14 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		return len; \
 	}
 
-
 // #define xchg_helper
 
 
+
+
+
+
+/*
 // macro for generating the implementation of pop/push instruction
 #define push_REG_helper(reg_name, reg_addr) \
 	make_instr_func(concat3(push_, reg_name, _v)) {\
@@ -111,6 +115,7 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		instr_execute(); \
 		return len; \
 	}
+*/
 
 
 // determine the data size of operands
