@@ -58,8 +58,8 @@ static char * testcases[] = {
 	"quick-sort",	// ---UNKNOWN BUG, infinite execution
 	"select-sort",	// GOOD
 	"max",		// -bug
-	"min3",		// 
-	"pascal",
+	"min3",		// -bug
+	"pascal",	// 
 	"bit", 
 	"movsx",
 	"sub-longlong",
