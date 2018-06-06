@@ -21,6 +21,15 @@ void print_reg() {
 	printf("eip\t0x%08x\n", cpu.eip);
 }
 
+void print_flags() {
+	printf("ZF\t%d\n", cpu.eflags.ZF);
+	printf("SF\t%d\n", cpu.eflags.SF);
+	printf("CF\t%d\n", cpu.eflags.CF);
+	printf("OF\t%d\n", cpu.eflags.OF);
+	printf("PF\t%d\n", cpu.eflags.PF);
+}
+
+
 int get_reg_val(const char *reg, bool *success) {
 	int i;
 	*success = true;

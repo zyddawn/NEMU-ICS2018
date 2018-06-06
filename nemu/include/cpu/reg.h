@@ -65,6 +65,7 @@ extern char * sreg_names[];
 
 // print registers
 void print_reg();
+void print_flags();
 // get register values
 int get_reg_val(const char *reg, bool *success);
 void reg_test();
