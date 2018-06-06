@@ -73,8 +73,8 @@ static char * testcases[] = {
 	"shuixianhua",	// --BAD (bug)
 	"sum",		// --BAD (bug)
 	"wanshu",	// --BAD (bug)
-	"struct",	// 
-	"string",
+	"struct",	// -bug 
+	"string",	// 
 	"hello-str", 
 	"test-float",
 #ifdef IA32_INTR
