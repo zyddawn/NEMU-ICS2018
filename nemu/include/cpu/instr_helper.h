@@ -65,8 +65,8 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 	}
 
 // sign_ext macro
-#define make_SignExt_impl_si2rm_bv(inst_name) \
-	make_instr_func(concat2(inst_name, _si2rm_bv)) { \
+#define make_SignExt_impl_si2rm_bv(inst_name, src_type, dest_type, suffix) \
+	make_instr_func(concat7(inst_name, _, src_type, 2, dest_type, _, suffix)) { \
 		int len = 1; \
 		decode_data_size_bv \
 		decode_operand_i2rm \

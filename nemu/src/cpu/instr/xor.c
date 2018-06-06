@@ -22,6 +22,6 @@ make_instr_impl_2op(xor, r, rm, b)
 make_instr_impl_2op(xor, r, rm, v)
 make_instr_impl_2op(xor, rm, r, b)
 make_instr_impl_2op(xor, rm, r, v)
-make_SignExt_impl_si2rm_bv(xor)
+make_SignExt_impl_si2rm_bv(xor, si, rm, bv)
 
 
