@@ -9,9 +9,9 @@ static void instr_execute_1op() {
 	print_reg();
 }
 
-make_instr_impl_1op(inc, rm, b)
-make_instr_impl_1op(inc, rm, v)
-make_instr_impl_1op(inc, r, v)
+make_instr_impl_1op(inc1, rm, b)
+make_instr_impl_1op(inc1, rm, v)
+make_instr_impl_1op(inc1, r, v)
 
 
 
