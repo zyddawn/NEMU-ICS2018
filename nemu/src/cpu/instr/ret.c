@@ -16,6 +16,7 @@ make_instr_func(ret_near) {
 }
 
 make_instr_func(ret_near_i) {
+	int len = 1;
 	OPERAND opr_src, pop_eip;
 	opr_src.data_size = 16;
 	decode_operand_i
