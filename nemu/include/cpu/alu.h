@@ -1,6 +1,10 @@
 #ifndef __ALU_H__
 #define __ALU_H__
 
+// helper
+uint32_t cnt_one_in_digits(uint32_t x);
+void set_ZF(uint32_t x);
+void set_PF(uint32_t x);
 
 // dest + src
 uint32_t alu_add(uint32_t src, uint32_t dest);
