@@ -2,7 +2,11 @@
 
 static void instr_execute_1op() {
 	operand_read(&opr_src);
-	opr_src.val = alu_not(opr_src.val);
+	opr_src.val = alu_xor(opr_src.val, 0xFFFFFFFF);
+	if(opr_src.data_size == 8)
+		opr_src.val &= 0xFF;
+	else if(opr_src.data_size == 16)
+		opr_src.val &= 0xFFFF;
 	operand_write(&opr_src);
 }
 
