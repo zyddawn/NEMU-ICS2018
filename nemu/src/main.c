@@ -69,8 +69,8 @@ static char * testcases[] = {
 	"matrix-mul-small",	// GOOD
 	"matrix-mul",	// GOOD
 	"mul-longlong", // -bug
-	"prime",	// 
-	"shuixianhua",
+	"prime",	// --BAD (bug) 
+	"shuixianhua",	// 
 	"sum",
 	"wanshu",
 	"struct",
