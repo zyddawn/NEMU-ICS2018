@@ -68,14 +68,14 @@ static char * testcases[] = {
 	"leap-year",	// GOOD
 	"matrix-mul-small",	// GOOD
 	"matrix-mul",	// GOOD
-	"mul-longlong", // -bug (group opcode)
+	"mul-longlong", // -bug
 	"prime",	// --BAD (bug) 
 	"shuixianhua",	// --BAD (bug)
 	"sum",		// --BAD (bug)
 	"wanshu",	// --BAD (bug)
-	"struct",	// -bug 
-	"string",	// 
-	"hello-str", 
+	"struct",	// -bug (can't recognize implemented opcode)
+	"string",	// -bug (can't recognize implemented opcode)
+	"hello-str", 	// 
 	"test-float",
 #ifdef IA32_INTR
 	"hello-inline", 
