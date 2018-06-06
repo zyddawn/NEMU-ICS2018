@@ -28,8 +28,39 @@ make_instr_func(push_rm_v) {
 	return len;
 }
 
+make_instr_func(push_i_b) {
+	int len = 1;
+	OPERAND opr_src, opr_dest;
+	opr_src.data_size = 8;
+	opr_dest.data_size = 32;
+	decode_operand_i
+	operand_read(&opr_src);
+	instr_execute();
+	opr_dest.type = OPR_MEM;
+	opr_dest.addr = cpu.esp;
+	opr_dest.val = sign_ext(opr_src.val, 8);
+	operand_write(&opr_dest);
+	return len;
+}
 
 
+make_instr_func(push_i_v) {
+	int len = 1;
+	OPERAND opr_src, opr_dest;
+	opr_src.data_size = data_size;
+	opr_dest.data_size = 32;
+	decode_operand_i
+	operand_read(&opr_src);
+	instr_execute();
+	opr_dest.type = OPR_MEM;
+	opr_dest.addr = cpu.esp;
+	opr_dest.val = sign_ext(opr_src.val, data_size);
+	operand_write(&opr_dest);
+	return len;
+
+
+
+}
 
 
 
