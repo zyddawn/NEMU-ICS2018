@@ -44,6 +44,9 @@ void exec(uint32_t n) {
 	}
 
 	nemu_state = NEMU_RUN;
+
+	bool for_debug = False;
+
 	while( n > 0 && nemu_state == NEMU_RUN) {
 
 #ifdef DEBUG
@@ -54,6 +57,14 @@ void exec(uint32_t n) {
 		instr_len = exec_inst();		
 		cpu.eip += instr_len;
 		n--;
+
+#ifdef DEBUG
+		if(cpu.eip == 0x30005) {
+			for_debug = True;
+		}
+		if(for_debug)
+			printf("cur instr_len = 0x%x, next eip = 0x%x\n", instr_len, cpu.eip);
+#endif
 
 		if(hit_break_rerun) {
 			resume_breakpoints();
