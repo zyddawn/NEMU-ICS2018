@@ -22,12 +22,12 @@ make_instr_func(ret_near_i) {
 	decode_operand_i
 	operand_read(&opr_src);
 	
-	pop_eip.data_size = 8 * opr_src.val;
+	pop_eip.data_size = 32;
 	pop_eip.type = OPR_MEM;
 	pop_eip.addr = cpu.esp;
 	
 	operand_read(&pop_eip);
-	cpu.esp += 4;
+	cpu.esp += opr_src.val;
 
 	cpu.eip = pop_eip.val;
 	return 0;
