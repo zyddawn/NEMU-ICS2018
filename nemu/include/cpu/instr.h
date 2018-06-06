@@ -42,6 +42,7 @@ extern uint8_t data_size;
 #include "cpu/instr/sbb.h"
 #include "cpu/instr/not.h"
 #include "cpu/instr/inc.h"
+#include "cpu/instr/dec.h"
 
 
 
