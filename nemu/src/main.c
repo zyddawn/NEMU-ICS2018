@@ -59,8 +59,8 @@ static char * testcases[] = {
 	"select-sort",	// GOOD
 	"max",		// -bug
 	"min3",		// -bug
-	"pascal",	// 
-	"bit", 
+	"pascal",	// GOOD
+	"bit", 		// 
 	"movsx",
 	"sub-longlong",
 	"fact",
