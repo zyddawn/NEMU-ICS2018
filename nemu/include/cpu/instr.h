@@ -40,6 +40,9 @@ extern uint8_t data_size;
 #include "cpu/instr/xor.h"
 #include "cpu/instr/or.h"
 #include "cpu/instr/sbb.h"
+#include "cpu/instr/not.h"
+
+
 
 
 #endif
