@@ -75,7 +75,7 @@ static char * testcases[] = {
 	"wanshu",	// --BAD (bug)
 	"struct",	// -bug (can't recognize implemented opcode)
 	"string",	// -bug (can't recognize implemented opcode)
-	"hello-str", 	// 
+	"hello-str", 	// -bug (undeclared opcode)
 	"test-float",
 #ifdef IA32_INTR
 	"hello-inline", 
