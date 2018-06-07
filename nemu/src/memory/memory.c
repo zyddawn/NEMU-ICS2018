@@ -12,10 +12,6 @@ uint32_t hw_mem_read(paddr_t paddr, size_t len) {
 	uint32_t ret = 0;
 	memcpy(&ret, hw_mem + paddr, len);
 	
-	if(cpu.ebp >= 0xC) {
-		printf("[ebp - 0xc] = 0x%x\n", hw_mem[cpu.ebp-12]);
-	}
-	
 	/* printf("read: \n");
 	for(int i = paddr; i < paddr + 16; i += 4) {
 		printf("0x%08x: %02x %02x %02x %02x\n", i, hw_mem[i+3], hw_mem[i+2], hw_mem[i+1], hw_mem[i]);
