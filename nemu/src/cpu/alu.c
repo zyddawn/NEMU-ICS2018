@@ -50,10 +50,10 @@ uint32_t alu_adc(uint32_t src, uint32_t dest) {
 	uint32_t res, prev_CF = cpu.eflags.CF,
 		 cur_CF, cur_OF;
 	if (src <= 0) {
-		res = alu_add(pref_CF, src);
+		res = alu_add(prev_CF, src);
 		res = alu_add(res, dest); }
 	else if (dest <= 0) {
-		res = alu_add(pref_CF, dest);
+		res = alu_add(prev_CF, dest);
 		res = alu_add(res, src); }
 	else {
 		res = alu_add(src, dest);
