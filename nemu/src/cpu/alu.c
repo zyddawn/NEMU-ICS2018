@@ -52,10 +52,15 @@ uint32_t alu_adc(uint32_t src, uint32_t dest) {
 	if (src >= 0x80000000) {
 		printf("Here src <= 0...\n");
 		res = alu_add(prev_CF, src);
+		cur_CF = cpu.eflags.CF;
+		printf("cur_CF = %d\n", cur_CF);
+		cur_OF = cpu.eflags.OF;
 		res = alu_add(res, dest); }
 	else if (dest >= 0x80000000) {
 		printf("Here dest <= 0...\n");
 		res = alu_add(prev_CF, dest);
+		cur_CF = cpu.eflags.CF;
+		cur_OF = cpu.eflags.OF;
 		printf("dest+1 = 0x%x\n", res);
 		res = alu_add(res, src); 
 		printf("res+src = 0x%x\n", res);
@@ -65,13 +70,12 @@ uint32_t alu_adc(uint32_t src, uint32_t dest) {
 		res = alu_add(src, dest);
 		cur_CF = cpu.eflags.CF;
 		cur_OF = cpu.eflags.OF;
-		if(prev_CF)
-       			res = alu_add(res, 1);
+       		res = alu_add(res, prev_CF);
 		// src+dest+CF should be done within one step, but here we separate it into 2 steps;
 		// thus any of these steps caused CF or OF to be 1, we should set CF or OF to be 1
-		cpu.eflags.CF = cur_CF | cpu.eflags.CF;
-		cpu.eflags.OF = cur_OF | cpu.eflags.OF;
 	}
+	cpu.eflags.CF = cur_CF | cpu.eflags.CF;
+	cpu.eflags.OF = cur_OF | cpu.eflags.OF;
 	return res;
 	
 	/* uint32_t prev_CF = cpu.eflags.CF, res, cur_CF, cur_OF;
