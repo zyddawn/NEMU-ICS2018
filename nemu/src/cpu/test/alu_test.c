@@ -91,7 +91,7 @@ void alu_test_add() {
 void alu_test_adc() {
 	uint32_t res, a, b, res_asm, res_eflags;
 	TEST_EFLAGS test_eflags;
-	int input[] = {0x10000000,-3, -2, -1, 0, 1, 2};
+	int input[] = {0x10000000,-3, -2, -1, 0, 1, 2, 0x80000000, 0x7FFFFFFF};
 	int n = sizeof(input) / sizeof(int);
 	int i, j;
 	for(i = 0 ; i < n ; i++) {
@@ -202,7 +202,7 @@ void alu_test_sub() {
 
 	uint32_t res, a, b, res_asm, res_eflags;
 	TEST_EFLAGS test_eflags;
-	int input[] = {/*0x10000000,*/ -3, -2, -1, 0, 1, 2, 0x80000000, 0x7fffffff, 0x7ffffffe};
+	int input[] = {0x10000000, -3, -2, -1, 0, 1, 2, 0x80000000, 0x7fffffff, 0x7ffffffe};
 	int n = sizeof(input) / sizeof(int);
 	int i, j;
 	for(i = 0 ; i < n ; i++) {
@@ -1289,8 +1289,8 @@ void alu_test_div() {
 
 void alu_test(){
 	printf("\n======== alu test ========\n");
-	/*alu_test_add();
-	alu_test_adc(); */
+	// alu_test_add();
+	alu_test_adc();
 	alu_test_sub();
 	alu_test_sbb();
 	/*alu_test_and();

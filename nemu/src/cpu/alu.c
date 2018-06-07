@@ -61,10 +61,17 @@ uint32_t alu_adc(uint32_t src, uint32_t dest) {
 }
 
 uint32_t alu_sub(uint32_t src, uint32_t dest) {
-	uint32_t res, compl_src = 0xFFFFFFFF-src+1;
+	uint32_t res, compl_src = 0xFFFFFFFF - src + 1;
+	if (compl_src == 0x80000000) {
+		cpu.eflags.CF = 1;
+		res = alu_adc(0x7FFFFFFF, dest);}
+	else
+		res = alu_add(compl_src, dest);
+	return res;
+	/* uint32_t res, compl_src = 0xFFFFFFFF-src+1;
 	res = alu_add(compl_src, dest);
 	cpu.eflags.CF = (dest<src);
-	return res;
+	return res; */
 }
 
 uint32_t alu_sbb(uint32_t src, uint32_t dest) {
