@@ -20,7 +20,7 @@ make_instr_func(imul_rm2r_v) {
 	else {
 		cpu.eflags.CF = cpu.eflags.OF = 1;
 	}
-	print_asm_2("imul", "v", len, &rm, &al);
+	print_asm_2("imul", "v", len, &opr_src, &opr_dest);
         return len;
 
 }
