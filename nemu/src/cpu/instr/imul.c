@@ -1,15 +1,32 @@
 #include "cpu/instr.h"
 
-/* 
 #define imul_helper(suffix) \
 	make_instr_func(concat(imul_rm2a_, suffix)) { \
 		int len = 1; \
 		concat(decode_data_size_, suffix) \
 		decode_operand_rm \
 		operand_read(&opr_src); \
-		uint64_t res
- } */
+		uint64_t temp = cpu.eax; \
+		opr_dest.type = OPR_REG; \
+		opr_dest.addr = REG_EAX; \
+		if (opr_src.data_size == 8) \
+			temp &= 0xFF; \
+		else if (opr_src.data_size == 16) \
+			temp &= 0xFFFF; \
+		uint32_t res = alu_imul(opr_src.val, temp, opr_src.data_size); \
+		opr_dest.val = res; \
+		operand_write(&opr_dest); \
+		if(data_size == 16 && ((res >> 16) & 0xFFFF) == 0) { \
+			cpu.eflags.CF = cpu.eflags.OF = 0;} \
+		else if (data_size == 32 && ((res >> 32) & 0xFFFFFFFF) == 0) { \
+			cpu.eflags.CF = cpu.eflags.OF = 0;} \
+		else { \
+			cpu.eflags.CF = cpu.eflags.OF = 1;} \
+		return len; \
+	}
 
+imul_helper(b)
+imul_helper(v)
 
 
 make_instr_func(imul_rm2r_v) {

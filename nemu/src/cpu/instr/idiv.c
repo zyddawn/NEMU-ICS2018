@@ -13,7 +13,7 @@
 			temp &= 0xFF; \
 		else if (opr_src.data_size == 16) \
 			temp &= 0xFFFF; \
-        	uint32_t res = alu_idiv(opr_src.val, temp, data_size); \
+        	uint32_t res = alu_idiv(opr_src.val, temp, opr_src.data_size); \
 		opr_dest.val = res; \
 		operand_write(&opr_dest); \
 		print_asm_1("idiv", "v", len, &opr_src); \
@@ -22,8 +22,6 @@
 
 idiv_helper(v)
 idiv_helper(b)
-
-
 
 
 /* // copied from mul.c
