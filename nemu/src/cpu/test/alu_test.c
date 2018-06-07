@@ -202,7 +202,7 @@ void alu_test_sub() {
 
 	uint32_t res, a, b, res_asm, res_eflags;
 	TEST_EFLAGS test_eflags;
-	int input[] = {0x10000000,-3, -2, -1, 0, 1, 2};
+	int input[] = {0x10000000,-3, -2, -1, 0, 1, 2, 0x80000000, 0x7fffffff, 0x7ffffffe};
 	int n = sizeof(input) / sizeof(int);
 	int i, j;
 	for(i = 0 ; i < n ; i++) {
@@ -218,10 +218,10 @@ void alu_test_sub() {
 				: "a" (a), "c" (b));
 				test_eflags.val = res_eflags;
 	
-			//printf("oracle eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", test_eflags.CF, test_eflags.PF, test_eflags.ZF, test_eflags.SF, test_eflags.OF);
-			//printf("nemu   eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", cpu.eflags.CF, cpu.eflags.PF, cpu.eflags.ZF, cpu.eflags.SF, cpu.eflags.OF);
-			//printf("a = 0x%08x, b= 0x%08x\n", a, b);
-			//printf("res = %d, res_asm = %d\n\n", res, res_asm);
+			printf("oracle eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", test_eflags.CF, test_eflags.PF, test_eflags.ZF, test_eflags.SF, test_eflags.OF);
+			printf("nemu   eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", cpu.eflags.CF, cpu.eflags.PF, cpu.eflags.ZF, cpu.eflags.SF, cpu.eflags.OF);
+			printf("a = 0x%08x, b= 0x%08x\n", a, b);
+			printf("res = %d, res_asm = %d\n\n", res, res_asm);
 
 			assert(res == res_asm);
 			assert(cpu.eflags.CF == test_eflags.CF);
@@ -1289,11 +1289,11 @@ void alu_test_div() {
 
 void alu_test(){
 	printf("\n======== alu test ========\n");
-	alu_test_add();
-	alu_test_adc();
+	/*alu_test_add();
+	alu_test_adc(); */
 	alu_test_sub();
 	alu_test_sbb();
-	alu_test_and();
+	/*alu_test_and();
 	alu_test_or();
 	alu_test_xor();
 	alu_test_shl();
@@ -1303,5 +1303,5 @@ void alu_test(){
 	alu_test_mul();
 	alu_test_div();
 	alu_test_imul();
-	alu_test_idiv();
+	alu_test_idiv(); */
 }
