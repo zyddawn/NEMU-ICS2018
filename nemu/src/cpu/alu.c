@@ -41,8 +41,8 @@ uint32_t alu_add(uint32_t src, uint32_t dest) {
 	set_SF(res, 32);
 	set_OF_add(src, dest, res);
 	set_CF_add(src, res);
-	printf("After add, eflags: \n");
-	print_flags();
+	// printf("After add, eflags: \n");
+	// print_flags();
 	return res;
 }
 
