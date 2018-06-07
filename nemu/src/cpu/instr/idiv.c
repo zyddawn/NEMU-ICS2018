@@ -9,7 +9,7 @@ make_instr_func(idiv_rm_v) {
 	// zero extent
         uint32_t res = alu_idiv(opr_src.val, cpu.eax, data_size);
 	cpu.eax = res;
-	print_asm("idiv", "v", len, &opr_src);
+	print_asm_1("idiv", "v", len, &opr_src);
         return len;
 }
 
