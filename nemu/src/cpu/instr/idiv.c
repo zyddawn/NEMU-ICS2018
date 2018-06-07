@@ -1,27 +1,50 @@
 #include "cpu/instr.h"
 
-#define idiv_helper(suffix) \
-	make_instr_func(concat(idiv_rm2a_, suffix)) { \
-        	int len = 1; \
-        	concat(decode_data_size_, suffix) \
-		decode_operand_rm \
-        	operand_read(&opr_src); \
-		uint32_t temp = cpu.eax; \
-		opr_dest.type = OPR_REG; \
-		opr_dest.addr = REG_EAX; \
-		if (opr_src.data_size == 8) \
-			temp &= 0xFF; \
-		else if (opr_src.data_size == 16) \
-			temp &= 0xFFFF; \
-        	uint32_t res = alu_idiv(opr_src.val, temp, opr_src.data_size); \
-		opr_dest.val = res; \
-		operand_write(&opr_dest); \
-		print_asm_1("idiv", "v", len, &opr_src); \
-        	return len; \
-	} \
+make_instr_func(idiv_rm2a_b) { 
+        int len = 1; 
+        OPERAND opr_src, al, ah;
+	opr_src.data_size = 8;
+	decode_operand_rm
+        operand_read(&opr_src);
+	uint32_t ax = cpu.eax & 0xFFFF; 
+	al.data_size = ah.data_size = 8;
+	al.type = ah.type = OPR_REG; 
+	al.addr = REG_AL;
+	ah.addr = REG_AH;
+        uint32_t res = alu_idiv(opr_src.val, ax, opr_src.data_size); 
+	al.val = res & 0xFF;
+	ah.val = res % opr_src.val; 
+	operand_write(&al);
+       	operand_write(&ah);	
+	print_asm_1("idiv", "v", len, &opr_src); 
+        return len; 
+} 
 
-idiv_helper(v)
-idiv_helper(b)
+
+make_instr_func(idiv_rm2a_v) { 
+        int len = 1; 
+        OPERAND opr_src, eax, edx;
+	opr_src.data_size = data_size;
+	decode_operand_rm
+        operand_read(&opr_src);
+	uint64_t num, res; 
+	eax.data_size = edx.data_size = data_size;
+	eax.type = edx.type = OPR_REG; 
+	al.addr = REG_EAX;
+	ah.addr = REG_EDX;
+	if (data_size == 16)
+		num = ((cpu.edx & 0xFFFF) << 16) | (cpu.eax & 0xFFFF);
+	else
+		num = (cpu.edx << 32) | cpu.eax;
+	res = alu_idiv(opr_src.val, num, data_size);
+	
+	eax.val = res & 0xFFFF;
+	edx.val = res % opr_src.val; 
+	operand_write(&eax);
+       	operand_write(&edx);	
+	print_asm_1("idiv", "v", len, &opr_src); 
+        return len; 
+}
 
 
 /* // copied from mul.c

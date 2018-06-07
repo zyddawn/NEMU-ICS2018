@@ -75,7 +75,6 @@ uint32_t alu_adc(uint32_t src, uint32_t dest) {
 
 uint32_t alu_sub(uint32_t src, uint32_t dest) {
 	uint32_t res, compl_src = 0xFFFFFFFF - src + 1;
-	// printf("compl_src = 0x%x\n", compl_src);
 	if (compl_src == 0x80000000) {
 		cpu.eflags.CF = 1;
 		res = alu_adc(0x7FFFFFFF, dest);}
