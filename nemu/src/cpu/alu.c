@@ -49,11 +49,11 @@ uint32_t alu_add(uint32_t src, uint32_t dest) {
 uint32_t alu_adc(uint32_t src, uint32_t dest) {
 	uint32_t res, prev_CF = cpu.eflags.CF,
 		 cur_CF, cur_OF;
-	if (src <= 0) {
+	if (src >= 0x80000000) {
 		printf("Here src <= 0...\n");
 		res = alu_add(prev_CF, src);
 		res = alu_add(res, dest); }
-	else if (dest <= 0) {
+	else if (dest >= 0x80000000) {
 		printf("Here dest <= 0...\n");
 		res = alu_add(prev_CF, dest);
 		printf("dest+1 = 0x%x\n", res);
