@@ -1,11 +1,14 @@
 #include "cpu/instr.h"
 
-
-
-make_instr_func(imul_rm2a_v) {
-	
-
-}
+/* 
+#define imul_helper(suffix) \
+	make_instr_func(concat(imul_rm2a_, suffix)) { \
+		int len = 1; \
+		concat(decode_data_size_, suffix) \
+		decode_operand_rm \
+		operand_read(&opr_src); \
+		uint64_t res
+ } */
 
 
 
