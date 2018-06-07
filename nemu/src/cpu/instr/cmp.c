@@ -6,7 +6,7 @@ static void instr_execute_2op() {
 	// printf("Before cmp: \n");
 	// print_flags();
 	// int temp = 
-	int temp = alu_sub(opr_dest.val, opr_src.val);
+	int temp = alu_sub(opr_src.val, opr_dest.val);
 	printf("opr_src < opr_dest? --- %d\n", opr_src.val < opr_dest.val);
 	printf("temp < 0? --- %d\n", temp < 0);
 	if (opr_src.val < opr_dest.val && temp < 0) {
