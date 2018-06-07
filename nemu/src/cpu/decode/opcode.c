@@ -109,7 +109,7 @@ instr_func group_3_b_entry[8] =
 
 /* 0xf7 */
 instr_func group_3_v_entry[8] =
-{test_i2rm_v, inv, not_rm_v, inv, mul_rm2a_v, inv, inv, inv};
+{test_i2rm_v, inv, not_rm_v, inv, mul_rm2a_v, inv, inv, idiv_rm_v};
 
 /* 0xff */
 instr_func group_5_indirect_entry[8] =
