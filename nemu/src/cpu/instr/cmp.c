@@ -5,7 +5,7 @@ static void instr_execute_2op() {
 	operand_read(&opr_dest);
 	alu_sub(opr_src.val, opr_dest.val);
 	if (opr_src.addr == cpu.ebp+8 || opr_dest.addr == cpu.ebp+8)
-		printf("[ebp+8] = %d\n", hw_mem_read(cpu.ebp+8, 4);
+		printf("[ebp+8] = %d\n", hw_mem_read(cpu.ebp+8, 4));
 }
 
 static void instr_execute_si2rm_bv() {
