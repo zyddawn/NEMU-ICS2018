@@ -3,12 +3,12 @@
 static void instr_execute_2op() {
 	operand_read(&opr_src);
 	operand_read(&opr_dest);
-	printf("Before cmp: \n");
-	print_flags();
+	// printf("Before cmp: \n");
+	// print_flags();
 	int temp = alu_sub(opr_src.val, opr_dest.val);
-	printf("0x%x - 0x%x = 0x%x\n", opr_dest.val, opr_src.val, temp);
-	printf("After cmp: \n");
-	print_flags();
+	printf("%d - %d = %d\n", opr_dest.val, opr_src.val, temp);
+	// printf("After cmp: \n");
+	// print_flags();
 }
 
 static void instr_execute_si2rm_bv() {
