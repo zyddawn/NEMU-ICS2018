@@ -47,17 +47,37 @@ uint32_t alu_add(uint32_t src, uint32_t dest) {
 }
 
 uint32_t alu_adc(uint32_t src, uint32_t dest) {
-	uint32_t prev_CF = cpu.eflags.CF, res;
-       	res = alu_add(src, dest);
-	uint32_t cur_CF = cpu.eflags.CF, \
-		 cur_OF = cpu.eflags.OF;
+	uint32_t res, prev_CF = cpu.eflags.CF;
+	if (src <= 0) {
+		res = alu_add(pref_CF, src);
+		res = alu_add(res, dest); }
+	else if (dest <= 0) {
+		res = alu_add(pref_CF, dest);
+		res = alu_add(res, src); }
+	else {
+		res = alu_add(src, dest);
+		cur_CF = cpu.eflags.CF;
+		cur_OF = cpu.eflags.OF;
+		if(prev_CF)
+       			res = alu_add(res, 1);
+		// src+dest+CF should be done within one step, but here we separate it into 2 steps;
+		// thus any of these steps caused CF or OF to be 1, we should set CF or OF to be 1
+		cpu.eflags.CF = cur_CF | cpu.eflags.CF;
+		cpu.eflags.OF = cur_OF | cpu.eflags.OF;
+	}
+	return res;
+	
+	/* uint32_t prev_CF = cpu.eflags.CF, res, cur_CF, cur_OF;
+	res = alu_add(src, dest);
+	cur_CF = cpu.eflags.CF;
+	cur_OF = cpu.eflags.OF;
 	if(prev_CF)
        		res = alu_add(res, 1);
 	// src+dest+CF should be done within one step, but here we separate it into 2 steps;
 	// thus any of these steps caused CF or OF to be 1, we should set CF or OF to be 1
 	cpu.eflags.CF = cur_CF | cpu.eflags.CF;
 	cpu.eflags.OF = cur_OF | cpu.eflags.OF;
-	return res;
+	return res; */
 }
 
 uint32_t alu_sub(uint32_t src, uint32_t dest) {
