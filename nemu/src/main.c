@@ -49,20 +49,20 @@ static char * testcases[] = {
 	"mov-cmp",	// GOOD
 #endif
 	"mov-c",	// GOOD
-	"mov-jcc",	// --BAD (bug)
-	"add",		// -bug
-	"add-longlong", // -bug
-	"if-else",	// --BAD (bug)
-	"fib",		// GOOD
+	"mov-jcc",	// GOOD
+	"add",		// GOOD
+	"add-longlong", // GOOD
+	"if-else",	// GOOD
+	"fib",		// --BAD
 	"bubble-sort",	// GOOD
-	"quick-sort",	// ---UNKNOWN BUG, infinite execution
+	"quick-sort",	// --BAD
 	"select-sort",	// GOOD
-	"max",		// -bug
-	"min3",		// -bug
+	"max",		// --BAD
+	"min3",		// --BAD
 	"pascal",	// GOOD
-	"bit", 		// -bug
+	"bit", 		// --BAD
 	"movsx",	// GOOD
-	"sub-longlong",	// -bug
+	"sub-longlong",	// GOOD
 	"fact",		// GOOD
 	"gotbaha",	// GOOD
 	"leap-year",	// GOOD
