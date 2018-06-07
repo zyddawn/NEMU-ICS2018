@@ -54,7 +54,10 @@ uint32_t alu_adc(uint32_t src, uint32_t dest) {
 		res = alu_add(res, dest); }
 	else if (dest <= 0) {
 		res = alu_add(prev_CF, dest);
-		res = alu_add(res, src); }
+		printf("dest+1 = 0x%x\n", res);
+		res = alu_add(res, src); 
+		printf("res+src = 0x%x\n", res);
+	}
 	else {
 		res = alu_add(src, dest);
 		cur_CF = cpu.eflags.CF;
