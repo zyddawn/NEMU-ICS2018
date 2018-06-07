@@ -3,9 +3,11 @@
 static void instr_execute_1op() {
 	operand_read(&opr_src);
 	uint32_t temp_CF = cpu.eflags.CF;
+	printf("Before dec: 0x%x\n", opr_src.val);
 	opr_src.val = alu_sub(opr_src.val, 1);
 	cpu.eflags.CF = temp_CF;
 	operand_write(&opr_src);
+	printf("after dec: 0x%x\n", opr_src.val);
 }
 
 // make_instr_impl_1op(dec, rm, b)
