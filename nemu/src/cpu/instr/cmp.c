@@ -5,7 +5,8 @@ static void instr_execute_2op() {
 	operand_read(&opr_dest);
 	// printf("Before cmp: \n");
 	// print_flags();
-	int temp = alu_sub(opr_src.val, opr_dest.val);
+	// int temp = 
+	alu_sub(opr_src.val, opr_dest.val);
 	// printf("%d - %d = %d\n", opr_dest.val, opr_src.val, temp);
 	// printf("After cmp: \n");
 	// print_flags();
