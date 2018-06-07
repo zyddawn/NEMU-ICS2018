@@ -66,7 +66,7 @@ uint32_t alu_adc(uint32_t src, uint32_t dest) {
 		printf("res+src = 0x%x\n", res);
 	}
 	else {
-		printf("Here non negative...\n");
+		//printf("Here non negative...\n");
 		res = alu_add(src, dest);
 		cur_CF = cpu.eflags.CF;
 		cur_OF = cpu.eflags.OF;
