@@ -6,8 +6,16 @@
         	concat(decode_data_size_, suffix) \
 		decode_operand_rm \
         	operand_read(&opr_src); \
-        	uint32_t res = alu_idiv(opr_src.val, cpu.eax, data_size); \
-		cpu.eax = res; \
+		uint32_t temp = cpu.eax; \
+		opr_dest.type = OPR_REG; \
+		opr_dest.addr = REG_EAX; \
+		if (opr_src.data_size == 8) \
+			temp &= 0xFF; \
+		else if (opr_src.data_size == 16) \
+			temp &= 0xFFFF; \
+        	uint32_t res = alu_idiv(opr_src.val, temp, data_size); \
+		opr_dest.val = res; \
+		operand_write(&opr_dest); \
 		print_asm_1("idiv", "v", len, &opr_src); \
         	return len; \
 	} \
