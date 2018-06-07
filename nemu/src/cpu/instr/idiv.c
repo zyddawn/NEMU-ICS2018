@@ -34,8 +34,9 @@ make_instr_func(idiv_rm2a_v) {
 	edx.addr = REG_EDX;
 	if (data_size == 16)
 		num = ((cpu.edx & 0xFFFF) << 16) | (cpu.eax & 0xFFFF);
-	else
-		num = (cpu.edx << 32) | cpu.eax;
+	else {
+		num = cpu.edx;
+	       	num = (num << 32) | cpu.eax; }
 	res = alu_idiv(opr_src.val, num, data_size);
 	
 	eax.val = res & 0xFFFF;
