@@ -1,5 +1,18 @@
 #include "cpu/instr.h"
 
+make_instr_func(jmp_near_rm) {
+	int len = 0;
+	decode_data_size_v
+	decode_operand_rm
+	operand_read(&opr_src);
+	if (data_size == 16)
+		cpu.eip = opr_src.val & 0xFFFF;
+	else
+		cpu.eip = opr_src.val;
+	return 0;
+}
+
+
 make_instr_func(jmp_near) {
         OPERAND rel;
         rel.type = OPR_IMM;
