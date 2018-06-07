@@ -74,7 +74,7 @@ static char * testcases[] = {
 	"sum",		// GOOD
 	"wanshu",	// --BAD
 	"struct",	// GOOD
-	"string",	// --BAD (bug)
+	"string",	// GOOD
 	"hello-str", 	// -bug (undeclared opcode)
 	"test-float",	// --BAD (bug)
 #ifdef IA32_INTR
