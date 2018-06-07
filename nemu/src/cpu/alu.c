@@ -87,6 +87,7 @@ uint32_t alu_sub(uint32_t src, uint32_t dest) {
 		res = alu_adc(0x7FFFFFFF, dest);}
 	else
 		res = alu_add(compl_src, dest);
+	cpu.eflags.CF = (dest<src);
 	return res;
 
 	/* uint32_t res, compl_src = 0xFFFFFFFF-src+1;
