@@ -1,63 +1,53 @@
 #include "cpu/instr.h"
 
-make_instr_func(idiv_rm2a_b) {
-	int len = 1;// in group
-	OPERAND ax, rm;
-	ax.type = OPR_REG;
-	ax.data_size = 16;
-	ax.addr = REG_AX;
-	operand_read(&ax);
-
-	rm.data_size = 8;
-	len += modrm_rm(eip + 1, &rm);
-	operand_read(&rm);
-	int32_t quotient  = alu_idiv(sign_ext_64(rm.val, 8), sign_ext_64(ax.val, 16), 8);
-	int32_t remainder = alu_imod(sign_ext_64(rm.val, 8), sign_ext_64(ax.val, 16));
-	OPERAND ah, al;
-	ah.type = al.type = OPR_REG;
-	ah.data_size = al.data_size = 8;
-	ah.addr = REG_AH;
-	al.addr = REG_AL;
-	al.val = quotient;
-	ah.val = remainder;
-	operand_write(&ah);
-	operand_write(&al);
-	print_asm_2("idiv", "b", len, &rm, &ax);
-	return len;
-}
-
-make_instr_func(idiv_rm2a_v) {
-        int len = 1;// in group
-        OPERAND a, d, rm;
-        d.type = a.type = OPR_REG;
-        d.data_size = a.data_size = data_size;
-        a.addr = REG_EAX;
-	d.addr = REG_EDX;
-        operand_read(&a);
-	operand_read(&d);
-
-        rm.data_size = data_size;
-        len += modrm_rm(eip + 1, &rm);
-        operand_read(&rm);
-        int32_t quotient  = 0;
-	int32_t remainder = 0;
-	if(data_size == 16) {
-		quotient = alu_idiv(sign_ext_64(rm.val, 16), sign_ext_64((d.val << 16) | a.val, 32), data_size);
-		remainder = alu_imod(sign_ext_64(rm.val, 16), sign_ext_64((d.val << 16) | a.val, 32));
-		print_asm_3("idiv", "w", len, &rm, &d, &a);
-	}
-	else { // data_size == 32
-		int64_t dividend = 0;
-		dividend |= d.val;
-		dividend = dividend << 32;
-		dividend |= a.val;
-		quotient = alu_idiv(sign_ext_64(rm.val, 32), dividend, data_size);
-		remainder = alu_imod(sign_ext_64(rm.val, 32), dividend);
-		print_asm_3("idiv", "l", len, &rm, &d, &a);
-	}
-	a.val = quotient;
-	d.val = remainder;
-        operand_write(&a);
-        operand_write(&d);
+make_instr_func(idiv_rm_v) {
+        int len = 1; // in group
+        decode_data_size_v
+	decode_operand_rm
+        operand_read(&opr_src);
+	
+	// zero extent
+        uint32_t res = alu_idiv(opr_src.val, cpu.eax, data_size);
+	cpu.eax = res;
+	print_asm("idiv", "v", len, &opr_src);
         return len;
 }
+
+/* // copied from mul.c
+make_instr_func(mul_rm2a_v) {
+        int len = 1; // in group
+        OPERAND a, rm;
+        a.data_size = data_size;
+        a.type = OPR_REG;
+        a.addr = REG_EAX;
+        rm.data_size = data_size;
+        len += modrm_rm(eip + 1, &rm);
+        operand_read(&a);
+        operand_read(&rm);
+        OPERAND ax, dx;
+        dx.type = ax.type = OPR_REG;
+        ax.addr = REG_AX;
+        dx.addr = REG_DX;
+        if(data_size == 16) {
+                uint32_t res = alu_mul(rm.val, a.val, 16);
+                dx.data_size = ax.data_size = 16;
+                ax.val = res & 0xffff;
+                dx.val = (res >> 16) & 0xffff;
+		print_asm_3("mul", "w", len, &rm, &dx, &ax);
+        } else { // data_size == 32
+                uint64_t res = alu_mul(rm.val, a.val, 32);
+                dx.data_size = ax.data_size = 32;
+                ax.val = res & 0xffffffff;
+                dx.val = (res >> 32) & 0xffffffff;
+		print_asm_3("mul", "l", len, &rm, &dx, &ax);
+        }
+        operand_write(&ax);
+        operand_write(&dx);
+	if(dx.val == 0) {
+		cpu.eflags.CF = cpu.eflags.OF = 0;
+	} else {
+		cpu.eflags.CF = cpu.eflags.OF = 1;
+	}
+        return len;
+
+} */
