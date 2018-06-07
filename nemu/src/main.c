@@ -57,8 +57,8 @@ static char * testcases[] = {
 	"bubble-sort",	// GOOD
 	"quick-sort",	// GOOD
 	"select-sort",	// GOOD
-	"max",		// --BAD
-	"min3",		// --BAD
+	"max",		// GOOD
+	"min3",		// GOOD
 	"pascal",	// GOOD
 	"bit", 		// GOOD
 	"movsx",	// GOOD
