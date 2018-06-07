@@ -77,18 +77,6 @@ uint32_t alu_adc(uint32_t src, uint32_t dest) {
 	cpu.eflags.CF = cur_CF | cpu.eflags.CF;
 	cpu.eflags.OF = cur_OF | cpu.eflags.OF;
 	return res;
-	
-	/* uint32_t prev_CF = cpu.eflags.CF, res, cur_CF, cur_OF;
-	res = alu_add(src, dest);
-	cur_CF = cpu.eflags.CF;
-	cur_OF = cpu.eflags.OF;
-	if(prev_CF)
-       		res = alu_add(res, 1);
-	// src+dest+CF should be done within one step, but here we separate it into 2 steps;
-	// thus any of these steps caused CF or OF to be 1, we should set CF or OF to be 1
-	cpu.eflags.CF = cur_CF | cpu.eflags.CF;
-	cpu.eflags.OF = cur_OF | cpu.eflags.OF;
-	return res; */
 }
 
 uint32_t alu_sub(uint32_t src, uint32_t dest) {
@@ -99,6 +87,7 @@ uint32_t alu_sub(uint32_t src, uint32_t dest) {
 	else
 		res = alu_add(compl_src, dest);
 	return res;
+
 	/* uint32_t res, compl_src = 0xFFFFFFFF-src+1;
 	res = alu_add(compl_src, dest);
 	cpu.eflags.CF = (dest<src);
