@@ -3,8 +3,8 @@
 static void instr_execute_1op_cc_pass() {
 	operand_read(&opr_src);
 	cpu.eip += sign_ext(opr_src.val, opr_src.data_size);
-	printf("It's jcc...\n");
-	print_flags();
+	// printf("It's jcc...\n");
+	// print_flags();
 }
 
 static void instr_execute_1op_cc_fail() {printf("It's jcc...\n"); print_flags(); /* Do nothing */}
