@@ -1,17 +1,22 @@
 #include "cpu/instr.h"
 
-make_instr_func(idiv_rm_v) {
-        int len = 1; // in group
-        decode_data_size_v
-	decode_operand_rm
-        operand_read(&opr_src);
-	
-	// zero extent
-        uint32_t res = alu_idiv(opr_src.val, cpu.eax, data_size);
-	cpu.eax = res;
-	print_asm_1("idiv", "v", len, &opr_src);
-        return len;
-}
+#define idiv_helper(suffix) \
+	make_instr_func(concat(idiv_rm2a_, suffix)) { \
+        	int len = 1; \
+        	concat(decode_data_size_, suffix) \
+		decode_operand_rm \
+        	operand_read(&opr_src); \
+        	uint32_t res = alu_idiv(opr_src.val, cpu.eax, data_size); \
+		cpu.eax = res; \
+		print_asm_1("idiv", "v", len, &opr_src); \
+        	return len; \
+	} \
+
+idiv_helper(v)
+idiv_helper(b)
+
+
+
 
 /* // copied from mul.c
 make_instr_func(mul_rm2a_v) {

@@ -1,5 +1,14 @@
 #include "cpu/instr.h"
 
+
+
+make_instr_func(imul_rm2a_v) {
+	
+
+}
+
+
+
 make_instr_func(imul_rm2r_v) {
         int len = 1; // in group
         decode_data_size_v
