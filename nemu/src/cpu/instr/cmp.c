@@ -9,9 +9,9 @@ static void instr_execute_2op() {
 	int temp = alu_sub(opr_src.val, opr_dest.val);
 	if (opr_src.val < opr_dest.val && temp < 0)
 		cpu.eflags.OF = 1;
-	// printf("%d - %d = %d\n", opr_dest.val, opr_src.val, temp);
-	// printf("After cmp: \n");
-	// print_flags();
+	printf("%d - %d = %d\n", opr_dest.val, opr_src.val, temp);
+	printf("After cmp: \n");
+	print_flags();
 }
 
 static void instr_execute_si2rm_bv() {
