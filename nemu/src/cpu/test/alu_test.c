@@ -1289,11 +1289,11 @@ void alu_test_div() {
 
 void alu_test(){
 	printf("\n======== alu test ========\n");
-	// alu_test_add();
+	alu_test_add();
 	alu_test_adc();
 	alu_test_sub();
 	alu_test_sbb();
-	/*alu_test_and();
+	alu_test_and();
 	alu_test_or();
 	alu_test_xor();
 	alu_test_shl();
@@ -1303,5 +1303,5 @@ void alu_test(){
 	alu_test_mul();
 	alu_test_div();
 	alu_test_imul();
-	alu_test_idiv(); */
+	alu_test_idiv();
 }
