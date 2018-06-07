@@ -53,14 +53,14 @@ static char * testcases[] = {
 	"add",		// GOOD
 	"add-longlong", // GOOD
 	"if-else",	// GOOD
-	"fib",		// --BAD
+	"fib",		// GOOD
 	"bubble-sort",	// GOOD
-	"quick-sort",	// --BAD
+	"quick-sort",	// GOOD
 	"select-sort",	// GOOD
 	"max",		// --BAD
 	"min3",		// --BAD
 	"pascal",	// GOOD
-	"bit", 		// --BAD
+	"bit", 		// GOOD
 	"movsx",	// GOOD
 	"sub-longlong",	// GOOD
 	"fact",		// GOOD
