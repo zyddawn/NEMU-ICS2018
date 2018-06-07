@@ -8,7 +8,7 @@ nemu:
 
 run: nemu do_not_call_me_testcase
 	$(call git_commit, "run")
-	./nemu/nemu -run echo
+	./nemu/nemu -run leap-year
 
 test: nemu do_not_call_me_testcase
 	$(call git_commit, "test")
