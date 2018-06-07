@@ -3,7 +3,11 @@
 static void instr_execute_2op() {
 	operand_read(&opr_src);
 	operand_read(&opr_dest);
+	printf("Before cmp: \n");
+	print_flags();
 	alu_sub(opr_src.val, opr_dest.val);
+	printf("After cmp: \n");
+	print_flags();
 }
 
 static void instr_execute_si2rm_bv() {
