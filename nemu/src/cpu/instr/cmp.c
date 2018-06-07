@@ -3,17 +3,9 @@
 static void instr_execute_2op() {
 	operand_read(&opr_src);
 	operand_read(&opr_dest);
-	// int temp =
 	alu_sub(opr_src.val, opr_dest.val);
-	// printf("opr_src < opr_dest? --- %d\n", opr_src.val < opr_dest.val);
-	// printf("temp < 0? --- %d\n", temp < 0);
-	// if (opr_src.val < opr_dest.val && temp < 0) {
-	// 	printf("so OF should be 1.\n");
-	//	cpu.eflags.OF = 1;
-	// }
-	// printf("%d - %d = %d\n", opr_dest.val, opr_src.val, temp);
-	// printf("After cmp: \n");
-	// print_flags();
+	if (opr_src.addr == cpu.ebp-8 || opr_dest.addr == cpu.ebp-8)
+		hw_mem_read(cpu.ebp-8, 4);
 }
 
 static void instr_execute_si2rm_bv() {
