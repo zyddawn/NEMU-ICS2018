@@ -63,7 +63,7 @@ uint32_t alu_adc(uint32_t src, uint32_t dest) {
 uint32_t alu_sub(uint32_t src, uint32_t dest) {
 	uint32_t res, compl_src = 0xFFFFFFFF-src+1;
 	res = alu_add(compl_src, dest);
-	cpu.eflags.CF = cpu.eflags.OF = (dest<src);
+	cpu.eflags.CF = (dest<src);
 	return res;
 }
 
