@@ -30,8 +30,8 @@ make_instr_func(idiv_rm2a_v) {
 	uint64_t num, res; 
 	eax.data_size = edx.data_size = data_size;
 	eax.type = edx.type = OPR_REG; 
-	al.addr = REG_EAX;
-	ah.addr = REG_EDX;
+	eax.addr = REG_EAX;
+	edx.addr = REG_EDX;
 	if (data_size == 16)
 		num = ((cpu.edx & 0xFFFF) << 16) | (cpu.eax & 0xFFFF);
 	else
