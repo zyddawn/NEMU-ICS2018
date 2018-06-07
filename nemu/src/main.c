@@ -64,15 +64,15 @@ static char * testcases[] = {
 	"movsx",	// GOOD
 	"sub-longlong",	// GOOD
 	"fact",		// GOOD
-	"gotbaha",	// GOOD
-	"leap-year",	// GOOD
+	"gotbaha",	// --BAD
+	"leap-year",	// --BAD
 	"matrix-mul-small",	// GOOD
 	"matrix-mul",	// GOOD
-	"mul-longlong", // -bug
-	"prime",	// --BAD (bug) 
-	"shuixianhua",	// --BAD (bug)
-	"sum",		// --BAD (bug)
-	"wanshu",	// --BAD (bug)
+	"mul-longlong", // GOOD
+	"prime",	// --BAD
+	"shuixianhua",	// --BAD
+	"sum",		// GOOD
+	"wanshu",	// --BAD
 	"struct",	// GOOD
 	"string",	// --BAD (bug)
 	"hello-str", 	// -bug (undeclared opcode)
