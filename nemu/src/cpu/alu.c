@@ -50,20 +50,20 @@ uint32_t alu_adc(uint32_t src, uint32_t dest) {
 	uint32_t res, prev_CF = cpu.eflags.CF,
 		 cur_CF, cur_OF;
 	if (src >= 0x80000000) {
-		printf("Here src <= 0...\n");
+		// printf("Here src <= 0...\n");
 		res = alu_add(prev_CF, src);
 		cur_CF = cpu.eflags.CF;
-		printf("cur_CF = %d\n", cur_CF);
+		//printf("cur_CF = %d\n", cur_CF);
 		cur_OF = cpu.eflags.OF;
 		res = alu_add(res, dest); }
 	else if (dest >= 0x80000000) {
-		printf("Here dest <= 0...\n");
+		// printf("Here dest <= 0...\n");
 		res = alu_add(prev_CF, dest);
 		cur_CF = cpu.eflags.CF;
 		cur_OF = cpu.eflags.OF;
-		printf("dest+1 = 0x%x\n", res);
+		// printf("dest+1 = 0x%x\n", res);
 		res = alu_add(res, src); 
-		printf("res+src = 0x%x\n", res);
+		// printf("res+src = 0x%x\n", res);
 	}
 	else {
 		//printf("Here non negative...\n");
