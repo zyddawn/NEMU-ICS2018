@@ -46,7 +46,7 @@ make_instr_func(imul_rm2a_v) {
 	}
 	operand_write(&eax);
 	operand_write(&edx);
-	if (data_size == 16 && (res >> 16) & 0xFFFF == 0)
+	if (data_size == 16 && ((res >> 16) & 0xFFFF) == 0)
 		cpu.eflags.CF = cpu.eflags.OF = 0;
 	else if (data_size == 32 && (res >> 32) == 0)
 		cpu.eflags.CF = cpu.eflags.OF = 0;
