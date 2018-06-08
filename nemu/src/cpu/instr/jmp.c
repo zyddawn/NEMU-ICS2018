@@ -39,12 +39,12 @@ make_instr_func(jmp_short_) {
 
         operand_read(&rel);
 
-	// int offset = sign_ext(rel.val, data_size);
+	int offset = sign_ext(rel.val, data_size);
 	// print_asm_1("jmp", "",  1 + data_size / 8, &rel);
 
 	printf("Here is jmp_short_...\n");
 	printf("Before jmp, eip = 0x%x\n", cpu.eip);
-	cpu.eip += (rel.val & 0xFF);
+	cpu.eip += offset; // (rel.val & 0xFF);
 	printf("After jmp, eip = 0x%x\n", cpu.eip);
 	
         return 2;
