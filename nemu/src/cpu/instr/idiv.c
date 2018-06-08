@@ -32,15 +32,17 @@ make_instr_func(idiv_rm2a_v) {
 	eax.type = edx.type = OPR_REG; 
 	eax.addr = REG_EAX;
 	edx.addr = REG_EDX;
-	if (data_size == 16)
+	if (data_size == 16) {
 		num = ((cpu.edx & 0xFFFF) << 16) | (cpu.eax & 0xFFFF);
+		res = alu_idiv(opr_src.val, num, data_size);
+		eax.val = res & 0xFFFF;
+		edx.val = res % opr_src.val; }
 	else {
 		num = cpu.edx;
-	       	num = (num << 32) | cpu.eax; }
-	res = alu_idiv(opr_src.val, num, data_size);
-	
-	eax.val = res & 0xFFFF;
-	edx.val = res % opr_src.val; 
+	       	num = (num << 32) | cpu.eax;
+		res = alu_idiv(opr_src.val, num, data_size);
+		eax.val = res & 0xFFFFFFFF;
+		edx.val = res % opr_src.val; }
 	operand_write(&eax);
        	operand_write(&edx);	
 	print_asm_1("idiv", "v", len, &opr_src); 
