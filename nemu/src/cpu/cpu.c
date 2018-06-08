@@ -59,9 +59,9 @@ void exec(uint32_t n) {
 #endif
 		instr_len = exec_inst();	
 
-		printf("cur eip = 0x%x, instr len = 0x%x, next eip = 0x%x\n", cpu.eip, instr_len, cpu.eip + instr_len);	
-		if (cpu.eip == 0x34eff)
-			printf("Current at 0x34eff\n");
+		// printf("cur eip = 0x%x, instr len = 0x%x, next eip = 0x%x\n", cpu.eip, instr_len, cpu.eip + instr_len);	
+		// if (cpu.eip == 0x34eff)
+		// 	printf("Current at 0x34eff\n");
 
 		cpu.eip += instr_len;
 		n--;
