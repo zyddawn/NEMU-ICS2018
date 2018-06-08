@@ -45,7 +45,7 @@ make_instr_func(imul_rm2a_v) {
 		eax.val = res & 0xFFFFFFFF;
 		edx.val = (res >> 32) & 0xFFFFFFFF;
 	}
-	printf("imul: 0x%x * 0x%x = 0x%llx, eax = 0x%x, edx = 0x%x\n", opr_src.val, num, res, eax.val, edx.val);
+	// printf("imul: 0x%x * 0x%x = 0x%llx, eax = 0x%x, edx = 0x%x\n", opr_src.val, num, res, eax.val, edx.val);
 	operand_write(&eax);
 	operand_write(&edx);
 	if (data_size == 16 && ((res >> 16) & 0xFFFF) == 0)
@@ -69,7 +69,7 @@ make_instr_func(imul_rm2r_v) {
 	// zero extent
         uint64_t res = alu_imul(opr_src.val, opr_dest.val, data_size);
 
-	printf("imul_rm2r: %d * %d = %lld\n", opr_src.val, opr_dest.val, res);
+	// printf("imul_rm2r: %d * %d = %lld\n", opr_src.val, opr_dest.val, res);
         opr_dest.val = res;
 	operand_write(&opr_dest);
 	if(data_size == 16 && ((res >> 16) & 0xFFFF) == 0) {
