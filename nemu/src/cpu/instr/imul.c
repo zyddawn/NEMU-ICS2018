@@ -13,7 +13,7 @@ make_instr_func(imul_rm2a_b) {
 	uint64_t res = alu_imul(opr_src.val, al, 8); 
 	ax.val = res & 0xFFFF;
 	operand_write(&ax);
-	if ((res >> 8) & 0xFF == 0)
+	if (((res >> 8) & 0xFF) == 0)
 		cpu.eflags.CF = cpu.eflags.OF = 0;
 	else
 		cpu.eflags.CF = cpu.eflags.OF = 1;
