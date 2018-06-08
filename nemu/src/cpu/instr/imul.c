@@ -10,7 +10,7 @@ make_instr_func(imul_rm2a_b) {
 	ax.data_size = 16;
 	ax.type = OPR_REG;
        	ax.addr = REG_AX;	
-	uint64_t res = alu_imul(opr_src.val, al, 8); 
+	uint64_t res = alu_imul(sign_ext(opr_src.val, 8), sign_ext(al, 8), 8); 
 	ax.val = res & 0xFFFF;
 	operand_write(&ax);
 	if (((res >> 8) & 0xFF) == 0)
@@ -36,7 +36,7 @@ make_instr_func(imul_rm2a_v) {
 	num = cpu.eax;
        	if (data_size == 16) {
 		num &= 0xFFFF;
-		res = opr_src.val * num;
+		res = alu_imul(sign_ext(opr_src.val, 16), sign_ext(num), 16);
 		eax.val = res & 0xFFFF;
 		edx.val = (res >> 16) & 0xFFFF; }
 	else {
