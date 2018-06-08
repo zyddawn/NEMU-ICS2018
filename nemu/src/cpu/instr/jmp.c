@@ -42,11 +42,13 @@ make_instr_func(jmp_short_) {
 	int offset = sign_ext(rel.val, data_size);
 	// print_asm_1("jmp", "",  1 + data_size / 8, &rel);
 
-	// printf("Here is jmp_short_...\n");
-	// printf("Before jmp, eip = 0x%x (%d), disp = 0x%x (%d)\n", cpu.eip, cpu.eip, offset, offset);
+	printf("Here is jmp_short_...\n");
+	printf("Before jmp, eip = 0x%x (%d), disp = 0x%x (%d)\n", cpu.eip, cpu.eip, offset, offset);
 	cpu.eip = offset; // (rel.val & 0xFF);
-	// printf("After jmp, eip = 0x%x (%d)\n", cpu.eip, cpu.eip);
-	
+	printf("After jmp, eip = 0x%x (%d)\n", cpu.eip, cpu.eip);
+	while(1)
+		;
+
         return 2;
 }
 
