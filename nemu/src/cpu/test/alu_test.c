@@ -975,9 +975,9 @@ void alu_test_imul() {
 				: "a" (a & 0xff), "c" (b & 0xff));
 			//	test_eflags.val = res_eflags;
 	
-			printf("oracle eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", test_eflags.CF, test_eflags.PF, test_eflags.ZF, test_eflags.SF, test_eflags.OF);
-			printf("nemu   eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", cpu.eflags.CF, cpu.eflags.PF, cpu.eflags.ZF, cpu.eflags.SF, cpu.eflags.OF);
-			printf("a = %d, b= %d, res = %d, res_asm = %d\n", a, b, (int32_t) res, (int32_t) sign_ext(res_asm_a & 0xffff, 16));
+			// printf("oracle eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", test_eflags.CF, test_eflags.PF, test_eflags.ZF, test_eflags.SF, test_eflags.OF);
+			// printf("nemu   eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", cpu.eflags.CF, cpu.eflags.PF, cpu.eflags.ZF, cpu.eflags.SF, cpu.eflags.OF);
+			// printf("a = %d, b= %d, res = %d, res_asm_a = %d\n", a, b, (int32_t) res, (int32_t) sign_ext(res_asm_a & 0xffff, 16));
 
 			assert((int32_t) res == (int32_t) sign_ext(res_asm_a, 16));
 		}
@@ -1050,7 +1050,7 @@ void alu_test_imul() {
 			//printf("nemu   eflags CF = %d, PF = %d, ZF = %d, SF = %d, OF = %d\n", cpu.eflags.CF, cpu.eflags.PF, cpu.eflags.ZF, cpu.eflags.SF, cpu.eflags.OF);
 			temp_a = res_asm_a;
 			temp_d = res_asm_d;
-			//printf("a = %d, b= %d, res = %d, res_asm = %d\n", a, b, (int32_t) res, (int32_t) ((temp_a & 0xffffffff) | ((temp_d & 0xffffffff) << 32)));
+			printf("a = %d, b= %d, res = %d, res_asm_a = %d\n", a, b, (int32_t) res, (int32_t) ((temp_a & 0xffffffff) | ((temp_d & 0xffffffff) << 32)));
 			assert((int32_t) res == (int32_t) ((temp_a & 0xffffffff) | ((temp_d & 0xffffffff) << 32)));
 		}
 	}
