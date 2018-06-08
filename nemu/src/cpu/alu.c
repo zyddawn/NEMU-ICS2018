@@ -120,8 +120,9 @@ uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size) {
 }
 
 int64_t alu_imul(int32_t src, int32_t dest, size_t data_size) {
-	int64_t res = src * dest;
-	// printf("src = %x, dest = %x, res = %llx\n", src, dest, res);
+	int64_t res;
+       	res = src * dest;
+	printf("src = %x, dest = %x, res = %lld\n", src, dest, res);
 	return res;
 }
 
