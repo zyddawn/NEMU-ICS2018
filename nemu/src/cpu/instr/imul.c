@@ -27,8 +27,8 @@ make_instr_func(imul_rm2a_v) {
 	decode_data_size_v
 	decode_operand_rm
 	operand_read(&opr_src); 
-	uint32_t num;
-	uint64_t res;
+	int32_t num;
+	int64_t res;
 	eax.data_size = edx.data_size = data_size;
 	eax.type = edx.type = OPR_REG;
 	eax.addr = REG_EAX;

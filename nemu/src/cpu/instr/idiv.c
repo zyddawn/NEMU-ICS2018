@@ -6,12 +6,12 @@ make_instr_func(idiv_rm2a_b) {
 	opr_src.data_size = 8;
 	decode_operand_rm
         operand_read(&opr_src);
-	uint32_t ax = cpu.eax & 0xFFFF; 
+	int32_t ax = cpu.eax & 0xFFFF; 
 	al.data_size = ah.data_size = 8;
 	al.type = ah.type = OPR_REG; 
 	al.addr = REG_AL;
 	ah.addr = REG_AH;
-        uint32_t res = alu_idiv(opr_src.val, ax, opr_src.data_size); 
+        int32_t res = alu_idiv(opr_src.val, ax, opr_src.data_size); 
 	al.val = res & 0xFF;
 	ah.val = res % opr_src.val; 
 	operand_write(&al);
@@ -27,7 +27,7 @@ make_instr_func(idiv_rm2a_v) {
 	opr_src.data_size = data_size;
 	decode_operand_rm
         operand_read(&opr_src);
-	uint64_t num, res; 
+	int64_t num, res; 
 	eax.data_size = edx.data_size = data_size;
 	eax.type = edx.type = OPR_REG; 
 	eax.addr = REG_EAX;
