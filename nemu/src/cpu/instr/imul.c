@@ -36,11 +36,11 @@ make_instr_func(imul_rm2a_v) {
 	num = cpu.eax;
        	if (data_size == 16) {
 		num &= 0xFFFF;
-		res = alu_imul(opr_src.val, num, data_size);
+		res = opr_src.val * num;
 		eax.val = res & 0xFFFF;
 		edx.val = (res >> 16) & 0xFFFF; }
 	else {
-		res = alu_imul(opr_src.val, num, data_size);
+		res = opr_src.val * num;
 		eax.val = res & 0xFFFFFFFF;
 		edx.val = (res >> 32) & 0xFFFFFFFF;
 	}
