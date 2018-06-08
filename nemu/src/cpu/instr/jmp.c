@@ -44,7 +44,7 @@ make_instr_func(jmp_short_) {
 
 	printf("Here is jmp_short_...\n");
 	printf("Before jmp, eip = 0x%x\n", cpu.eip);
-	cpu.eip += rel.val;
+	cpu.eip += (rel.val & 0xFF);
 	printf("After jmp, eip = 0x%x\n", cpu.eip);
 	
         return 2;
