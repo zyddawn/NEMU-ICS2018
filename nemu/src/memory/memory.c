@@ -13,8 +13,8 @@ uint32_t hw_mem_read(paddr_t paddr, size_t len) {
 	memcpy(&ret, hw_mem + paddr, len);
 	// if(paddr == cpu.ebp-4 && hw_mem[cpu.ebp-4] == 3)
 	//	printf("[ebp-4] = %d\n", hw_mem[cpu.ebp-4]);
-	if(paddr == cpu.ebp + 8)
-		printf("[ebp+8] = %d\n", hw_mem[cpu.ebp+8]+256*hw_mem[cpu.ebp+9]);
+	// if(paddr == cpu.ebp + 8)
+	//	printf("[ebp+8] = %d\n", hw_mem[cpu.ebp+8]+256*hw_mem[cpu.ebp+9]);
 	return ret;
 }
 
