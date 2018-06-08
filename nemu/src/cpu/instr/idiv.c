@@ -36,13 +36,13 @@ make_instr_func(idiv_rm2a_v) {
 		num = ((cpu.edx & 0xFFFF) << 16) | (cpu.eax & 0xFFFF);
 		res = alu_idiv(opr_src.val, num, data_size);
 		eax.val = res & 0xFFFF;
-		edx.val = res % opr_src.val; }
+		edx.val = num % opr_src.val; }
 	else {
 		num = cpu.edx;
 	       	num = (num << 32) | cpu.eax;
 		res = alu_idiv(opr_src.val, num, data_size);
 		eax.val = res & 0xFFFFFFFF;
-		edx.val = res % opr_src.val; }
+		edx.val = num % opr_src.val; }
 	printf("idiv: %lld / %d = %d...%d\n", num, opr_src.val, eax.val, edx.val);
 	operand_write(&eax);
        	operand_write(&edx);	
