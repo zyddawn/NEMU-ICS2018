@@ -64,24 +64,24 @@ static char * testcases[] = {
 	"movsx",	// GOOD
 	"sub-longlong",	// GOOD
 	"fact",		// GOOD
-	"gotbaha",	// --BAD
-	"leap-year",	// --BAD
+	"gotbaha",	// GOOD
+	"leap-year",	// GOOD
 	"matrix-mul-small",	// GOOD
 	"matrix-mul",	// GOOD
 	"mul-longlong", // GOOD
-	"prime",	// --BAD
+	"prime",	// GOOD
 	"shuixianhua",	// --BAD
 	"sum",		// GOOD
-	"wanshu",	// --BAD
+	"wanshu",	// GOOD
 	"struct",	// GOOD
 	"string",	// GOOD
 	"hello-str", 	// -bug (undeclared opcode)
-	"test-float",	// --BAD (bug)
+	"test-float",	// --BAD
 #ifdef IA32_INTR
-	"hello-inline", // didn't understand
+	"hello-inline", // INT not implemented
 #endif
 #if defined(IA32_INTR) && defined(HAS_DEVICE_SERIAL) && defined(HAS_DEVICE_KEYBOARD)
-	"echo",		// didn't understand
+	"echo",		// INT not implemented
 #endif
 };
 
