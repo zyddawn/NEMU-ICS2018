@@ -21,6 +21,7 @@ void print_reg() {
 	printf("eip\t0x%08x\n", cpu.eip);
 }
 
+// for debug
 void print_flags() {
 	printf("ZF\t%d\n", cpu.eflags.ZF);
 	printf("SF\t%d\n", cpu.eflags.SF);
