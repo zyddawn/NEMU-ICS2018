@@ -70,12 +70,12 @@ static char * testcases[] = {
 	"matrix-mul",	// GOOD
 	"mul-longlong", // GOOD
 	"prime",	// GOOD
-	"shuixianhua",	// --BAD
+	"shuixianhua",	// GOOD
 	"sum",		// GOOD
 	"wanshu",	// GOOD
 	"struct",	// GOOD
 	"string",	// GOOD
-	"hello-str", 	// -bug (undeclared opcode)
+	"hello-str", 	// GOOD
 	"test-float",	// --BAD
 #ifdef IA32_INTR
 	"hello-inline", // INT not implemented
