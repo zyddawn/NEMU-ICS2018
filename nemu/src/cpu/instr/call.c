@@ -46,7 +46,7 @@ make_instr_func(call_near_rm_v) {
 	printf("new eip = 0x%x\n", rm.val);
 	while(1)
 		;
-	cpu.eip = rm.val;
+	cpu.eip = r.val;
 	return 0;
 }
 
