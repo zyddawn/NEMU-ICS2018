@@ -28,6 +28,7 @@ make_instr_func(call_near_rm_v) {
 	decode_operand_r
 	operand_read(&opr_src);
 	printf("opr_src.val = 0x%x, eax = 0x%x\n", opr_src.val, cpu.eax);
+	print_reg();
 	rm.data_size = push_eip.data_size = data_size;
 	rm.type = OPR_MEM;
 	rm.addr = opr_src.val;
