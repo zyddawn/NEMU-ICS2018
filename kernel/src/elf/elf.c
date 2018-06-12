@@ -35,7 +35,7 @@ uint32_t loader() {
 	for(; ph < eph; ph ++) {
 		if(ph->p_type == PT_LOAD) {
 			// panic("Please implement the loader");
-			printf("entry = 0x%x\n", elf->e_entry);
+			// printf("entry = 0x%x\n", elf->e_entry);
 			/* TODO: copy the segment from the ELF file to its proper memory area */
 			memcpy((void *)elf + ph->p_offset, (void *)ph->p_vaddr, ph->p_filesz);  // BUG
 
