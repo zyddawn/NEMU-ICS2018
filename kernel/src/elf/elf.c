@@ -33,11 +33,11 @@ uint32_t loader() {
 	eph = ph + elf->e_phnum;
 	for(; ph < eph; ph ++) {
 		if(ph->p_type == PT_LOAD) {
-
+			printf("buf header: 0x%02x 0x%02x 0x%02x 0x%02x\n", buf[0], buf[1], buf[2], buf[3]);
 			panic("Please implement the loader");
 
 			/* TODO: copy the segment from the ELF file to its proper memory area */
-			
+			hw_mem_write()
 			/* TODO: zeror the memory area [vaddr + file_sz, vaddr + mem_sz) */
 
 #ifdef IA32_PAGE
