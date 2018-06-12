@@ -34,12 +34,12 @@ uint32_t loader() {
 	eph = ph + elf->e_phnum;		// end of program header
 	for(; ph < eph; ph ++) {
 		if(ph->p_type == PT_LOAD) {
-			panic("Please implement the loader");
+			// panic("Please implement the loader");
 			/* TODO: copy the segment from the ELF file to its proper memory area */
 			memcpy((void *)elf + ph->p_offset, (void *)elf + ph->p_vaddr, ph->p_filesz); 
 
 			/* TODO: zeror the memory area [vaddr + file_sz, vaddr + mem_sz) */
-			// memset()
+			memset((void *) elf + ph->p_vaddr + ph->filesz, 0, ph->memsz - ph->p_filesz);
 
 #ifdef IA32_PAGE
 			/* Record the program break for future use */
