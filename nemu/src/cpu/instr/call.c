@@ -34,7 +34,7 @@ make_instr_func(call_near_rm_v) {
 	rm.sreg = SREG_CS;
 	push_eip.type = OPR_MEM;
 	push_eip.sreg = SREG_SS;
-
+	
 	// read call address
 	operand_read(&rm);
 	eip += (1 + data_size / 8);
@@ -43,6 +43,9 @@ make_instr_func(call_near_rm_v) {
 	push_eip.addr = cpu.esp;
 	push_eip.val = eip;
 	operand_write(&push_eip);
+	printf("new eip = 0x%x\n", rm.val);
+	while(1)
+		;
 	cpu.eip = rm.val;
 	return 0;
 }
