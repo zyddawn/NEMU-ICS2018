@@ -26,7 +26,7 @@ make_instr_func(call_near_rm_v) {
 	OPERAND r, rm, push_eip;
 	r.data_size = data_size;
 	r.type = OPR_REG;
-	r.addr = modrm.val;
+	r.addr = opcode & 0x7;
 	cpu.edx = 1;
 	operand_read(&r);
 	printf("opr_src.val = 0x%x, eax = 0x%x\n", r.val, cpu.eax);
