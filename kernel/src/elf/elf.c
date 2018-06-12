@@ -30,15 +30,16 @@ uint32_t loader() {
 #endif
 
 	/* Load each program segment */
-	ph = (void *)elf + elf->e_phoff;
-	eph = ph + elf->e_phnum;
+	ph = (void *)elf + elf->e_phoff;   	// program header
+	eph = ph + elf->e_phnum;		// end of program header
 	for(; ph < eph; ph ++) {
 		if(ph->p_type == PT_LOAD) {
-			// printf("vaddr = 0x%x, filesz = 0x%x, memsz = 0x%x\n", ph->p_vaddr, ph->p_filesz, ph->p_memsz);
 			panic("Please implement the loader");
 			/* TODO: copy the segment from the ELF file to its proper memory area */
-			
+			memcpy((void *)elf + ph->p_offset, hw_mem + p_vaddr, ph->p_filesz); 
+
 			/* TODO: zeror the memory area [vaddr + file_sz, vaddr + mem_sz) */
+			// memset()
 
 #ifdef IA32_PAGE
 			/* Record the program break for future use */
