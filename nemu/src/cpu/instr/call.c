@@ -28,12 +28,12 @@ make_instr_func(call_near_rm_v) {
 	r.type = OPR_REG;
 	r.addr = modrm.val;
 	cpu.edx = 1;
-	operand_read(&opr_src);
-	printf("opr_src.val = 0x%x, eax = 0x%x\n", opr_src.val, cpu.eax);
+	operand_read(&r);
+	printf("opr_src.val = 0x%x, eax = 0x%x\n", r.val, cpu.eax);
 	print_reg();
 	rm.data_size = push_eip.data_size = data_size;
 	rm.type = OPR_MEM;
-	rm.addr = ;
+	rm.addr = 0;
 	rm.sreg = SREG_CS;
 	push_eip.type = OPR_MEM;
 	push_eip.sreg = SREG_SS;
