@@ -51,7 +51,7 @@ uint32_t loader() {
 	}
 
 	volatile uint32_t entry = elf->e_entry;
-
+	printf("entry = 0x%x\n", entry);
 #ifdef IA32_PAGE
 	mm_malloc(KOFFSET - STACK_SIZE, STACK_SIZE);
 #ifdef HAS_DEVICE_VGA
