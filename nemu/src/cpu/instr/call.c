@@ -42,12 +42,12 @@ make_instr_func(call_near_r_v) {
 	return 0;
 }
 
-make_instr_func(call_near_rm_v) {
+// make_instr_func(call_near_rm_v) {
 	
 
 
 
 
 
-}
+//}
 
