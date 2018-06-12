@@ -129,8 +129,8 @@ int modrm_opcode_rm(uint32_t eip, uint8_t * opcode, OPERAND * rm) {
 int modrm_opcode(uint32_t eip, uint8_t * opcode) {
         MODRM modrm;
         modrm.val = instr_fetch(eip, 1);
-        printf("modrm.val = 0x%x\n", modrm.val);
 	*opcode = modrm.reg_opcode;
+	printf("opcode = 0x%x, *opcode = 0x%x\n", opcode, *opcode);
         return 1;
 }
 
