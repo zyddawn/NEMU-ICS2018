@@ -4,7 +4,7 @@
 	make_instr_func(name) { \
 		uint8_t op_code; \
 		modrm_opcode(eip + 1, &op_code); \
-		printf("op_code = %x\n", op_code); \
+		printf("eip = 0x%x, op_code = %x\n", eip, op_code); \
 		return concat(name, _entry)[op_code](eip, op_code); \
 	}
 
