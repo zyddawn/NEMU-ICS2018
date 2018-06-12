@@ -36,7 +36,7 @@ uint32_t loader() {
 		if(ph->p_type == PT_LOAD) {
 			panic("Please implement the loader");
 			/* TODO: copy the segment from the ELF file to its proper memory area */
-			memcpy((void *)elf + ph->p_offset, hw_mem + p_vaddr, ph->p_filesz); 
+			memcpy((void *)elf + ph->p_offset, (void *)elf + ph->p_vaddr, ph->p_filesz); 
 
 			/* TODO: zeror the memory area [vaddr + file_sz, vaddr + mem_sz) */
 			// memset()
