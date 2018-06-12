@@ -39,7 +39,7 @@ uint32_t loader() {
 			memcpy((void *)ph->p_vaddr, elf + ph->p_offset, ph->p_filesz);
 			// memcpy((void *) (elf + ph->p_offset), get_mem_addr() + ph->p_vaddr, ph->p_filesz);
 			/* TODO: zeror the memory area [vaddr + file_sz, vaddr + mem_sz) */
-			memset(ph->p_vaddr + ph->p_filesz, 0, ph->p_memsz - ph->p_filesz);  // BUG
+			memset((void *) (ph->p_vaddr + ph->p_filesz), 0, ph->p_memsz - ph->p_filesz);  // BUG
 #ifdef IA32_PAGE
 			/* Record the program break for future use */
 			extern uint32_t brk;
