@@ -35,12 +35,12 @@ uint32_t loader() {
 	for(; ph < eph; ph ++) {
 		if(ph->p_type == PT_LOAD) {
 			// panic("Please implement the loader");
+			printf("entry = 0x%x\n", elf->e_entry);
 			/* TODO: copy the segment from the ELF file to its proper memory area */
 			memcpy((void *)elf + ph->p_offset, (void *)ph->p_vaddr, ph->p_filesz);  // BUG
 
 			/* TODO: zeror the memory area [vaddr + file_sz, vaddr + mem_sz) */
 			memset((void *) (ph->p_vaddr + ph->p_filesz), 0, ph->p_memsz - ph->p_filesz);  // BUG
-
 #ifdef IA32_PAGE
 			/* Record the program break for future use */
 			extern uint32_t brk;
@@ -51,7 +51,6 @@ uint32_t loader() {
 	}
 
 	volatile uint32_t entry = elf->e_entry;
-	printf("entry = 0x%x\n", entry);
 #ifdef IA32_PAGE
 	mm_malloc(KOFFSET - STACK_SIZE, STACK_SIZE);
 #ifdef HAS_DEVICE_VGA
