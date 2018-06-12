@@ -2,6 +2,7 @@
 #define __INSTR_CALL_H__
 
 make_instr_func(call_near_r_v);
+make_instr_func(call_near_rm_v);
 
 #endif
 
