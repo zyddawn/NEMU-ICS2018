@@ -130,7 +130,7 @@ int modrm_opcode(uint32_t eip, uint8_t * opcode) {
         MODRM modrm;
         modrm.val = instr_fetch(eip, 1);
 	*opcode = modrm.reg_opcode;
-	printf("opcode = 0x%x, *opcode = 0x%x\n", opcode, *opcode);
+	printf("opcode = 0x%x, *opcode = 0x%x\n", (unsigned)opcode, *opcode);
         return 1;
 }
 
