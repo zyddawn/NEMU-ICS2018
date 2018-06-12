@@ -43,9 +43,6 @@ make_instr_func(call_near_rm_v) {
 	push_eip.addr = cpu.esp;
 	push_eip.val = eip;
 	operand_write(&push_eip);
-	printf("new eip = 0x%x\n", rm.val);
-	while(1)
-		;
 	cpu.eip = r.val;
 	return 0;
 }
