@@ -16,7 +16,7 @@ uint32_t hw_mem_read(paddr_t paddr, size_t len) {
 	// if(paddr == cpu.ebp + 8)
 	//	printf("[ebp+8] = %d\n", hw_mem[cpu.ebp+8]+256*hw_mem[cpu.ebp+9]);
 	
-	printf("hw_mem addr = 0x%x, content = 0x%x\n", get_mem_addr(), *get_mem_addr());
+	printf("hw_mem addr = 0x%x, content = 0x%x\n", (unsigned)get_mem_addr(), (unsigned)*get_mem_addr());
 	return ret;
 }
 
