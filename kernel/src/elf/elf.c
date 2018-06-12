@@ -40,7 +40,7 @@ uint32_t loader() {
 			//	vaddr 
 			
 			// }
-			printf("[elf + ph->offset] = 0x%x\n", *(elf + ph->p_offset));
+			printf("[elf + ph->offset] = 0x%x\n", (unsigned)*(elf + ph->p_offset));
 
 			// memcpy((void *) (elf + ph->p_offset), get_mem_addr() + ph->p_vaddr, ph->p_filesz);
 			/* TODO: zeror the memory area [vaddr + file_sz, vaddr + mem_sz) */
