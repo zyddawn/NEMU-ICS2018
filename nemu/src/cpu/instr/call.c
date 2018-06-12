@@ -28,11 +28,9 @@ make_instr_func(call_near_rm_v) {
 	r.type = OPR_REG;
 	r.addr = instr_fetch(eip+1, 1) & 0x7;
 	operand_read(&r);
-	printf("opr_src.val = 0x%x, eax = 0x%x\n", r.val, cpu.eax);
-	print_reg();
 	rm.data_size = push_eip.data_size = data_size;
 	rm.type = OPR_MEM;
-	rm.addr = 0;
+	rm.addr = r.val;
 	rm.sreg = SREG_CS;
 	push_eip.type = OPR_MEM;
 	push_eip.sreg = SREG_SS;
@@ -46,8 +44,6 @@ make_instr_func(call_near_rm_v) {
 	push_eip.val = eip;
 	operand_write(&push_eip);
 	cpu.eip = rm.val;
-	while (1)
-		;
 	return 0;
 }
 
