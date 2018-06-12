@@ -34,8 +34,8 @@ uint32_t loader() {
 	eph = ph + elf->e_phnum;
 	for(; ph < eph; ph ++) {
 		if(ph->p_type == PT_LOAD) {
-			// panic("Please implement the loader");
 			printf("vaddr = 0x%x, filesz = 0x%x, memsz = 0x%x\n", ph->p_vaddr, ph->p_filesz, ph->p_memsz);
+			panic("Please implement the loader");
 			/* TODO: copy the segment from the ELF file to its proper memory area */
 			
 			/* TODO: zeror the memory area [vaddr + file_sz, vaddr + mem_sz) */
