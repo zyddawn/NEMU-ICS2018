@@ -2,6 +2,7 @@
 #include "memory.h"
 #include "string.h"
 
+#include <stdio.h>
 #include <elf.h>
 
 #ifdef HAS_DEVICE_IDE
