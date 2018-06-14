@@ -37,7 +37,7 @@ uint32_t loader() {
 			// panic("Please implement the loader");
 			/* TODO: copy the segment from the ELF file to its proper memory area */
 			Log("vaddr = 0x%x, offset = 0x%x, filesz = 0x%x\n", (uint32_t)ph->p_vaddr, (uint32_t)ph->p_offset, (uint32_t)ph->p_filesz);
-			// Log("BEFORE COPY --- vaddr content: %x %x %x %x, offset content: %x %x %x %x\n", *(ph->p_vaddr), *(ph->p_vaddr+1), *(ph->p_vaddr+2), *(ph->p_vaddr+3), *(elf+ph->p_offset), *(elf+ph->p_offset+1), *(elf+ph->p_offset+2), *(elf+ph->p_offset+3));
+			Log("BEFORE COPY --- vaddr content: %x %x %x %x, offset content: %x %x %x %x\n", *((void *)ph->p_vaddr), *((void *)ph->p_vaddr+1), *(ph->p_vaddr+2), *(ph->p_vaddr+3), *(elf+ph->p_offset), *(elf+ph->p_offset+1), *(elf+ph->p_offset+2), *(elf+ph->p_offset+3));
 			memcpy((void *)ph->p_vaddr, elf + ph->p_offset, ph->p_filesz);
 			// printf("AFTER");
 			
