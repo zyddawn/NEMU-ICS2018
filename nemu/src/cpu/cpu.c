@@ -137,7 +137,7 @@ int exec_inst() {
 	// instruction decode and execution
 #ifdef DEBUG
 	;
-	// printf("cur_eip = 0x%x, opcode = 0x%x\n", cpu.eip, opcode);
+	printf("cur_eip = 0x%x, opcode = 0x%x\n", cpu.eip, opcode);
 #endif
 	int len = opcode_entry[opcode](cpu.eip, opcode);
 #ifdef DEBUG
