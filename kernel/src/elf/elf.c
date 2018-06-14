@@ -37,7 +37,7 @@ uint32_t loader() {
 		if(ph->p_type == PT_LOAD) {
 			// panic("Please implement the loader");
 			/* TODO: copy the segment from the ELF file to its proper memory area */
-			Log("origin vaddr = 0x%x\n", *((uint32_t*)ph->p_vaddr));
+			Log("origin vaddr = 0x%x\n", *((void*)0x60000));
 			memcpy((void *)ph->p_vaddr, elf + ph->p_offset, ph->p_filesz);
 			
 			/* TODO: zeror the memory area [vaddr + file_sz, vaddr + mem_sz) */
