@@ -23,7 +23,7 @@ make_instr_func(call_near_r_v) {
 }
 
 make_instr_func(call_near_rm_v) {
-	OPERAND r, rm, push_eip;
+	OPERAND r, push_eip;
 	r.data_size = data_size;
 	r.type = OPR_REG;
 	r.addr = instr_fetch(eip+1, 1) & 0x7;
