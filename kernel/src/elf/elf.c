@@ -33,15 +33,12 @@ uint32_t loader() {
 	ph = (void *)elf + elf->e_phoff;   	// program header
 	eph = ph + elf->e_phnum;		// end of program header
 	for(; ph < eph; ph ++) {
-		printf("type = %d, offset = 0x%x, vaddr = 0x%x, filesz = 0x%x, memsz = 0x%x, flags = 0x%x, align = 0x%x\n", ph->p_type, ph->p_offset, ph->p_vaddr, ph->p_filesz, ph->p_memsz, ph->p_flags, ph->p_align);
+		Log("type = %d, offset = 0x%x, vaddr = 0x%x, filesz = 0x%x, memsz = 0x%x, flags = 0x%x, align = 0x%x\n", ph->p_type, ph->p_offset, ph->p_vaddr, ph->p_filesz, ph->p_memsz, ph->p_flags, ph->p_align);
 		if(ph->p_type == PT_LOAD) {
 			// panic("Please implement the loader");
 			/* TODO: copy the segment from the ELF file to its proper memory area */
-			Log("vaddr = 0x%x, offset = 0x%x, filesz = 0x%x\n", (uint32_t)ph->p_vaddr, (uint32_t)ph->p_offset, (uint32_t)ph->p_filesz);
-			Log("BEFORE COPY --- vaddr content: %x %x %x %x, offset content: %x %x %x %x\n", *((uint32_t*)(ph->p_vaddr)), *((uint32_t*)(ph->p_vaddr)+1), *((uint32_t*)(ph->p_vaddr)+2), *((uint32_t*)(ph->p_vaddr)+3), *((uint32_t*)(elf)+ph->p_offset), *((uint32_t*)elf+ph->p_offset+1), *((uint32_t*)elf+ph->p_offset+2), *((uint32_t*)elf+ph->p_offset+3));
+			// Log("vaddr = 0x%x, offset = 0x%x, filesz = 0x%x\n", (uint32_t)ph->p_vaddr, (uint32_t)ph->p_offset, (uint32_t)ph->p_filesz);
 			memcpy((void *)ph->p_vaddr, elf + ph->p_offset, ph->p_filesz);
-			Log("AFTER COPY --- \n");
-			
 			
 			/* TODO: zeror the memory area [vaddr + file_sz, vaddr + mem_sz) */
 			memset((void *) (ph->p_vaddr + ph->p_filesz), 0, ph->p_memsz - ph->p_filesz);  // BUG
@@ -53,6 +50,7 @@ uint32_t loader() {
 #endif
 		}
 	}
+	Log("Loading finished.\n")
 
 	volatile uint32_t entry = elf->e_entry;
 #ifdef IA32_PAGE
