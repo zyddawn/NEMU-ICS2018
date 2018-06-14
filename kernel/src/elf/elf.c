@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <elf.h>
+#include "nemu/include/memory/memory.h"
 
 #ifdef HAS_DEVICE_IDE
 #define ELF_OFFSET_IN_DISK 0
@@ -38,6 +39,7 @@ uint32_t loader() {
 			// panic("Please implement the loader");
 			/* TODO: copy the segment from the ELF file to its proper memory area */
 			Log("origin vaddr = 0x%x\n", *((uint32_t*)0x60000));
+			Log("hw_mem[0] = 0x%x\n", hw_mem[0]);
 			memcpy((void *)ph->p_vaddr, elf + ph->p_offset, ph->p_filesz);
 			
 			/* TODO: zeror the memory area [vaddr + file_sz, vaddr + mem_sz) */
