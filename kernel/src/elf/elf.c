@@ -4,7 +4,6 @@
 
 #include <stdio.h>
 #include <elf.h>
-#include "~/Documents/pa2018_spring/nemu/include/memory/memory.h"
 
 #ifdef HAS_DEVICE_IDE
 #define ELF_OFFSET_IN_DISK 0
@@ -34,16 +33,14 @@ uint32_t loader() {
 	ph = (void *)elf + elf->e_phoff;   	// program header
 	eph = ph + elf->e_phnum;		// end of program header
 	for(; ph < eph; ph ++) {
-		Log("type = %d, offset = 0x%x, vaddr = 0x%x, filesz = 0x%x, memsz = 0x%x, flags = 0x%x, align = 0x%x\n", ph->p_type, ph->p_offset, ph->p_vaddr, ph->p_filesz, ph->p_memsz, ph->p_flags, ph->p_align);
+		// Log("type = %d, offset = 0x%x, vaddr = 0x%x, filesz = 0x%x, memsz = 0x%x, flags = 0x%x, align = 0x%x\n", ph->p_type, ph->p_offset, ph->p_vaddr, ph->p_filesz, ph->p_memsz, ph->p_flags, ph->p_align);
 		if(ph->p_type == PT_LOAD) {
 			// panic("Please implement the loader");
 			/* TODO: copy the segment from the ELF file to its proper memory area */
-			Log("origin vaddr = 0x%x\n", *((uint32_t*)0x60000));
-			Log("hw_mem[0] = 0x%x\n", hw_mem[0]);
-			memcpy((void *)ph->p_vaddr, elf + ph->p_offset, ph->p_filesz);
+			memcpy((void *)ph->p_vaddr, ELF_OFFSET_IN_DISK + ph->p_offset, ph->p_filesz);
 			
 			/* TODO: zeror the memory area [vaddr + file_sz, vaddr + mem_sz) */
-			memset((void *) (ph->p_vaddr + ph->p_filesz), 0, ph->p_memsz - ph->p_filesz);  // BUG
+			memset((void *)ph->p_vaddr + ph->p_filesz, 0, ph->p_memsz - ph->p_filesz);
 #ifdef IA32_PAGE
 			/* Record the program break for future use */
 			extern uint32_t brk;
@@ -52,7 +49,6 @@ uint32_t loader() {
 #endif
 		}
 	}
-	Log("Loading finished.\n")
 
 	volatile uint32_t entry = elf->e_entry;
 #ifdef IA32_PAGE
