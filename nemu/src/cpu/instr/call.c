@@ -27,7 +27,7 @@ make_instr_func(call_near_rm_v) {
 	r.data_size = data_size;
 	r.type = OPR_REG;
 	r.addr = instr_fetch(eip+1, 1) & 0x7;
-	printf("r")
+	printf("r.addr = 0x%x\n", r.addr);
 	operand_read(&r);
 	push_eip.data_size = data_size;
 	push_eip.type = OPR_MEM;
