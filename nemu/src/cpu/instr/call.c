@@ -28,15 +28,11 @@ make_instr_func(call_near_rm_v) {
 	r.type = OPR_REG;
 	r.addr = instr_fetch(eip+1, 1) & 0x7;
 	operand_read(&r);
-	rm.data_size = push_eip.data_size = data_size;
-	rm.type = OPR_MEM;
-	rm.addr = r.val;
-	rm.sreg = SREG_CS;
+	push_eip.data_size = data_size;
 	push_eip.type = OPR_MEM;
 	push_eip.sreg = SREG_SS;
 	
 	// read call address
-	operand_read(&rm);
 	eip += (1 + data_size / 8);
 	// push eip
 	cpu.esp -= 4;
