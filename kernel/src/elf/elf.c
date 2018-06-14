@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include <elf.h>
-#include "nemu/include/memory/memory.h"
+#include "~/Documents/pa2018_spring/nemu/include/memory/memory.h"
 
 #ifdef HAS_DEVICE_IDE
 #define ELF_OFFSET_IN_DISK 0
