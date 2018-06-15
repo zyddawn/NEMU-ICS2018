@@ -42,7 +42,7 @@ uint32_t loader() {
 			//		printk("\n0x%x: ", i);
 			//	printk("%02x ", [i]);
 			//}
-			memcpy((void *)ph->p_vaddr, ph->p_offset, ph->p_filesz);
+			memcpy((void *)ph->p_vaddr, (void *)ph->p_offset, ph->p_filesz);
 			
 			/* TODO: zeror the memory area [vaddr + file_sz, vaddr + mem_sz) */
 			memset((void *)(ph->p_vaddr + ph->p_filesz), 0, ph->p_memsz - ph->p_filesz);
