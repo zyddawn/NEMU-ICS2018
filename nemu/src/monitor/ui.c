@@ -71,6 +71,7 @@ cmd_handler(cmd_info) {
 
 // static void cmd_p(char *e, char *cmd_end) {
 cmd_handler(cmd_p) {
+	printf("call p\n");
 	if(args == NULL) { 
 		puts("Command format: \"p EXPR\"");
 		return 0;
