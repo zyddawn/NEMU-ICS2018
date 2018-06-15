@@ -31,25 +31,25 @@ static struct rule {
 	{" +",	NOTYPE},				// white space
 	{"\\+", '+'},
 	{"==", EQ},
-	{"-", "-"},
-	{"*", "*"},
-	{"/", "/"},
-	{"%", "%"},
+	{"-", '-'},
+	{"*", '*'},
+	{"/", '/'},
+	{"%", '%'},
 	{"&&", AND},
 	{"||", OR},
 	{"!=", NEQ},
-	{"!", "!"},
+	{"!", '!'},
 	{"<=", LEQ},
 	{">=", GEQ},
 	{"<<", LSHIFT},
 	{">>", RSHIFT},
-	{">", ">"},
-	{"<", "<"},
+	{">", '>'},
+	{"<", '<'},
 	{"0x[0-9a-fA-F]+", HEX},
 	{"$[a-z]+", REG},
 	{"[0-9]+", DEC},
-	{"(", "("},
-	{")", ")"},
+	{"(", '('},
+	{")", ')'},
 
 };
 
@@ -153,7 +153,6 @@ static bool make_token(char *e) {
 	return true; 
 }
 
-
 // check if parentheses match
 bool check_parentheses(int p, int q) {
 	uint32_t L_cnt = 0,
@@ -170,6 +169,63 @@ bool check_parentheses(int p, int q) {
 		return true;
 	return false;
 }
+
+
+// transfer hex to uint32
+uint32_t hex2uint(char* str, bool* success) {
+	int str_len = strlen(str);
+	uint64_t res = 0;
+
+	*success = true;
+	for(int i = 2; i < str_len; ++ i) {
+		if (str[i] >= '0' && str[i] <= 9)
+			res = res * 0x10 + str[i] - '0';
+		else if (str[i] >= 'a' && str[i] <= 'f')
+			res = res * 0x10 + str[i] - 'a';
+		else if (str[i] >= 'A' && str[i] <= 'F')
+			res = res * 0x10 + str[i] - 'A';
+		else {
+			*success = false;
+			return 0;
+		}
+		// uint32_t overflow
+		if (res >= 0x100000000) {
+			printf("Error! Too large hexadecimal number.\n");
+			*success = false
+			return 0
+		}
+	}
+	return (uint32_t)(res & 0xFFFFFFFF);
+}
+
+// transfer register to uint32
+uint32_t reg2uint(char* str, bool* success) {
+	*success = true;
+	if (strcmp(str, "$eax") == 0)
+		return cpu.eax;
+	else if (strcmp(str, "$ecx") == 0)
+		return cpu.ecx;
+	else if (strcmp(str, "$edx") == 0)
+		return cpu.edx;
+	else if (strcmp(str, "$ebx") == 0)
+		return cpu.ebx;
+	else if (strcmp(str, "$esp") == 0)
+		return cpu.esp;
+	else if (strcmp(str, "$ebp") == 0)
+		return cpu.ebp;
+	else if (strcmp(str, "$esi") == 0)
+		return cpu.esi;
+	else if (strcmp(str, "$edi") == 0)
+		return cpu.edi;
+	else if (strcmp(str, "$eip") == 0)
+		return cpu.eip;
+	else {
+		printf("No register matched.\n");
+		*success = false; 
+		return 0;
+	}
+}
+
 
 
 
