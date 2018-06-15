@@ -326,14 +326,14 @@ uint32_t eval(int p, int q, bool *success) {
 						return 0;
 					}
 					return val1 * val2;
-				case "/":
+				case '/':
 					if (val2 == 0) {
 						printf("Error! Division by zero.\n");
 						*success = false;
 						return 0;
 					}
 					return val1 / val2;
-				case "%":
+				case '%':
 					if (val2 != 0)
 						return val1 % val2;
 					else {
