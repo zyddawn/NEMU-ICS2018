@@ -102,16 +102,47 @@ static bool make_token(char *e) {
 				/* TODO: Now a new token is recognized with rules[i]. 
 				 * Add codes to perform some actions with this token.
 				 */
+				// token length limit
+				if (substr_len > 32) {
+					printf("Error! Token length limit exceeded.\n");
+					return false;
+				}
 
-
+				// clean
+				int prev_token_len = strlen(tokens[nr_token].str);
+				while (prev_token_len --)
+					tokens[nr_token].str[preb_token_len] = '\0';
+				
 				switch(rules[i].token_type) {
-					default: tokens[nr_token].type = rules[i].token_type;
-							 nr_token ++;
+					case DEC: 
+					case HEX:
+					case REG:
+					case EQ:
+					case AND:
+					case OR:
+					case NEQ:
+					case LEQ:
+					case GEQ:
+					case LSHIFT:
+					case RSHIFT:
+						strncpy(tokens[nr_token].str, substr_start, substr_len);
+						tokens[nr_token].type = rules[i].token_type;
+						nr_token ++;
+						break;
+					case NOTYPE:
+					default:
+						 break;
 				}
 
 				break;
 			}
 		}
+		
+		if(nr_token > 32) {
+			printf("Error! Expression memory limit exceeded.\n");
+			return false;
+		}
+
 
 		if(i == NR_REGEX) {
 			printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
@@ -121,6 +152,29 @@ static bool make_token(char *e) {
 
 	return true; 
 }
+
+
+// check if parentheses match
+bool check_parentheses(int p, int q) {
+	uint32_t L_cnt = 0,
+		 R_cnt = 0;
+	for(int i = p; i < q; ++ i) {
+		if (tokens[i].type == '(')
+			++ L_cnt;
+		else if (tokens[i].type == ')')
+			++ R_cnt;
+		if (L_cnt <= R_cnt)
+			return false;
+	}
+	if (L_cnt - R_cnt == 1 && tokens[q].type == ')')
+		return true;
+	return false;
+}
+
+
+
+
+
 
 uint32_t expr(char *e, bool *success) {
 	if(!make_token(e)) {
