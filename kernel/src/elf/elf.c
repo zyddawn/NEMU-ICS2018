@@ -2,8 +2,6 @@
 #include "memory.h"
 #include "string.h"
 
-#include "../"
-
 #include <stdio.h>
 #include <elf.h>
 
