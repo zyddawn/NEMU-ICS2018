@@ -42,7 +42,8 @@ make_instr_func(call_near_rm_v) {
 	printf("pushed eip = 0x%x, new eip = 0x%x\n", eip, r.val);
 	printf("hw_mem[0x30000]: %02x %02x %02x %02x %02x %02x\n", hw_mem[0x30000], hw_mem[0x30001], hw_mem[0x30002], hw_mem[0x30003], hw_mem[0x30004], hw_mem[0x30005]);
 	printf("hw_mem[0x60000]: %02x %02x %02x %02x %02x %02x\n", hw_mem[0x60000], hw_mem[0x60001], hw_mem[0x60002], hw_mem[0x60003], hw_mem[0x60004], hw_mem[0x60005]);
-	printf("hw_mem[0x0]: %02x %02x %02x %02x %02x %02x\n", hw_mem[0x0], hw_mem[0x1], hw_mem[0x2], hw_mem[0x3], hw_mem[0x4], hw_mem[0x5]);
+	// printf("hw_mem[0x0]: %02x %02x %02x %02x %02x %02x\n", hw_mem[0x0], hw_mem[0x1], hw_mem[0x2], hw_mem[0x3], hw_mem[0x4], hw_mem[0x5]);
+	printf("hw_mem[0x38504]: %02x %02x %02x %02x %02x %02x\n", hw_mem[0x38504], hw_mem[0x38505], hw_mem[0x38506], hw_mem[0x38507], hw_mem[0x38508], hw_mem[0x38509]);
 	
 	
 	cpu.eip = r.val;
