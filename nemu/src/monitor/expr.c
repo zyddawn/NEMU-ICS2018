@@ -279,7 +279,130 @@ int dominant_op(int p, int q) {
 }
 
 
-
+uint32_t eval(int p, int q, bool *success) {
+	if (p > q) {
+		*success = false;
+		printf("Error! Bad expression.\n");
+		return 0;
+	}
+	else if (p == q) {
+		// single number
+		if(tokens[p].type == DEX) {
+			if(strlen(tokens[p].str) > strlen("4294967296\0") || (strlen(tokens[p].str) == strlen("4294967296\0") && strcmp(tokens[p].str, "4294967296\0") >= 0)) {
+				printf("Error! Too large decimal number.\n");
+				*success = false;
+				return 0;
+			}
+			return atoi(tokens[p].str);
+		}
+		else if (tokens[p].type == HEX)
+			return hex2uint(tokens[p].str, success);
+		else if (tokens[p].type == REG)
+			return reg2uint(tokens[p].str, success);
+		printf("Error! Bad expression.\n");
+		*success = false;
+		return 0;
+	}
+	else if (check_parentheses(p, q))
+		return eval(p+1, q-1, success);
+	else {
+		uint32_t val1, val2;
+		int op = dominant_op(p, q);
+		if (op == p) {
+			val2 = eval(op + 1, q, success);
+			if (tokens[op].type == '!') {
+				if(val2 > 0)
+					return 0;
+				return 1;
+			}
+			else if(tokens[op].type == DEREF)
+				return vaddr_read(val2, 4);
+		}
+		else if (op > p) {
+			val1 = eval(p, op - 1, success);
+			val2 = eval(op + 1, q, success);
+			uint64_t res;
+			switch(tokens[op].type) {
+				case '+':
+					res = (uint64_t)val1 + (uint64_t)val2;
+					if (res >= 4294967296) {
+						printf("Error! Addition overflow.\n");
+						*success = false;
+						return 0;
+					}
+					return (uint32_t)(res & 0xFFFFFFFF);
+				case '-':
+					if(val1 < val2) {
+						printf("Error! Negative result for unsigned int type.\n");
+						*success = false;
+						return 0;
+					}
+					return val1 - val2;
+				case '*':
+					res = (uint64_t)val1 * (uint64_t)val2;
+					if(res > 4294967296) {
+						printf("Error! Multiplication overflow.\n");
+						*success = false;
+						return 0;
+					}
+					return val1 * val2;
+				case "/":
+					if (val2 == 0) {
+						printf("Error! Division by zero.\n");
+						*success = false;
+						return 0;
+					}
+					return val1 / val2;
+				case "%":
+					if (val2 != 0)
+						return val1 % val2;
+					else {
+						printf("Error! Mod zero error.\n");
+						*success = false;
+						return 0;
+					}
+				case '>':
+					return val1 > val2;
+				case '<':
+					return val1 < val2;
+				case EQ:
+					return val1 == val2;
+				case NEQ:
+					return val1 != val2;
+				case LEQ:
+					return val1 <= val2;
+				case GEQ:
+					return val1 >= val2;
+				case LSHIFT:
+					res = (uint64_t)val1 << (uint64_t)val2;
+					if(res >= 4294967296) {
+						printf("Error! Left-shift overflow.\n");
+						*success = false;
+						return 0;
+					}
+					return val1 << val2;
+				case RSHIFT:
+					return val1 >> val2;
+				case AND:
+					if(val1 > 0 && val2 > 0)
+						return 1;
+					return 0;
+				case OR:
+					if(val1 > 0 || val2 > 0)
+						return 1;
+					return 0;
+				default:
+					*success = false;
+					return 0;
+			}
+		}
+		else {
+			*success = false;
+			return 0;
+		}
+	}
+	return 0;
+}
 
 
 uint32_t expr(char *e, bool *success) {
@@ -288,9 +411,12 @@ uint32_t expr(char *e, bool *success) {
 		return 0;
 	}
 
-	printf("\nPlease implement expr at expr.c\n");
-	assert(0);
-
-	return 0;
+	// printf("\nPlease implement expr at expr.c\n");
+	// assert(0);
+	for (int i = 0; i < nr_token; ++ i) {
+		if(tokens[i].type=='*' && (i==0 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!='(' && tokens[i-1].type!=')')))
+			tokens[i].type = DEREF;
+	}
+	return eval(0, nr_token-1, success);
 }
 
