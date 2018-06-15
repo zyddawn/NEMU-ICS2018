@@ -226,7 +226,57 @@ uint32_t reg2uint(char* str, bool* success) {
 	}
 }
 
+int assign_priority(char op) {
+	switch(op) {
+		case AND: case OR:
+			return 1;
+		case NEQ: case EQ:
+			return 2;
+		case LEQ: case GEQ: case '>': case '<':
+			return 3;
+		case LSHIFT: case RSHIFT: 
+			return 4;
+		case '+': case '-':
+			return 5;
+		case '%': case '*': case '/':
+			return 6;
+		case DEREF: case '!':
+			return 7;
+		case ')': case '(': case DEC: case REG: case HEX:
+			return -1;
+		default:
+			return 100;
+	}
+}
 
+
+
+int dominant_op(int p, int q) {
+	int cnt_parentheses = 0,
+	    min_prior = 10, min_index = -1;
+	for (int i = p; i <= q; ++ i) {
+		if (tokens[i].type == '(')
+			++ cnt_parentheses;
+		else if (tokens[i].type == ')')
+			-- cnt_parentheses;
+		if(cnt_parentheses < 0) {
+			printf("Parentheses not matched!\n");
+			return -1;
+		}
+		int cur_prior = assign_priority(tokens[i].type);
+		if (cnt_parentheses == 0 && cur_prior > 0 && min_prior >= cur_prior) {
+			min_prior = cur_prior;
+			min_index = i;
+		}
+	}
+	if (cnt_parentheses != 0) {
+		printf("Parentheses not matched!\n");
+		return -1;
+	}
+	if(min_index == -1)
+		printf("Dominant operator not found!\n");
+	return min_index;
+}
 
 
 
