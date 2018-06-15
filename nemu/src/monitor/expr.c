@@ -391,10 +391,12 @@ uint32_t eval(int p, int q, bool *success) {
 
 
 uint32_t expr(char *e, bool *success) {
+	printf("passed in token = %s\n", e);
 	if(!make_token(e)) {
 		*success = false;
 		return 0;
 	}
+	printf("Make token finished.\n");
 
 	// printf("\nPlease implement expr at expr.c\n");
 	// assert(0);
