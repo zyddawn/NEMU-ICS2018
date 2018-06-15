@@ -81,6 +81,7 @@ void init_cond() {
 	/* Load the program. */
 	uint32_t eip = loader();
 	Log("Current EIP = 0x%x\n", eip);
+	Log("eip content = 0x%x", (void*)eip);
 #ifdef HAS_DEVICE_VGA
 	/* Read data in the video memory to check whether 
 	 * the test data is written sucessfully.
