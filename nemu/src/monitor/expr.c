@@ -170,8 +170,8 @@ uint32_t hex2uint(char* str, bool* success) {
 		// uint32_t overflow
 		if (res >= 0x100000000) {
 			printf("Error! Too large hexadecimal number.\n");
-			*success = false
-			return 0
+			*success = false;
+			return 0;
 		}
 	}
 	return (uint32_t)(res & 0xFFFFFFFF);
