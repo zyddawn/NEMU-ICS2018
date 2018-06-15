@@ -43,7 +43,7 @@ make_instr_func(call_near_rm_v) {
 	// printf("hw_mem[0x30000]: %02x %02x %02x %02x %02x %02x\n", hw_mem[0x30000], hw_mem[0x30001], hw_mem[0x30002], hw_mem[0x30003], hw_mem[0x30004], hw_mem[0x30005]);
 	// printf("hw_mem[0x60000]: %02x %02x %02x %02x %02x %02x\n", hw_mem[0x60000], hw_mem[0x60001], hw_mem[0x60002], hw_mem[0x60003], hw_mem[0x60004], hw_mem[0x60005]);
 	// printf("hw_mem[0x38504]: %02x %02x %02x %02x %02x %02x\n", hw_mem[0x38504], hw_mem[0x38505], hw_mem[0x38506], hw_mem[0x38507], hw_mem[0x38508], hw_mem[0x38509]);
-	for(int i=0x30000; i<0x30100; ++i) {
+	for(int i=0x38000; i<0x38100; ++i) {
 		if(i % 16 == 0)
 			printf("\n0x%08x: ", i);
 		printf("%02x ", hw_mem[i]);
