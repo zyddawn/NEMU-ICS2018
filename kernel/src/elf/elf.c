@@ -36,12 +36,6 @@ uint32_t loader() {
 		if(ph->p_type == PT_LOAD) {
 			// panic("Please implement the loader");
 			/* TODO: copy the segment from the ELF file to its proper memory area */
-			// printk("Before COPY: \n");
-			// for(int i=0x60000; i<0x60100; ++i) {
-			//	if(i % 16 == 0)
-			//		printk("\n0x%x: ", i);
-			//	printk("%02x ", [i]);
-			//}
 			memcpy((void *)ph->p_vaddr, (void *)ph->p_offset, ph->p_filesz);
 			
 			/* TODO: zeror the memory area [vaddr + file_sz, vaddr + mem_sz) */
@@ -56,7 +50,6 @@ uint32_t loader() {
 	}
 
 	volatile uint32_t entry = elf->e_entry;
-	Log("Loading finished. entry = 0x%x\n", entry);
 #ifdef IA32_PAGE
 	mm_malloc(KOFFSET - STACK_SIZE, STACK_SIZE);
 #ifdef HAS_DEVICE_VGA
