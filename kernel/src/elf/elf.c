@@ -40,7 +40,7 @@ uint32_t loader() {
 			for(int i=0x60000; i<0x60100; ++i) {
 				if(i % 16 == 0)
 					printk("\n0x%x: ", i);
-				printk("%02x ", hw_mem[i]);
+				printk("%02x ", *(void*)i);
 			
 			}
 			memcpy((void *)ph->p_vaddr, elf + ph->p_offset, ph->p_filesz);
