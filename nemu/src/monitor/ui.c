@@ -78,7 +78,9 @@ cmd_handler(cmd_p) {
 	}
 
 	bool success;
+	printf("Before call expr\n");
 	uint32_t val = expr(args, &success);
+	printf("after call expr\n");
 	if(!success) {
 		printf("invalid expression: '%s'\n", args);
 	} else {
