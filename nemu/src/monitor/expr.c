@@ -206,7 +206,7 @@ uint32_t reg2uint(char* str, bool* success) {
 	}
 }
 
-int assign_priority(char op) {
+int assign_priority(int op) {
 	switch(op) {
 		case AND: case OR:
 			return 1;
