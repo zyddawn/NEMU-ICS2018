@@ -86,19 +86,15 @@ static bool make_token(char *e) {
 	int position = 0;
 	int i;
 	regmatch_t pmatch;
-	
 	nr_token = 0;
-
 	while(e[position] != '\0') {
 		/* Try all rules one by one. */
 		for(i = 0; i < NR_REGEX; i ++) {
 			if(regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
 				char *substr_start = e + position;
 				int substr_len = pmatch.rm_eo;
-
 				printf("match regex[%d] at position %d with len %d: %.*s", i, position, substr_len, substr_len, substr_start);
 				position += substr_len;
-
 				/* TODO: Now a new token is recognized with rules[i]. 
 				 * Add codes to perform some actions with this token.
 				 */
@@ -107,49 +103,33 @@ static bool make_token(char *e) {
 					printf("Error! Token length limit exceeded.\n");
 					return false;
 				}
-
 				// clean
 				int prev_token_len = strlen(tokens[nr_token].str);
 				while (prev_token_len --)
-					tokens[nr_token].str[preb_token_len] = '\0';
+					tokens[nr_token].str[prev_token_len] = '\0';
 				
 				switch(rules[i].token_type) {
-					case DEC: 
-					case HEX:
-					case REG:
-					case EQ:
-					case AND:
-					case OR:
-					case NEQ:
-					case LEQ:
-					case GEQ:
-					case LSHIFT:
-					case RSHIFT:
+					case DEC: case HEX: case REG: case EQ: 
+					case AND: case OR: case NEQ: case LEQ: case GEQ: case LSHIFT: case RSHIFT:
 						strncpy(tokens[nr_token].str, substr_start, substr_len);
 						tokens[nr_token].type = rules[i].token_type;
 						nr_token ++;
 						break;
 					case NOTYPE:
-					default:
-						 break;
+					default: break;
 				}
-
 				break;
 			}
-		}
-		
+		}	
 		if(nr_token > 32) {
 			printf("Error! Expression memory limit exceeded.\n");
 			return false;
 		}
-
-
 		if(i == NR_REGEX) {
 			printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
 			return false;
 		}
 	}
-
 	return true; 
 }
 
@@ -175,7 +155,6 @@ bool check_parentheses(int p, int q) {
 uint32_t hex2uint(char* str, bool* success) {
 	int str_len = strlen(str);
 	uint64_t res = 0;
-
 	*success = true;
 	for(int i = 2; i < str_len; ++ i) {
 		if (str[i] >= '0' && str[i] <= 9)
