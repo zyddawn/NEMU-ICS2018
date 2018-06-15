@@ -11,6 +11,8 @@
 #include <sys/types.h>
 #include <regex.h>
 
+#define DEBUG
+
 enum {
 	NOTYPE = 256, 
 	/* TODO: Add more token types */
@@ -260,6 +262,9 @@ int dominant_op(int p, int q) {
 
 
 uint32_t eval(int p, int q, bool *success) {
+#ifdef DEBUG
+	printf("eval: p=%d, q=%d\n", p, q);_
+#endif
 	if (p > q) {
 		*success = false;
 		printf("Error! Bad expression.\n");
@@ -397,6 +402,11 @@ uint32_t expr(char *e, bool *success) {
 		if(tokens[i].type=='*' && (i==0 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!='(' && tokens[i-1].type!=')')))
 			tokens[i].type = DEREF;
 	}
+#ifdef DEBUG
+	for(int i=0; i<nr_token; ++i) {
+		printf("tokens[%d].str = %s, type = %d\n", i, tokens[i].str, tokens[i].type);
+	}
+#endif
 	return eval(0, nr_token-1, success);
 }
 
