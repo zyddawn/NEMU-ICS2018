@@ -263,7 +263,7 @@ int dominant_op(int p, int q) {
 
 uint32_t eval(int p, int q, bool *success) {
 #ifdef DEBUG
-	printf("eval: p=%d, q=%d\n", p, q);_
+	printf("eval: p=%d, q=%d\n", p, q);
 #endif
 	if (p > q) {
 		*success = false;
