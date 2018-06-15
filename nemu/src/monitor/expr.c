@@ -11,10 +11,12 @@
 #include <regex.h>
 
 enum {
-	NOTYPE = 256, EQ
-
+	NOTYPE = 256, 
 	/* TODO: Add more token types */
-
+	EQ = 255, AND = 254, OR = 253, 
+	NEQ = 252, LEQ = 251, GEQ = 250, DEC = 249, 
+	HEX = 248, REG = 247, LSHIFT = 246, RSHIFT = 245,
+	DEREF = 244, 
 };
 
 static struct rule {
@@ -25,10 +27,30 @@ static struct rule {
 	/* TODO: Add more rules.
 	 * Pay attention to the precedence level of different rules.
 	 */
-
+	
 	{" +",	NOTYPE},				// white space
 	{"\\+", '+'},
 	{"==", EQ},
+	{"-", "-"},
+	{"*", "*"},
+	{"/", "/"},
+	{"%", "%"},
+	{"&&", AND},
+	{"||", OR},
+	{"!=", NEQ},
+	{"!", "!"},
+	{"<=", LEQ},
+	{">=", GEQ},
+	{"<<", LSHIFT},
+	{">>", RSHIFT},
+	{">", ">"},
+	{"<", "<"},
+	{"0x[0-9a-fA-F]+", HEX},
+	{"$[a-z]+", REG},
+	{"[0-9]+", DEC},
+	{"(", "("},
+	{")", ")"},
+
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
