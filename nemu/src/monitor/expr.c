@@ -267,7 +267,7 @@ uint32_t eval(int p, int q, bool *success) {
 	}
 	else if (p == q) {
 		// single number
-		if(tokens[p].type == DEX) {
+		if(tokens[p].type == DEC) {
 			if(strlen(tokens[p].str) > strlen("4294967296\0") || (strlen(tokens[p].str) == strlen("4294967296\0") && strcmp(tokens[p].str, "4294967296\0") >= 0)) {
 				printf("Error! Too large decimal number.\n");
 				*success = false;
@@ -296,7 +296,7 @@ uint32_t eval(int p, int q, bool *success) {
 				return 1;
 			}
 			else if(tokens[op].type == DEREF)
-				return vaddr_read(val2, 4);
+				return vaddr_read(val2, SREG_DS, 4);
 		}
 		else if (op > p) {
 			val1 = eval(p, op - 1, success);
