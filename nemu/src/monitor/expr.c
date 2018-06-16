@@ -14,9 +14,7 @@
 // #define DEBUG
 
 #define int_max 2147483647
-#define int_max_str "2147483647\0"
 #define int_min (-2147483648)
-#define int_min_str "2147483648\0"
 
 enum {
 	NOTYPE = 256, 
@@ -31,11 +29,9 @@ static struct rule {
 	char *regex;
 	int token_type;
 } rules[] = {
-
 	/* TODO: Add more rules.
 	 * Pay attention to the precedence level of different rules.
 	 */
-	
 	{" +", NOTYPE},				// white space
 	{"\\+", '+'},
 	{"==", EQ},
@@ -58,9 +54,6 @@ static struct rule {
 	{"[0-9]+", DEC},
 	{"\\(", '('},
 	{"\\)", ')'},
-	{"\\[", '['},
-	{"\\]", ']'},
-
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -75,7 +68,7 @@ void init_regex() {
 	char error_msg[128];
 	int ret;
 
-	for(i = 0; i < NR_REGEX; i ++) {
+	for(i = 0; i < NR_REGEX; ++i) {
 		ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);
 		if(ret != 0) {
 			regerror(ret, &re[i], error_msg, 128);
@@ -92,14 +85,44 @@ typedef struct token {
 Token tokens[32];
 int nr_token;
 
+
+void clean_token() {
+	int clean_token_len = strlen(tokens[nr_token].str);
+	while (clean_token_len --)
+		tokens[nr_token].str[clean_token_len] = '\0';
+}
+
 static bool make_token(char *e) {
 	int position = 0;
 	int i;
+	// for function or variable match
+	char name[32];
+	vaddr_t addr;
 	regmatch_t pmatch;
 	nr_token = 0;
 	while(e[position] != '\0') {
+		/* Try search fun_name or variable_name */
+		bool success = false;
+		if(sscanf(e+position, "%31[a-zA-Z0-9_]", name) == 1) {
+			printf("name = %s\n", name);
+			addr = look_up_symtab(name, &success);
+			printf("addr = 0x%x, success = %d\n", addr, success);
+			if(success) {
+				char addr_str[32];
+				sprintf(addr_str, "0x%x", (uint32_t)addr);
+				printf("addr_str = %s\n", addr_str);
+				int substr_len = strlen(addr_str);
+				position += substr_len;
+				clean_token();
+				
+				strncpy(tokens[nr_token].str, addr_str, substr_len);
+				tokens[nr_token].type = VARIABLE;
+				++nr_token;
+				continue;
+			}
+		}
 		/* Try all rules one by one. */
-		for(i = 0; i < NR_REGEX; i ++) {
+		for(i = 0; i < NR_REGEX; ++i) {
 			if(regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
 				char *substr_start = e + position;
 				int substr_len = pmatch.rm_eo;
@@ -114,9 +137,7 @@ static bool make_token(char *e) {
 					return false;
 				}
 				// clean
-				int clean_token_len = strlen(tokens[nr_token].str);
-				while (clean_token_len --)
-					tokens[nr_token].str[clean_token_len] = '\0';
+				clean_token();
 				
 				switch(rules[i].token_type) {
 					case DEC: case HEX: case REG: case EQ: 
@@ -127,7 +148,7 @@ static bool make_token(char *e) {
 					case '(': case ')':
 						strncpy(tokens[nr_token].str, substr_start, substr_len);
 						tokens[nr_token].type = rules[i].token_type;
-						nr_token ++;
+						++nr_token;
 						break;
 					case NOTYPE:
 					default: break;
@@ -135,6 +156,7 @@ static bool make_token(char *e) {
 				break;
 			}
 		}	
+
 		if(nr_token > 32) {
 			printf("Error! Expression memory limit exceeded.\n");
 			return false;
@@ -155,11 +177,11 @@ bool check_parentheses(int p, int q) {
 	}
 	uint32_t L_cnt = 0,
 		 R_cnt = 0;
-	for(int i = p; i < q; ++ i) {
+	for(int i = p; i < q; ++i) {
 		if (tokens[i].type == '(')
-			++ L_cnt;
+			++L_cnt;
 		else if (tokens[i].type == ')')
-			++ R_cnt;
+			++R_cnt;
 		if (L_cnt <= R_cnt)	// when the expr is not surrounded by a big pair of parentheses, L == R
 			return false;
 	}
@@ -178,7 +200,7 @@ uint64_t hex2uint(char* str, bool* success) {
 	int str_len = strlen(str);
 	uint64_t res = 0;
 	*success = true;
-	for(int i = 2; i < str_len; ++ i) {
+	for(int i = 2; i < str_len; ++i) {
 		if (str[i] >= '0' && str[i] <= '9')
 			res = res * 0x10 + str[i] - '0';
 		else if (str[i] >= 'a' && str[i] <= 'f')
@@ -243,7 +265,7 @@ int assign_priority(int op) {
 			return 6;
 		case DEREF: case '!': case NEG: case POS:
 			return 7;
-		case ')': case '(': case DEC: case REG: case HEX:
+		case ')': case '(': case DEC: case REG: case HEX: case VARIABLE: 
 			return -1;
 		default:
 			return 100;
@@ -253,11 +275,11 @@ int assign_priority(int op) {
 int dominant_op(int p, int q) {
 	int cnt_parentheses = 0,
 	    min_prior = 10, min_index = -1;
-	for (int i = p; i <= q; ++ i) {
+	for (int i = p; i <= q; ++i) {
 		if (tokens[i].type == '(')
-			++ cnt_parentheses;
+			++cnt_parentheses;
 		else if (tokens[i].type == ')')
-			-- cnt_parentheses;
+			--cnt_parentheses;
 		if(cnt_parentheses < 0) {
 			printf("Parentheses not matched!\n");
 			return -1;
@@ -308,10 +330,12 @@ long long int eval(int p, int q, bool *success) {
 			}
 			return res;
 		}
-		else if (tokens[p].type == HEX)
+		else if (tokens[p].type == HEX || tokens[p].type == VARIABLE)
 			return hex2uint(tokens[p].str, success); 
 		else if (tokens[p].type == REG)
 			return (uint64_t)reg2uint(tokens[p].str, success);
+
+
 		printf("Error! Bad expression.\n");
 		*success = false;
 		return 0;
@@ -430,7 +454,7 @@ long long int expr(char *e, bool *success) {
 	}
 	// printf("\nPlease implement expr at expr.c\n");
 	// assert(0);
-	for (int i = 0; i < nr_token; ++ i) {
+	for (int i = 0; i < nr_token; ++i) {
 		// deref
 		if(tokens[i].type=='*' && (i==0 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!=')')))
 			tokens[i].type = DEREF;

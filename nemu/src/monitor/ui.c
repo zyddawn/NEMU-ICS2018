@@ -125,7 +125,6 @@ cmd_handler(cmd_b) {
 		}
 	} else if(sscanf(args, "%80[a-zA-Z0-9_]", fun_name) == 1) {
 		//addr = look_up_fun_symtab(fun_name, &success) + 3;	// +3 to skip the machine code of "push %ebp; movl %esp, %ebp"
-		printf("fun_name = %s\n", fun_name);
 		addr = look_up_fun_symtab(fun_name, &success);
 		if(!success) {
 			printf("function '%s' not found\n", fun_name);
