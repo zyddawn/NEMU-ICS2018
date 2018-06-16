@@ -134,6 +134,11 @@ static bool make_token(char *e) {
 			return false;
 		}
 	}
+#ifdef DEBUG
+	printf("summary of make_token:\n");
+	for(int i=0; i<nr_token; ++i)
+		printf("token[%d] = %s\n", i, tokens[i].str);
+#endif
 	return true; 
 }
 
