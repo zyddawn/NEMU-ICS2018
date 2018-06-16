@@ -142,7 +142,6 @@ static bool make_token(char *e) {
 
 // check if parentheses match
 bool check_parentheses(int p, int q) {
-	printf("check_p: p=%d, q=%d\n", p, q);
 	if(tokens[p].type != '(') {
 		printf("Error! No need to call check_parentheses in this position.\n");
 		return false;
@@ -150,12 +149,11 @@ bool check_parentheses(int p, int q) {
 	uint32_t L_cnt = 0,
 		 R_cnt = 0;
 	for(int i = p; i < q; ++ i) {
-		printf("L = %d, R = %d\n", L_cnt, R_cnt);
 		if (tokens[i].type == '(')
 			++ L_cnt;
 		else if (tokens[i].type == ')')
 			++ R_cnt;
-		if (L_cnt <= R_cnt)
+		if (L_cnt <= R_cnt)	// when the expr is not surrounded by a big pair of parentheses, L == R
 			return false;
 	}
 	if (L_cnt - R_cnt == 1 && tokens[q].type == ')')
@@ -271,10 +269,6 @@ int dominant_op(int p, int q) {
 
 uint32_t eval(int p, int q, bool *success) {
 	*success = true;
-	printf("eval: p=%d, q=%d\n", p, q);
-	for(int i=p; i<=q; ++i)
-		printf("%s ", tokens[i].str);
-	printf("\n");
 	if (p > q) {
 		*success = false;
 		printf("Error! Bad expression.\n");
@@ -288,7 +282,6 @@ uint32_t eval(int p, int q, bool *success) {
 				*success = false;
 				return 0;
 			}
-			// printf("number = %s, nemu outcome = %u\n", tokens[p].str, (uint32_t)atoi(tokens[p].str));
 			return (uint32_t)atoi(tokens[p].str);
 		}
 		else if (tokens[p].type == HEX)
