@@ -142,6 +142,10 @@ static bool make_token(char *e) {
 
 // check if parentheses match
 bool check_parentheses(int p, int q) {
+	if(tokens[p].type != '(') {
+		printf("Error! The whole expression is not surrounded by parentheses.\n");
+		return false;
+	}
 	uint32_t L_cnt = 0,
 		 R_cnt = 0;
 	for(int i = p; i < q; ++ i) {
