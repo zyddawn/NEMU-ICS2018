@@ -280,7 +280,7 @@ uint32_t eval(int p, int q, bool *success) {
 				*success = false;
 				return 0;
 			}
-			return atoi(tokens[p].str);
+			return (uint32_t)atoi(tokens[p].str);
 		}
 		else if (tokens[p].type == HEX)
 			return hex2uint(tokens[p].str, success);
