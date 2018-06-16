@@ -166,6 +166,10 @@ bool check_parentheses(int p, int q) {
 	return false;
 }
 
+// check if res is out of int number range
+bool out_of_int_range(long long int res) {
+	return (res>int_max || res<int_min);
+}
 
 // transfer hex to uint32
 uint64_t hex2uint(char* str, bool* success) {
@@ -269,10 +273,6 @@ int dominant_op(int p, int q) {
 	if(min_index == -1)
 		printf("Dominant operator not found!\n");
 	return min_index;
-}
-
-bool out_of_int_range(long long int res) {
-	return (res>int_max || res<int_min);
 }
 
 
