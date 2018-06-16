@@ -280,6 +280,7 @@ uint32_t eval(int p, int q, bool *success) {
 				*success = false;
 				return 0;
 			}
+			printf("number = %s, nemu outcome = %u\n", tokens[p].str, (uint32_t)atoi(tokens[p].str));
 			return (uint32_t)atoi(tokens[p].str);
 		}
 		else if (tokens[p].type == HEX)
