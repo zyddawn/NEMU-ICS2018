@@ -36,15 +36,14 @@ make_instr_func(jmp_short_) {
 	rel.sreg = SREG_CS;
         rel.data_size = 8;
         rel.addr = eip + 1;
-
         operand_read(&rel);
 
 	int offset = sign_ext(rel.val, 8);
 	// print_asm_1("jmp", "",  1 + data_size / 8, &rel);
 	// char offset = rel.val & 0xFF;  // signed 8-bit
-	printf("Before jmp, eip = 0x%x (%d), disp = 0x%x (%d), re.val = 0x%x\n", cpu.eip, cpu.eip, offset, offset, rel.val);
+	// printf("Before jmp, eip = 0x%x (%d), disp = 0x%x (%d), re.val = 0x%x\n", cpu.eip, cpu.eip, offset, offset, rel.val);
 	cpu.eip += offset;  
-	printf("After jmp, eip = 0x%x (%d)\n", cpu.eip, cpu.eip);
+	// printf("After jmp, eip = 0x%x (%d)\n", cpu.eip, cpu.eip);
         return 2;
 }
 
