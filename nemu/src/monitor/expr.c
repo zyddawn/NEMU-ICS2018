@@ -128,7 +128,7 @@ static bool make_token(char *e) {
 					case NOTYPE:
 					default: break;
 				}
-				// break;
+				break;
 			}
 		}	
 		if(nr_token > 32) {
