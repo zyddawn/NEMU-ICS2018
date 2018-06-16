@@ -352,8 +352,10 @@ long long int eval(int p, int q, bool *success) {
 						return 0;
 					return 1;
 				}
-				else if(tokens[op].type == DEREF)
+				else if(tokens[op].type == DEREF) {
+					printf("DEREF val2 = %lld\n", val2);
 					return vaddr_read(val2, SREG_DS, 4);
+				}
 				else if(tokens[op].type == POS)
 					return val2;
 				else if(tokens[op].type == NEG) {
