@@ -142,6 +142,7 @@ static bool make_token(char *e) {
 
 // check if parentheses match
 bool check_parentheses(int p, int q) {
+	printf("check_p: p=%d, q=%d\n", p, q);
 	if(tokens[p].type != '(') {
 		printf("Error! No need to call check_parentheses in this position.\n");
 		return false;
@@ -149,6 +150,7 @@ bool check_parentheses(int p, int q) {
 	uint32_t L_cnt = 0,
 		 R_cnt = 0;
 	for(int i = p; i < q; ++ i) {
+		printf("L = %d, R = %d\n", L_cnt, R_cnt);
 		if (tokens[i].type == '(')
 			++ L_cnt;
 		else if (tokens[i].type == ')')
