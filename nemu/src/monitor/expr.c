@@ -113,7 +113,7 @@ static bool make_token(char *e) {
 				sprintf(addr_str, "0x%x", (uint32_t)addr);
 				printf("addr_str = %s\n", addr_str);
 				int substr_len = strlen(addr_str);
-				position += substr_len;
+				position += strlen(name);
 				clean_token();
 				
 				strncpy(tokens[nr_token].str, addr_str, substr_len);
