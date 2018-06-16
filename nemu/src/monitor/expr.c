@@ -369,11 +369,10 @@ long long int eval(int p, int q, bool *success) {
 		}
 		else if (op > p) {
 			val1 = eval(p, op - 1, success);
-			printf("val1 = %lld\n", val1);
 			if(*success)
 				val2 = eval(op + 1, q, success);
-			printf("val2 = %lld\n", val2);
 			if(*success) {
+				printf("op type = %d\n", tokens[op].type);
 				switch(tokens[op].type) {
 					case '+':
 						printf("val1 = %lld, val2 = %lld\n", val1, val2);
@@ -383,6 +382,7 @@ long long int eval(int p, int q, bool *success) {
 							return 0;
 						}
 						*success = true;
+						printf("add res = %lld\n", res);
 						return res;
 					case '-':
 						res = val1 - val2;
