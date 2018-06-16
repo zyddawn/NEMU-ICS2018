@@ -13,6 +13,11 @@
 
 #define DEBUG
 
+#define int_max 2147483647
+#define int_max_str "2147483647\0"
+#define int_min -2147483648
+#define int_min_str "2147483648\0"
+
 enum {
 	NOTYPE = 256, 
 	/* TODO: Add more token types */
@@ -163,7 +168,7 @@ bool check_parentheses(int p, int q) {
 
 
 // transfer hex to uint32
-uint32_t hex2uint(char* str, bool* success) {
+uint64_t hex2uint(char* str, bool* success) {
 	int str_len = strlen(str);
 	uint64_t res = 0;
 	*success = true;
@@ -178,14 +183,14 @@ uint32_t hex2uint(char* str, bool* success) {
 			*success = false;
 			return 0;
 		}
-		// uint32_t overflow
-		if (res >= 0x100000000) {
-			printf("Error! Too large hexadecimal number.\n");
+		// overflow
+		if (out_of_int_range(res)) {
+			printf("Error! Exceeded hexadecimal number (int) range.\n");
 			*success = false;
 			return 0;
 		}
 	}
-	return (uint32_t)res;
+	return res;
 }
 
 // transfer register to uint32
@@ -266,14 +271,18 @@ int dominant_op(int p, int q) {
 	return min_index;
 }
 
+bool out_of_int_range(long long int res)
+	return res>int_max || res<int_min;
 
-uint32_t eval(int p, int q, bool *success) {
+
+long long int eval(int p, int q, bool *success) {
 	*success = true;
 #ifdef DEBUG
 	for(int i=p; i<=q; ++i)
 		printf("str[%d]=%s, type=%d\n", i, tokens[i].str, tokens[i].type);
 	printf("\n");
 #endif
+	long long int res = 0;
 	if (p > q) {
 		*success = false;
 		printf("Error! Bad expression.\n");
@@ -282,17 +291,23 @@ uint32_t eval(int p, int q, bool *success) {
 	else if (p == q) {
 		// single number
 		if(tokens[p].type == DEC) {
-			if(strlen(tokens[p].str) > strlen("4294967296\0") || (strlen(tokens[p].str) == strlen("4294967296\0") && strcmp(tokens[p].str, "4294967296\0") >= 0)) {
-				printf("Error! Too large decimal number.\n");
-				*success = false;
-				return 0;
+			int dec_len = strlen(tokens[p].str);
+			res = 0;
+			for (int i=0; i<dec_len; ++i) {
+				if(tokens[p].str[i]>='0' && tokens[p].str[i]<='9')
+					res = res * 10 + tokens[p].str[i] - '0';
+				if(out_of_int_range(res)) {
+					printf("Error! Exceeded int number range.\n");
+					*success = false;
+					return 0;
+				}
 			}
-			return (uint32_t)atoi(tokens[p].str);
+			return res;
 		}
 		else if (tokens[p].type == HEX)
 			return hex2uint(tokens[p].str, success); 
 		else if (tokens[p].type == REG)
-			return reg2uint(tokens[p].str, success);
+			return (uint64_t)reg2uint(tokens[p].str, success);
 		printf("Error! Bad expression.\n");
 		*success = false;
 		return 0;
@@ -301,47 +316,67 @@ uint32_t eval(int p, int q, bool *success) {
 		return eval(p+1, q-1, success);
 	}
 	else {
-		uint32_t val1, val2;
+		long long int val1, val2;
 		int op = dominant_op(p, q);
 		if (op == p) {
 			val2 = eval(op + 1, q, success);
+			if(out_of_int_range(val2)) {
+				printf("Error! Exceeded int range.\n");
+				*success = false;
+				return 0;
+			}
 			if (tokens[op].type == '!') {
 				if(val2)
 					return 0;
 				return 1;
 			}
-			else if(tokens[op].type == DEREF) {
+			else if(tokens[op].type == DEREF)
 				return vaddr_read(val2, SREG_DS, 4);
+			else if(tokens[op].type == POS)
+				return val2;
+			else if(tokens[op].type == NEG) {
+				res = -val2;
+				if (out_of_int_range(res)) {
+					printf("Error! Exceeded int range.\n");
+					*success = false;
+					return 0;
+				}
+				return res;	
 			}
 		}
 		else if (op > p) {
 			val1 = eval(p, op - 1, success);
 			val2 = eval(op + 1, q, success);
-			uint64_t res;
+			if(out_of_int_range(val1) || out_of_int_range(val2)) {
+				printf("Error! Exceeded int range.\n");
+				*success = false;
+				return 0;
+			}
 			switch(tokens[op].type) {
 				case '+':
-					res = (uint64_t)val1 + (uint64_t)val2;
-					if (res >= 4294967296) {
+					res = val1 + val2;
+					if (out_of_int_range(res)) {
 						printf("Error! Addition overflow.\n");
 						*success = false;
 						return 0;
 					}
-					return val1 + val2;
+					return res;
 				case '-':
-					if(val1 < val2) {
-						printf("Error! Negative result for unsigned int type.\n");
+					res = val1 - val2;
+					if(out_of_int_range(res)) {
+						printf("Error! Substraction overflow.\n");
 						*success = false;
 						return 0;
 					}
-					return val1 - val2;
+					return res;
 				case '*':
-					res = (uint64_t)val1 * (uint64_t)val2;
-					if(res > 4294967296) {
+					res = val1 * val2;
+					if(out_of_int_range(res)) {
 						printf("Error! Multiplication overflow.\n");
 						*success = false;
 						return 0;
 					}
-					return val1 * val2;
+					return res;
 				case '/':
 					if (val2 == 0) {
 						printf("Error! Division by zero.\n");
@@ -364,16 +399,16 @@ uint32_t eval(int p, int q, bool *success) {
 				case LEQ:  return val1 <= val2;
 				case GEQ:  return val1 >= val2;
 				case LSHIFT:
-					res = (uint64_t)val1 << (uint64_t)val2;
-					if(res >= 4294967296) {
+					res = val1 << val2;
+					if(out_of_int_range(res)) {
 						printf("Error! Left-shift overflow.\n");
 						*success = false;
 						return 0;
 					}
-					return val1 << val2;
+					return res;
 				case RSHIFT:  return val1 >> val2;
 				case AND:     
-					      printf("val1=%d, val2=%d\n", (bool)val1, (bool)val2);
+					      printf("val1=%lld, val2=%lld\n", (bool)val1, (bool)val2);
 					      return val1 && val2;
 				case OR:      return val1 || val2;
 				default:
@@ -390,7 +425,7 @@ uint32_t eval(int p, int q, bool *success) {
 }
 
 
-uint32_t expr(char *e, bool *success) {
+long long int expr(char *e, bool *success) {
 	if(!make_token(e)) {
 		*success = false;
 		return 0;
@@ -398,10 +433,13 @@ uint32_t expr(char *e, bool *success) {
 	// printf("\nPlease implement expr at expr.c\n");
 	// assert(0);
 	for (int i = 0; i < nr_token; ++ i) {
+		// deref
 		if(tokens[i].type=='*' && (i==0 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!=')')))
 			tokens[i].type = DEREF;
+		// neg
 		else if(tokens[i].type=='-' && (i==0 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!=')')))
 			tokens[i].type = NEG;
+		// pos
 		else if(tokens[i].type=='+' && (i==1 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!=')')))
 			tokens[i].type = POS;
 	}

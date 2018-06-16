@@ -77,7 +77,7 @@ cmd_handler(cmd_p) {
 	}
 
 	bool success;
-	int val = expr(args, &success);
+	int val = (int)expr(args, &success);
 	if(!success) {
 		printf("invalid expression: '%s'\n", args);
 	} else {
