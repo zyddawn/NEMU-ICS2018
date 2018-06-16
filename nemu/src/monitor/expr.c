@@ -203,6 +203,7 @@ uint64_t hex2uint(char* str, bool* success) {
 	uint64_t res = 0;
 	*success = true;
 	for(int i = 2; i < str_len; ++i) {
+		printf("str[i] = %c", str[i]);
 		if (str[i] >= '0' && str[i] <= '9')
 			res = res * 0x10 + str[i] - '0';
 		else if (str[i] >= 'a' && str[i] <= 'f')
@@ -213,6 +214,7 @@ uint64_t hex2uint(char* str, bool* success) {
 			*success = false;
 			return 0;
 		}
+		printf("res = 0x%x", res);
 		// overflow
 		if (out_of_int_range(res)) {
 			printf("Error! Exceeded hexadecimal number (int) range.\n");
@@ -306,9 +308,9 @@ long long int eval(int p, int q, bool *success) {
 	*success = true;
 #ifdef DEBUG
 	;
-	for(int i=p; i<=q; ++i)
-	 	printf("str[%d]=%s, type=%d\n", i, tokens[i].str, tokens[i].type);
-	printf("\n");
+	// for(int i=p; i<=q; ++i)
+	//  	printf("str[%d]=%s, type=%d\n", i, tokens[i].str, tokens[i].type);
+	// printf("\n");
 #endif
 	long long int res = 0;
 	if (p > q) {
