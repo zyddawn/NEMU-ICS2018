@@ -301,7 +301,7 @@ uint32_t eval(int p, int q, bool *success) {
 		if (op == p) {
 			val2 = eval(op + 1, q, success);
 			if (tokens[op].type == '!') {
-				if(val2 > 0)
+				if(val2)
 					return 0;
 				return 1;
 			}
@@ -353,18 +353,12 @@ uint32_t eval(int p, int q, bool *success) {
 						*success = false;
 						return 0;
 					}
-				case '>':
-					return val1 > val2;
-				case '<':
-					return val1 < val2;
-				case EQ:
-					return val1 == val2;
-				case NEQ:
-					return val1 != val2;
-				case LEQ:
-					return val1 <= val2;
-				case GEQ:
-					return val1 >= val2;
+				case '>':  return val1 > val2;
+				case '<':  return val1 < val2;
+				case EQ:   return val1 == val2;
+				case NEQ:  return val1 != val2;
+				case LEQ:  return val1 <= val2;
+				case GEQ:  return val1 >= val2;
 				case LSHIFT:
 					res = (uint64_t)val1 << (uint64_t)val2;
 					if(res >= 4294967296) {
@@ -373,16 +367,9 @@ uint32_t eval(int p, int q, bool *success) {
 						return 0;
 					}
 					return val1 << val2;
-				case RSHIFT:
-					return val1 >> val2;
-				case AND:
-					if(val1 > 0 && val2 > 0)
-						return 1;
-					return 0;
-				case OR:
-					if(val1 > 0 || val2 > 0)
-						return 1;
-					return 0;
+				case RSHIFT:  return val1 >> val2;
+				case AND:     return val1 && val2;
+				case OR:      return val1 || val2;
 				default:
 					*success = false;
 					return 0;
