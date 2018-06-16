@@ -377,6 +377,7 @@ long long int eval(int p, int q, bool *success) {
 				val2 = eval(op + 1, q, success);
 			printf("after val2: success = %d\n", *success);
 			if(*success) {
+				printf("op_type = %d\n", tokens[op].type);
 				switch(tokens[op].type) {
 					case '+':
 						printf("val1 = %lld, val2 = %lld\n", val1, val2);
