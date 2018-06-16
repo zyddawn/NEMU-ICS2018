@@ -297,7 +297,7 @@ uint32_t eval(int p, int q, bool *success) {
 		return 0;
 	}
 	else if (tokens[p].type == '(' && check_parentheses(p, q)) {
-		printf("p = %d, q = %d | p+1 = %d, q-1 = %d\n");
+		printf("p = %d, q = %d | p+1 = %d, q-1 = %d\n", p, q, p+1, q-1);
 		return eval(p+1, q-1, success);
 	}
 	else {
