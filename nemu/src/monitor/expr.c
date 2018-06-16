@@ -295,7 +295,7 @@ uint32_t eval(int p, int q, bool *success) {
 		*success = false;
 		return 0;
 	}
-	else if (tokens[p].type == '(' && check_parentheses(p, q))
+	else if (check_parentheses(p, q))
 		return eval(p+1, q-1, success);
 	else {
 		uint32_t val1, val2;
