@@ -137,11 +137,6 @@ static bool make_token(char *e) {
 			return false;
 		}
 	}
-#ifdef DEBUG
-	printf("summary of make_token:\n");
-	for(int i=0; i<nr_token; ++i)
-		printf("token[%d] = %s\n", i, tokens[i].str);
-#endif
 	return true; 
 }
 
@@ -218,7 +213,6 @@ uint32_t reg2uint(char* str, bool* success) {
 }
 
 int assign_priority(int op) {
-	printf("op = %d\n", op);
 	switch(op) {
 		case AND: case OR:
 			return 1;
@@ -261,6 +255,7 @@ int dominant_op(int p, int q) {
 		if (cnt_parentheses == 0 && cur_prior > 0 && min_prior >= cur_prior) {
 			min_prior = cur_prior;
 			min_index = i;
+			printf("min_prior = %d, min_index = %d\n", min_prior, min_index);
 		}
 	}
 	if (cnt_parentheses != 0) {
