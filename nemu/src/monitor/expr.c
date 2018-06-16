@@ -222,6 +222,7 @@ uint64_t hex2uint(char* str, bool* success) {
 			return 0;
 		}
 	}
+	printf("success return\n");
 	return res;
 }
 
