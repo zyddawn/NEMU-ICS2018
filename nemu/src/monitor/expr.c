@@ -230,7 +230,7 @@ int assign_priority(int op) {
 			return 5;
 		case '%': case '*': case '/':
 			return 6;
-		case DEREF: case '!':
+		case DEREF: case '!': case NEG: case POS:
 			return 7;
 		case ')': case '(': case DEC: case REG: case HEX:
 			return -1;
