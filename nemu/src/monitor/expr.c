@@ -305,8 +305,10 @@ uint32_t eval(int p, int q, bool *success) {
 					return 0;
 				return 1;
 			}
-			else if(tokens[op].type == DEREF)
+			else if(tokens[op].type == DEREF) {
+				printf("Read mempry\n");
 				return vaddr_read(val2, SREG_DS, 4);
+			}
 		}
 		else if (op > p) {
 			val1 = eval(p, op - 1, success);
@@ -403,7 +405,7 @@ uint32_t expr(char *e, bool *success) {
 	// printf("\nPlease implement expr at expr.c\n");
 	// assert(0);
 	for (int i = 0; i < nr_token; ++ i) {
-		if(tokens[i].type=='*' && (i==0 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!='(' && tokens[i-1].type!=')'))) {
+		if(tokens[i].type=='*' && (i==0 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!=')'))) {
 			tokens[i].type = DEREF;
 			printf("pos = %d, DEREF\n", i);
 		}
