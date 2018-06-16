@@ -93,10 +93,16 @@ static bool make_token(char *e) {
 	while(e[position] != '\0') {
 		/* Try all rules one by one. */
 		for(i = 0; i < NR_REGEX; i ++) {
+#ifdef DEBUG
+			printf("Try rule %d\n", i);
+#endif
 			if(regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
 				char *substr_start = e + position;
 				int substr_len = pmatch.rm_eo;
 				printf("match regex[%d] at position %d with len %d: %.*s", i, position, substr_len, substr_len, substr_start);
+#ifdef DEBUG
+				printf("Before match: position = %d, substr_len = %d\n", position, substr_len);
+#endif				
 				position += substr_len;
 				/* TODO: Now a new token is recognized with rules[i]. 
 				 * Add codes to perform some actions with this token.
@@ -107,9 +113,9 @@ static bool make_token(char *e) {
 					return false;
 				}
 				// clean
-				int prev_token_len = strlen(tokens[nr_token].str);
-				while (prev_token_len --)
-					tokens[nr_token].str[prev_token_len] = '\0';
+				int clean_token_len = strlen(tokens[nr_token].str);
+				while (clean_token_len --)
+					tokens[nr_token].str[clean_token_len] = '\0';
 				
 				switch(rules[i].token_type) {
 					case DEC: case HEX: case REG: case EQ: 
@@ -391,12 +397,10 @@ uint32_t eval(int p, int q, bool *success) {
 
 
 uint32_t expr(char *e, bool *success) {
-	printf("passed in token = %s\n", e);
 	if(!make_token(e)) {
 		*success = false;
 		return 0;
 	}
-	printf("Make token finished.\n");
 
 	// printf("\nPlease implement expr at expr.c\n");
 	// assert(0);
