@@ -127,7 +127,7 @@ static bool make_token(char *e) {
 					case NOTYPE:
 					default: break;
 				}
-				break;
+				// break;
 			}
 		}	
 		if(nr_token > 32) {
@@ -138,9 +138,6 @@ static bool make_token(char *e) {
 			printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
 			return false;
 		}
-#ifdef DEBUG
-		printf("rule %d not match.\n", i);
-#endif
 	}
 	return true; 
 }
