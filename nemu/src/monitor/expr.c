@@ -198,6 +198,7 @@ bool out_of_int_range(long long int res) {
 
 // transfer hex to uint32
 uint64_t hex2uint(char* str, bool* success) {
+	printf("str = %s\n", str);
 	int str_len = strlen(str);
 	uint64_t res = 0;
 	*success = true;
@@ -331,8 +332,11 @@ long long int eval(int p, int q, bool *success) {
 			}
 			return res;
 		}
-		else if (tokens[p].type == HEX || tokens[p].type == VARIABLE)
+		else if (tokens[p].type == HEX || tokens[p].type == VARIABLE) {
+			if(tokens[p].type == VARIABLE)
+				printf("Variable enter hex2uint\n");
 			return hex2uint(tokens[p].str, success); 
+		}
 		else if (tokens[p].type == REG)
 			return (uint64_t)reg2uint(tokens[p].str, success);
 
@@ -372,12 +376,9 @@ long long int eval(int p, int q, bool *success) {
 		}
 		else if (op > p) {
 			val1 = eval(p, op - 1, success);
-			printf("after val1: success = %d\n", *success);
 			if(*success)
 				val2 = eval(op + 1, q, success);
-			printf("after val2: success = %d\n", *success);
 			if(*success) {
-				printf("op_type = %d\n", tokens[op].type);
 				switch(tokens[op].type) {
 					case '+':
 						printf("val1 = %lld, val2 = %lld\n", val1, val2);
