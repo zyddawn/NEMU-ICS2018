@@ -11,7 +11,7 @@
 #include <sys/types.h>
 #include <regex.h>
 
-#define DEBUG
+// #define DEBUG
 
 #define int_max 2147483647
 #define int_max_str "2147483647\0"
