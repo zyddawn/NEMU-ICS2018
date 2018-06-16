@@ -322,6 +322,7 @@ long long int eval(int p, int q, bool *success) {
 		int op = dominant_op(p, q);
 		if (op == p) {
 			val2 = eval(op + 1, q, success);
+			printf("val2 = %lld, op=%d, \n", val2, tokens[p].type);
 			if((val2!=(long long int)int_max+1 || tokens[op].type!=NEG) && (out_of_int_range(val2))) {
 				printf("Error! Exceeded int range.\n");
 				*success = false;
