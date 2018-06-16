@@ -306,7 +306,6 @@ uint32_t eval(int p, int q, bool *success) {
 				return 1;
 			}
 			else if(tokens[op].type == DEREF) {
-				printf("Read mempry at 0x%08x\n", val2);
 				return vaddr_read(val2, SREG_DS, 4);
 			}
 		}

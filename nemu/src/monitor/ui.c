@@ -97,7 +97,7 @@ cmd_handler(cmd_px) {
 	if(!success) {
 		printf("invalid expression: '%s'\n", args);
 	} else {
-		printf("0x%08x\n", val);
+		printf("0x%x\n", val);
 	}
 	return 0;
 }
