@@ -322,89 +322,95 @@ long long int eval(int p, int q, bool *success) {
 		int op = dominant_op(p, q);
 		if (op == p) {
 			val2 = eval(op + 1, q, success);
-			if (tokens[op].type == '!') {
-				if(val2)
-					return 0;
-				return 1;
-			}
-			else if(tokens[op].type == DEREF)
-				return vaddr_read(val2, SREG_DS, 4);
-			else if(tokens[op].type == POS)
-				return val2;
-			else if(tokens[op].type == NEG) {
-				res = -val2;
-				if (out_of_int_range(res)) {
-					printf("Error! Exceeded int range.\n");
-					*success = false;
-					return 0;
+			if(*success) {
+				if (tokens[op].type == '!') {
+					if(val2)
+						return 0;
+					return 1;
 				}
-				return res;	
+				else if(tokens[op].type == DEREF)
+					return vaddr_read(val2, SREG_DS, 4);
+				else if(tokens[op].type == POS)
+					return val2;
+				else if(tokens[op].type == NEG) {
+					res = -val2;
+					if (out_of_int_range(res)) {
+						printf("Error! Exceeded int range.\n");
+						*success = false;
+						return 0;
+					}
+					return res;	
+				}
 			}
 		}
 		else if (op > p) {
 			val1 = eval(p, op - 1, success);
-			val2 = eval(op + 1, q, success);
-			switch(tokens[op].type) {
-				case '+':
-					res = val1 + val2;
-					if (out_of_int_range(res)) {
-						printf("Error! Addition overflow.\n");
+			if(*success)
+				val2 = eval(op + 1, q, success);
+			if(*success) {
+				switch(tokens[op].type) {
+					case '+':
+						res = val1 + val2;
+						if (out_of_int_range(res)) {
+							printf("Error! Addition overflow.\n");
+							*success = false;
+							return 0;
+						}
+						return res;
+					case '-':
+						res = val1 - val2;
+						if(out_of_int_range(res)) {
+							printf("Error! Substraction overflow.\n");
+							*success = false;
+							return 0;
+						}
+						return res;
+					case '*':
+						res = val1 * val2;
+						if(out_of_int_range(res)) {
+							printf("Error! Multiplication overflow.\n");
+							*success = false;
+							return 0;
+						}
+						return res;
+					case '/':
+						if (val2 == 0) {
+							printf("Error! Division by zero.\n");
+							*success = false;
+							return 0;
+						}
+						return val1 / val2;
+					case '%':
+						if (val2 != 0)
+							return val1 % val2;
+						else {
+							printf("Error! Mod zero error.\n");
+							*success = false;
+							return 0;
+						}
+					case '>':  return val1 > val2;
+					case '<':  return val1 < val2;
+					case EQ:   return val1 == val2;
+					case NEQ:  return val1 != val2;
+					case LEQ:  return val1 <= val2;
+					case GEQ:  return val1 >= val2;
+					case LSHIFT:
+						res = val1 << val2;
+						if(out_of_int_range(res)) {
+							printf("Error! Left-shift overflow.\n");
+							*success = false;
+							return 0;
+						}
+						return res;
+					case RSHIFT:  return val1 >> val2;
+					case AND:     return val1 && val2;
+					case OR:      return val1 || val2;
+					default:
 						*success = false;
 						return 0;
-					}
-					return res;
-				case '-':
-					res = val1 - val2;
-					if(out_of_int_range(res)) {
-						printf("Error! Substraction overflow.\n");
-						*success = false;
-						return 0;
-					}
-					return res;
-				case '*':
-					res = val1 * val2;
-					if(out_of_int_range(res)) {
-						printf("Error! Multiplication overflow.\n");
-						*success = false;
-						return 0;
-					}
-					return res;
-				case '/':
-					if (val2 == 0) {
-						printf("Error! Division by zero.\n");
-						*success = false;
-						return 0;
-					}
-					return val1 / val2;
-				case '%':
-					if (val2 != 0)
-						return val1 % val2;
-					else {
-						printf("Error! Mod zero error.\n");
-						*success = false;
-						return 0;
-					}
-				case '>':  return val1 > val2;
-				case '<':  return val1 < val2;
-				case EQ:   return val1 == val2;
-				case NEQ:  return val1 != val2;
-				case LEQ:  return val1 <= val2;
-				case GEQ:  return val1 >= val2;
-				case LSHIFT:
-					res = val1 << val2;
-					if(out_of_int_range(res)) {
-						printf("Error! Left-shift overflow.\n");
-						*success = false;
-						return 0;
-					}
-					return res;
-				case RSHIFT:  return val1 >> val2;
-				case AND:     return val1 && val2;
-				case OR:      return val1 || val2;
-				default:
-					*success = false;
-					return 0;
+				}
 			}
+
 		}
 		else {
 			*success = false;
