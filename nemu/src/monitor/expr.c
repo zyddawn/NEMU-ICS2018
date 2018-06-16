@@ -369,8 +369,10 @@ long long int eval(int p, int q, bool *success) {
 		}
 		else if (op > p) {
 			val1 = eval(p, op - 1, success);
+			printf("val1 = %lld\n", val1);
 			if(*success)
 				val2 = eval(op + 1, q, success);
+			printf("val2 = %lld\n", val2);
 			if(*success) {
 				switch(tokens[op].type) {
 					case '+':
