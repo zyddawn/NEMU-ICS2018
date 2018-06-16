@@ -298,7 +298,7 @@ long long int eval(int p, int q, bool *success) {
 			for (int i=0; i<dec_len; ++i) {
 				if(tokens[p].str[i]>='0' && tokens[p].str[i]<='9')
 					res = res * 10 + tokens[p].str[i] - '0';
-				if(out_of_int_range(res)) {
+				if((res!=(long long int)int_max+1 || !(p>0 && tokens[p-1].type==NEG)) && out_of_int_range(res)) {
 					printf("Error! Exceeded int number range.\n");
 					*success = false;
 					return 0;
@@ -322,12 +322,6 @@ long long int eval(int p, int q, bool *success) {
 		int op = dominant_op(p, q);
 		if (op == p) {
 			val2 = eval(op + 1, q, success);
-			printf("val2 = %lld, op=%d, \n", val2, tokens[p].type);
-			if((val2!=(long long int)int_max+1 || tokens[op].type!=NEG) && (out_of_int_range(val2))) {
-				printf("Error! Exceeded int range.\n");
-				*success = false;
-				return 0;
-			}
 			if (tokens[op].type == '!') {
 				if(val2)
 					return 0;
@@ -350,11 +344,6 @@ long long int eval(int p, int q, bool *success) {
 		else if (op > p) {
 			val1 = eval(p, op - 1, success);
 			val2 = eval(op + 1, q, success);
-			if(out_of_int_range(val1) || out_of_int_range(val2)) {
-				printf("Error! Exceeded int range.\n");
-				*success = false;
-				return 0;
-			}
 			switch(tokens[op].type) {
 				case '+':
 					res = val1 + val2;
