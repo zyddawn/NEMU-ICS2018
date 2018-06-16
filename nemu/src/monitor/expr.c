@@ -15,7 +15,7 @@
 
 #define int_max 2147483647
 #define int_max_str "2147483647\0"
-#define int_min -2147483648
+#define int_min (-2147483648)
 #define int_min_str "2147483648\0"
 
 enum {
