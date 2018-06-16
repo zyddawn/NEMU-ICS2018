@@ -313,6 +313,9 @@ uint32_t eval(int p, int q, bool *success) {
 		else if (op > p) {
 			val1 = eval(p, op - 1, success);
 			val2 = eval(op + 1, q, success);
+#ifdef DEBUG
+			printf("val1 = %d, val2 = %d\n", val1, val2);
+#endif
 			uint64_t res;
 			switch(tokens[op].type) {
 				case '+':
