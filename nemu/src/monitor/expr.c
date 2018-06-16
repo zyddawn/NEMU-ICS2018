@@ -409,7 +409,7 @@ long long int eval(int p, int q, bool *success) {
 					return res;
 				case RSHIFT:  return val1 >> val2;
 				case AND:     
-					      printf("val1=%lld, val2=%lld\n", (bool)val1, (bool)val2);
+					      printf("val1=%d, val2=%d\n", (bool)val1, (bool)val2);
 					      return val1 && val2;
 				case OR:      return val1 || val2;
 				default:
