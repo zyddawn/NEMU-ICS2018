@@ -168,8 +168,8 @@ uint32_t hex2uint(char* str, bool* success) {
 	uint64_t res = 0;
 	*success = true;
 	for(int i = 2; i < str_len; ++ i) {
-		printf("str[%d] = %d", i, str[i]-'0');
-		if (str[i] >= '0' && str[i] <= 9)
+		printf("str[%d] = %d\n", i, str[i]-'0');
+		if (str[i] >= '0' && str[i] <= '9')
 			res = res * 0x10 + str[i] - '0';
 		else if (str[i] >= 'a' && str[i] <= 'f')
 			res = res * 0x10 + str[i] - 'a';
