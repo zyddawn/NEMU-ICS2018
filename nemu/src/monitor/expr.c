@@ -238,7 +238,6 @@ int assign_priority(int op) {
 
 
 int dominant_op(int p, int q) {
-	printf("Dom_op: p=%d, q=%d\n", p, q);
 	int cnt_parentheses = 0,
 	    min_prior = 10, min_index = -1;
 	for (int i = p; i <= q; ++ i) {
@@ -251,11 +250,9 @@ int dominant_op(int p, int q) {
 			return -1;
 		}
 		int cur_prior = assign_priority(tokens[i].type);
-		printf("cur_prior = %d at pos=%d\n", cur_prior, i);
 		if (cnt_parentheses == 0 && cur_prior > 0 && min_prior >= cur_prior) {
 			min_prior = cur_prior;
 			min_index = i;
-			printf("min_prior = %d, min_index = %d\n", min_prior, min_index);
 		}
 	}
 	if (cnt_parentheses != 0) {
@@ -269,9 +266,6 @@ int dominant_op(int p, int q) {
 
 
 uint32_t eval(int p, int q, bool *success) {
-#ifdef DEBUG
-	printf("eval: p=%d, q=%d\n", p, q);
-#endif
 	*success = true;
 	if (p > q) {
 		*success = false;
@@ -403,18 +397,12 @@ uint32_t expr(char *e, bool *success) {
 		*success = false;
 		return 0;
 	}
-
 	// printf("\nPlease implement expr at expr.c\n");
 	// assert(0);
 	for (int i = 0; i < nr_token; ++ i) {
 		if(tokens[i].type=='*' && (i==0 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!='(' && tokens[i-1].type!=')')))
 			tokens[i].type = DEREF;
 	}
-#ifdef DEBUG
-	for(int i=0; i<nr_token; ++i) {
-		printf("tokens[%d].str = %s, type = %d\n", i, tokens[i].str, tokens[i].type);
-	}
-#endif
 	return eval(0, nr_token-1, success);
 }
 
