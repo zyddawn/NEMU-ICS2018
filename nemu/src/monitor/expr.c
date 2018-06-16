@@ -377,12 +377,13 @@ long long int eval(int p, int q, bool *success) {
 			if(*success) {
 				switch(tokens[op].type) {
 					case '+':
+						printf("val1 = %lld, val2 = %lld\n", val1, val2);
 						res = val1 + val2;
 						if (out_of_int_range(res)) {
 							printf("Error! Addition overflow.\n");
-							*success = false;
 							return 0;
 						}
+						*success = true;
 						return res;
 					case '-':
 						res = val1 - val2;
