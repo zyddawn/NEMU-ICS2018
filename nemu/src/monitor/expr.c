@@ -271,8 +271,9 @@ int dominant_op(int p, int q) {
 	return min_index;
 }
 
-bool out_of_int_range(long long int res)
-	return res>int_max || res<int_min;
+bool out_of_int_range(long long int res) {
+	return (res>int_max || res<int_min);
+}
 
 
 long long int eval(int p, int q, bool *success) {
