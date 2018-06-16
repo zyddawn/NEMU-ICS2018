@@ -302,9 +302,9 @@ long long int eval(int p, int q, bool *success) {
 	*success = true;
 #ifdef DEBUG
 	;
-	for(int i=p; i<=q; ++i)
-	 	printf("str[%d]=%s, type=%d\n", i, tokens[i].str, tokens[i].type);
-	printf("\n");
+	// for(int i=p; i<=q; ++i)
+	// 	printf("str[%d]=%s, type=%d\n", i, tokens[i].str, tokens[i].type);
+	// printf("\n");
 #endif
 	long long int res = 0;
 	if (p > q) {
@@ -374,17 +374,14 @@ long long int eval(int p, int q, bool *success) {
 			if(*success)
 				val2 = eval(op + 1, q, success);
 			if(*success) {
-				printf("op type = %d\n", tokens[op].type);
 				switch(tokens[op].type) {
 					case '+':
-						printf("val1 = %lld, val2 = %lld\n", val1, val2);
 						res = val1 + val2;
 						if (out_of_int_range(res)) {
 							printf("Error! Addition overflow.\n");
 							return 0;
 						}
 						*success = true;
-						printf("add res = %lld\n", res);
 						return res;
 					case '-':
 						res = val1 - val2;
