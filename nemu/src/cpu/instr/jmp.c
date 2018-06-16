@@ -39,11 +39,9 @@ make_instr_func(jmp_short_) {
 
         operand_read(&rel);
 
-	int offset = sign_ext(rel.val, data_size);
+	// int offset = sign_ext(rel.val, data_size);
 	// print_asm_1("jmp", "",  1 + data_size / 8, &rel);
-
-	
-	// char offset = rel.val & 0xFF;  // signed 8-bit
+	char offset = rel.val & 0xFF;  // signed 8-bit
 	printf("Before jmp, eip = 0x%x (%d), disp = 0x%x (%d)\n", cpu.eip, cpu.eip, offset, offset);
 	cpu.eip += offset;  
 	printf("After jmp, eip = 0x%x (%d)\n", cpu.eip, cpu.eip);
