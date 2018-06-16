@@ -94,7 +94,7 @@ static bool make_token(char *e) {
 		/* Try all rules one by one. */
 		for(i = 0; i < NR_REGEX; i ++) {
 #ifdef DEBUG
-			printf("Try rule %d: %s\n", i, rule[i].regex);
+			printf("Try rule %d: %s\n", i, rules[i].regex);
 #endif
 			if(regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
 				char *substr_start = e + position;
