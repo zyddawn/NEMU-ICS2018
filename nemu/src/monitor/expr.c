@@ -345,7 +345,7 @@ long long int eval(int p, int q, bool *success) {
 		return eval(p+1, q-1, success);
 	}
 	else {
-		long long int val1, val2;
+		long long int val1=0, val2=0;
 		int op = dominant_op(p, q);
 		if (op == p) {
 			val2 = eval(op + 1, q, success);
