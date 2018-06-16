@@ -367,7 +367,9 @@ uint32_t eval(int p, int q, bool *success) {
 					}
 					return val1 << val2;
 				case RSHIFT:  return val1 >> val2;
-				case AND:     return val1 && val2;
+				case AND:     
+					      printf("val1=%d, val2=%d\n", (bool)val1, (bool)val2);
+					      return val1 && val2;
 				case OR:      return val1 || val2;
 				default:
 					*success = false;
