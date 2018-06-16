@@ -397,7 +397,7 @@ uint32_t expr(char *e, bool *success) {
 			tokens[i].type = DEREF;
 		else if(tokens[i].type=='-' && (i==0 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!=')')))
 			tokens[i].type = NEG;
-		else if(tokens[i].type=='+' && (i==1 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type=')')))
+		else if(tokens[i].type=='+' && (i==1 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!=')')))
 			tokens[i].type = POS;
 	}
 	return eval(0, nr_token-1, success);
