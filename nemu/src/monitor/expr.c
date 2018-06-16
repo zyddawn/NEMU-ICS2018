@@ -24,7 +24,7 @@ enum {
 	EQ = 255, AND = 254, OR = 253, 
 	NEQ = 252, LEQ = 251, GEQ = 250, DEC = 249, 
 	HEX = 248, REG = 247, LSHIFT = 246, RSHIFT = 245,
-	DEREF = 244, NEG = 243, POS = 242, 
+	DEREF = 244, NEG = 243, POS = 242, VARIABLE = 241,
 };
 
 static struct rule {
@@ -58,6 +58,8 @@ static struct rule {
 	{"[0-9]+", DEC},
 	{"\\(", '('},
 	{"\\)", ')'},
+	{"\\[", '['},
+	{"\\]", ']'},
 
 };
 
