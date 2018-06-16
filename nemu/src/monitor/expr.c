@@ -3,7 +3,6 @@
 #include "cpu/cpu.h"
 #include "memory/memory.h"
 
-
 #include <stdlib.h>
 
 /* We use the POSIX regex functions to process regular expressions.
@@ -404,8 +403,10 @@ uint32_t expr(char *e, bool *success) {
 	// printf("\nPlease implement expr at expr.c\n");
 	// assert(0);
 	for (int i = 0; i < nr_token; ++ i) {
-		if(tokens[i].type=='*' && (i==0 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!='(' && tokens[i-1].type!=')')))
+		if(tokens[i].type=='*' && (i==0 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!='(' && tokens[i-1].type!=')'))) {
 			tokens[i].type = DEREF;
+			printf("pos = %d, DEREF\n", i);
+		}
 	}
 	return eval(0, nr_token-1, success);
 }
