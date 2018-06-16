@@ -143,7 +143,7 @@ static bool make_token(char *e) {
 // check if parentheses match
 bool check_parentheses(int p, int q) {
 	if(tokens[p].type != '(') {
-		printf("Error! The whole expression is not surrounded by parentheses.\n");
+		printf("Error! No need to call check_parentheses in this position.\n");
 		return false;
 	}
 	uint32_t L_cnt = 0,
@@ -239,8 +239,6 @@ int assign_priority(int op) {
 	}
 }
 
-
-
 int dominant_op(int p, int q) {
 	int cnt_parentheses = 0,
 	    min_prior = 10, min_index = -1;
@@ -298,8 +296,10 @@ uint32_t eval(int p, int q, bool *success) {
 		*success = false;
 		return 0;
 	}
-	else if (tokens[p].type == '(' && check_parentheses(p, q))
+	else if (tokens[p].type == '(' && check_parentheses(p, q)) {
+		printf("p = %d, q = %d | p+1 = %d, q-1 = %d\n");
 		return eval(p+1, q-1, success);
+	}
 	else {
 		uint32_t val1, val2;
 		int op = dominant_op(p, q);
