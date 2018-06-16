@@ -272,6 +272,7 @@ uint32_t eval(int p, int q, bool *success) {
 #ifdef DEBUG
 	printf("eval: p=%d, q=%d\n", p, q);
 #endif
+	*success = true;
 	if (p > q) {
 		*success = false;
 		printf("Error! Bad expression.\n");
@@ -322,7 +323,6 @@ uint32_t eval(int p, int q, bool *success) {
 						*success = false;
 						return 0;
 					}
-					printf("res = %d\n", (uint32_t)res);
 					return (uint32_t)(res & 0xFFFFFFFF);
 				case '-':
 					if(val1 < val2) {
