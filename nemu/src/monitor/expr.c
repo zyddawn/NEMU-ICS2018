@@ -269,6 +269,7 @@ int dominant_op(int p, int q) {
 
 uint32_t eval(int p, int q, bool *success) {
 	*success = true;
+	printf("eval: p=%d, q=%d\n", p, q);
 	for(int i=p; i<=q; ++i)
 		printf("%s ", tokens[i].str);
 	printf("\n");
