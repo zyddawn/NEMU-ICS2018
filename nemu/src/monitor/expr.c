@@ -377,6 +377,7 @@ long long int eval(int p, int q, bool *success) {
 						res = val1 + val2;
 						if (out_of_int_range(res)) {
 							printf("Error! Addition overflow.\n");
+							*success = false;
 							return 0;
 						}
 						*success = true;
