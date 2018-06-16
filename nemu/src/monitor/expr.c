@@ -284,8 +284,11 @@ uint32_t eval(int p, int q, bool *success) {
 			}
 			return (uint32_t)atoi(tokens[p].str);
 		}
-		else if (tokens[p].type == HEX)
-			return hex2uint(tokens[p].str, success);
+		else if (tokens[p].type == HEX) {
+			uint32_t res = hex2uint(tokens[p].str, success); 
+			printf("hex value = 0x%x\n", res);
+			return res;
+		}
 		else if (tokens[p].type == REG)
 			return reg2uint(tokens[p].str, success);
 		printf("Error! Bad expression.\n");
