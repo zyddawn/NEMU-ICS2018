@@ -19,7 +19,7 @@ enum {
 	EQ = 255, AND = 254, OR = 253, 
 	NEQ = 252, LEQ = 251, GEQ = 250, DEC = 249, 
 	HEX = 248, REG = 247, LSHIFT = 246, RSHIFT = 245,
-	DEREF = 244, 
+	DEREF = 244, NEG = 243, POS = 242, 
 };
 
 static struct rule {
@@ -393,10 +393,12 @@ uint32_t expr(char *e, bool *success) {
 	// printf("\nPlease implement expr at expr.c\n");
 	// assert(0);
 	for (int i = 0; i < nr_token; ++ i) {
-		if(tokens[i].type=='*' && (i==0 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!=')'))) {
+		if(tokens[i].type=='*' && (i==0 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!=')')))
 			tokens[i].type = DEREF;
-			printf("pos = %d, DEREF\n", i);
-		}
+		else if(tokens[i].type=='-' && (i==0 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!=')')))
+			tokens[i].type = NEG;
+		else if(tokens[i].type=='+' && (i==1 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type=')')))
+			tokens[i].type = POS;
 	}
 	return eval(0, nr_token-1, success);
 }
