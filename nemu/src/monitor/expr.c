@@ -168,7 +168,6 @@ uint32_t hex2uint(char* str, bool* success) {
 	uint64_t res = 0;
 	*success = true;
 	for(int i = 2; i < str_len; ++ i) {
-		printf("str[%d] = %d\n", i, str[i]-'0');
 		if (str[i] >= '0' && str[i] <= '9')
 			res = res * 0x10 + str[i] - '0';
 		else if (str[i] >= 'a' && str[i] <= 'f')
@@ -285,11 +284,8 @@ uint32_t eval(int p, int q, bool *success) {
 			}
 			return (uint32_t)atoi(tokens[p].str);
 		}
-		else if (tokens[p].type == HEX) {
-			uint32_t res = hex2uint(tokens[p].str, success); 
-			printf("hex value = 0x%x\n", res);
-			return res;
-		}
+		else if (tokens[p].type == HEX)
+			return hex2uint(tokens[p].str, success); 
 		else if (tokens[p].type == REG)
 			return reg2uint(tokens[p].str, success);
 		printf("Error! Bad expression.\n");
