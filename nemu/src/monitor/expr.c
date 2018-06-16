@@ -203,7 +203,7 @@ uint64_t hex2uint(char* str, bool* success) {
 	uint64_t res = 0;
 	*success = true;
 	for(int i = 2; i < str_len; ++i) {
-		printf("str[i] = %c", str[i]);
+		printf("str[i] = %c\n", str[i]);
 		if (str[i] >= '0' && str[i] <= '9')
 			res = res * 0x10 + str[i] - '0';
 		else if (str[i] >= 'a' && str[i] <= 'f')
@@ -214,7 +214,7 @@ uint64_t hex2uint(char* str, bool* success) {
 			*success = false;
 			return 0;
 		}
-		printf("res = 0x%x", (uint32_t)res);
+		printf("res = 0x%x\n", (uint32_t)res);
 		// overflow
 		if (out_of_int_range(res)) {
 			printf("Error! Exceeded hexadecimal number (int) range.\n");
