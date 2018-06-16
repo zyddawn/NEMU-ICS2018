@@ -77,7 +77,7 @@ cmd_handler(cmd_p) {
 	}
 
 	bool success;
-	uint32_t val = expr(args, &success);
+	int val = expr(args, &success);
 	if(!success) {
 		printf("invalid expression: '%s'\n", args);
 	} else {
@@ -93,11 +93,11 @@ cmd_handler(cmd_px) {
 	}
 
 	bool success;
-	uint32_t val = expr(args, &success);
+	uint32_t val = (uint32_t)expr(args, &success);
 	if(!success) {
 		printf("invalid expression: '%s'\n", args);
 	} else {
-		printf("%08x\n", val);
+		printf("0x%08x\n", val);
 	}
 	return 0;
 }
@@ -118,7 +118,7 @@ cmd_handler(cmd_b) {
 	args += strspn(args, " ");
 	if(*args == '*') {
 		args ++;
-		addr = expr(args, &success);
+		addr = (uint32_t)expr(args, &success);
 		if(!success) {
 			printf("invalid expression: '%s'\n", args);
 			return 0;
@@ -204,7 +204,7 @@ cmd_handler(cmd_x) {
 		}
 
 		bool success;
-		addr = expr(exprs, &success);
+		addr = (uint32_t)expr(exprs, &success);
 		if(!success) {
 			printf("invalid expression: %s\n", exprs);
 		} else {
