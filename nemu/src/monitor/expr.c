@@ -270,8 +270,8 @@ int dominant_op(int p, int q) {
 uint32_t eval(int p, int q, bool *success) {
 	*success = true;
 #ifdef DEBUG
-	for(int i=p; i<q; ++i)
-		printf("%s", tokens[i].str);
+	for(int i=p; i<=q; ++i)
+		printf("str[%d]=%s, type=%d\n", i, tokens[i].str, tokens[i].type);
 	printf("\n");
 #endif
 	if (p > q) {
