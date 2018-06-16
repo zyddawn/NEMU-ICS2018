@@ -137,10 +137,6 @@ static bool make_token(char *e) {
 			return false;
 		}
 	}
-	printf("make token summary\n");
-	for(int i=0; i<nr_token; ++i) {
-		printf("at i=%d, str=%s, type=%d\n", i, tokens[i].str, tokens[i].type);
-	}
 	return true; 
 }
 
@@ -310,7 +306,7 @@ uint32_t eval(int p, int q, bool *success) {
 				return 1;
 			}
 			else if(tokens[op].type == DEREF) {
-				printf("Read mempry\n");
+				printf("Read mempry at 0x%08x\n", val2);
 				return vaddr_read(val2, SREG_DS, 4);
 			}
 		}
