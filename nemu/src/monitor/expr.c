@@ -214,7 +214,7 @@ uint64_t hex2uint(char* str, bool* success) {
 			*success = false;
 			return 0;
 		}
-		printf("res = 0x%x", res);
+		printf("res = 0x%x", (uint32_t)res);
 		// overflow
 		if (out_of_int_range(res)) {
 			printf("Error! Exceeded hexadecimal number (int) range.\n");
