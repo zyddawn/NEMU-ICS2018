@@ -85,6 +85,7 @@ typedef struct token {
 Token tokens[32];
 int nr_token;
 
+uint32_t look_up_symtab(char *, bool *);
 
 void clean_token() {
 	int clean_token_len = strlen(tokens[nr_token].str);
