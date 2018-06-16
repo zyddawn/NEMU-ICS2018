@@ -93,16 +93,10 @@ static bool make_token(char *e) {
 	while(e[position] != '\0') {
 		/* Try all rules one by one. */
 		for(i = 0; i < NR_REGEX; i ++) {
-#ifdef DEBUG
-			printf("Try rule %d: %s\n", i, rules[i].regex);
-#endif
 			if(regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
 				char *substr_start = e + position;
 				int substr_len = pmatch.rm_eo;
 				printf("match regex[%d] at position %d with len %d: %.*s", i, position, substr_len, substr_len, substr_start);
-#ifdef DEBUG
-				printf("Before match: position = %d, substr_len = %d\n", position, substr_len);
-#endif				
 				position += substr_len;
 				/* TODO: Now a new token is recognized with rules[i]. 
 				 * Add codes to perform some actions with this token.
@@ -216,6 +210,7 @@ uint32_t reg2uint(char* str, bool* success) {
 }
 
 int assign_priority(int op) {
+	printf("op = %d\n", op);
 	switch(op) {
 		case AND: case OR:
 			return 1;
@@ -241,6 +236,7 @@ int assign_priority(int op) {
 
 
 int dominant_op(int p, int q) {
+	printf("Dom_op: p=%d, q=%d\n", p, q);
 	int cnt_parentheses = 0,
 	    min_prior = 10, min_index = -1;
 	for (int i = p; i <= q; ++ i) {
@@ -253,6 +249,7 @@ int dominant_op(int p, int q) {
 			return -1;
 		}
 		int cur_prior = assign_priority(tokens[i].type);
+		printf("cur_prior = %d at pos=%d\n", cur_prior, i);
 		if (cnt_parentheses == 0 && cur_prior > 0 && min_prior >= cur_prior) {
 			min_prior = cur_prior;
 			min_index = i;
