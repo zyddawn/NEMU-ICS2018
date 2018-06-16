@@ -105,13 +105,10 @@ static bool make_token(char *e) {
 		/* Try search fun_name or variable_name */
 		bool success = false;
 		if(sscanf(e+position, "%31[a-zA-Z0-9_]", name) == 1) {
-			printf("name = %s\n", name);
 			addr = look_up_symtab(name, &success);
-			printf("addr = 0x%x, success = %d\n", addr, success);
 			if(success) {
 				char addr_str[32];
 				sprintf(addr_str, "0x%x", (uint32_t)addr);
-				printf("addr_str = %s\n", addr_str);
 				int substr_len = strlen(addr_str);
 				position += strlen(name);
 				clean_token();
@@ -331,11 +328,8 @@ long long int eval(int p, int q, bool *success) {
 			}
 			return res;
 		}
-		else if (tokens[p].type == HEX || tokens[p].type == VARIABLE) {
-			if(tokens[p].type == VARIABLE)
-				printf("Variable enter hex2uint\n");
+		else if (tokens[p].type == HEX || tokens[p].type == VARIABLE)
 			return hex2uint(tokens[p].str, success); 
-		}
 		else if (tokens[p].type == REG)
 			return (uint64_t)reg2uint(tokens[p].str, success);
 
