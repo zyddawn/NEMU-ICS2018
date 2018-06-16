@@ -181,7 +181,7 @@ uint32_t hex2uint(char* str, bool* success) {
 			return 0;
 		}
 	}
-	return (uint32_t)(res & 0xFFFFFFFF);
+	return (uint32_t)res;
 }
 
 // transfer register to uint32
@@ -317,7 +317,7 @@ uint32_t eval(int p, int q, bool *success) {
 						*success = false;
 						return 0;
 					}
-					return (uint32_t)(res & 0xFFFFFFFF);
+					return val1 + val2;
 				case '-':
 					if(val1 < val2) {
 						printf("Error! Negative result for unsigned int type.\n");
