@@ -409,9 +409,7 @@ long long int eval(int p, int q, bool *success) {
 					}
 					return res;
 				case RSHIFT:  return val1 >> val2;
-				case AND:     
-					      printf("val1=%d, val2=%d\n", (bool)val1, (bool)val2);
-					      return val1 && val2;
+				case AND:     return val1 && val2;
 				case OR:      return val1 || val2;
 				default:
 					*success = false;
@@ -442,7 +440,7 @@ long long int expr(char *e, bool *success) {
 		else if(tokens[i].type=='-' && (i==0 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!=')')))
 			tokens[i].type = NEG;
 		// pos
-		else if(tokens[i].type=='+' && (i==1 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!=')')))
+		else if(tokens[i].type=='+' && (i==0 || (tokens[i-1].type!=DEC && tokens[i-1].type!=HEX && tokens[i-1].type!=REG && tokens[i-1].type!=')')))
 			tokens[i].type = POS;
 	}
 	return eval(0, nr_token-1, success);
