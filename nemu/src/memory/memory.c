@@ -7,7 +7,6 @@
 #include <stdio.h>
 
 uint8_t hw_mem[MEM_SIZE_B];
-BLOCK L1_cache[CACHE_LINES/8][8];  // cache
 
 uint32_t hw_mem_read(paddr_t paddr, size_t len) {
 	uint32_t ret = 0;

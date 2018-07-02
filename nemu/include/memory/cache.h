@@ -5,12 +5,12 @@
 
 #define BLOCK_SIZE_B 64
 #define CACHE_LINES 1024
-#define TAG_BITS 19
+#define TAG_BITS 14
 #define SET_INDEX_BITS 7
 #define BLOCK_INDEX_BITS 6
 
-// physics addr 32 bits in total
-//  19 (tag) + 7 (set index) + 6 (block index)
+// physics addr 27 bits in total
+//  14 (tag) + 7 (set index) + 6 (block index)
 
 typedef struct {
 	bool valid_bit;
