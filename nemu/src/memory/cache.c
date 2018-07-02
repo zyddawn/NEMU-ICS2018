@@ -1,12 +1,8 @@
-#include "memory/memory.h"
 #include "memory/cache.h"
-#include <memory.h>
-#include <stdio.h>
-#include <time.h>
 
 
 CacheLine L1_dcache[CACHE_LINES/SET_SIZE][SET_SIZE];
-srand(time(NULL));
+srand((unsigned)time(NULL));
 
 
 static uint32_t get_tag(paddr_t paddr) {

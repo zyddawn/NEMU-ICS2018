@@ -2,6 +2,12 @@
 // #define __CACHE_H__
 
 #include "nemu.h"
+#include "memory/memory.h"
+#include <memory.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+
 
 #define BLOCK_SIZE_B 64
 #define CACHE_LINES 1024
