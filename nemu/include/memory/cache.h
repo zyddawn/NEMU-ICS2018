@@ -1,5 +1,5 @@
-#ifndef __CACHE_H__
-#define __CACHE_H__
+// #ifndef __CACHE_H__
+// #define __CACHE_H__
 
 #include "nemu.h"
 
