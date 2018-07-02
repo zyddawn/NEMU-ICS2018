@@ -25,6 +25,7 @@ static uint32_t get_block_index(paddr_t paddr) {
 }
 
 static uint32_t move_to_cache(CacheLine cache[][SET_SIZE], paddr_t cur_addr) {
+	// randomly replace
 	uint32_t replace_id = (uint32_t) rand() % SET_SIZE;
 	uint32_t set_index = get_set_index(cur_addr),
 		 new_tag = get_tag(cur_addr);
@@ -74,6 +75,7 @@ uint32_t cache_read(paddr_t paddr, size_t len, CacheLine cache[][SET_SIZE]) {
 
 		// if in the same block as before, no need to match again
 		if(data_set_index == prev_set_index) {
+			cache_hit = true;
 			res = update_res(cache, res, data_set_index, inner_set_index, data_block_index);
 			continue;
 		}
@@ -93,6 +95,57 @@ uint32_t cache_read(paddr_t paddr, size_t len, CacheLine cache[][SET_SIZE]) {
 	}
 	return res;
 }
+
+static void update_cache(CacheLine cache[][SET_SIZE], uint32_t set_index, uint32_t inner_set_index, uint32_t block_index, uint32_t *cur_data) {
+	cache[set_index][inner_set_index].block_data[block_index] = ((*cur_data) & 0xFF);
+	*cur_data >>= 8;
+}
+
+
+void cache_write(paddr_t paddr, size_t len, uint32_t data, CacheLine cache[][SET_SIZE]) {
+	// write to cache (if hit)
+	if (len == 0)
+		return ;
+	bool cache_hit = false;
+	uint32_t data_tag, data_set_index, data_block_index,
+		 inner_set_index = 0, prev_set_index = -1, cur_data = data;  // to judge if in the same block
+	paddr_t cur_addr = paddr;
+	for(uint32_t i=0; i<len; ++i) {
+		cur_addr = paddr + i;
+		data_tag = get_tag(cur_addr);
+		data_set_index = get_set_index(cur_addr);
+		data_block_index = get_block_index(cur_addr);
+		
+		if (data_tag > 0x4000 || data_set_index > 128 || data_block_index > 64) {
+			Log("Parsing error! Wrong paddr.");
+			return ;
+		}
+
+		// if in the same block as before, no need to match again
+		if (data_set_index == prev_set_index) {
+		       	if (cache_hit) {
+				update_cache(cache, data_set_index, inner_set_index, data_block_index, &cur_data);
+			}
+		}
+		else {
+			for(inner_set_index=0; inner_set_index<SET_SIZE; ++inner_set_index) {
+				// found data in cache
+				if (found_in_cache(cache, data_tag, data_set_index, inner_set_index)) {
+					cache_hit = true;
+					update_cache(cache, data_set_index, inner_set_index, data_block_index, &cur_data);
+					break;
+				}
+			}
+			if(inner_set_index == SET_SIZE)
+				cache_hit = false;
+		}
+	}
+
+	// write to memory
+	hw_mem_write(paddr_t paddr size_t len, uint32_t data);
+}
+
+
 
 
 

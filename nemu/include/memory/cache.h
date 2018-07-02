@@ -19,8 +19,12 @@ typedef struct {
 	uint8_t block_data[BLOCK_SIZE_B];
 } CacheLine;
 
+
 // 8-way set associative
-extern CacheLine cache[][SET_SIZE];
+extern CacheLine L1_dcache[][SET_SIZE];
 
 
+void init_cache(CacheLine cache[][SET_SIZE]);
+uint32_t cache_read(paddr_t paddr, size_t len, CacheLine cache[][SET_SIZE]);
+void cache_write(paddr_t paddr, size_t len, uint32_t data, CacheLine cache[][SET_SIZE]);
 
