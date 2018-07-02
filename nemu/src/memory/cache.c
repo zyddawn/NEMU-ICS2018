@@ -2,8 +2,12 @@
 #include "memory/cache.h"
 #include <memory.h>
 #include <stdio.h>
+#include <time.h>
 
-BLOCK cache[CACHE_LINES/8][8];
+
+CacheLine L1_dcache[CACHE_LINES/SET_SIZE][SET_SIZE];
+srand(time(NULL));
+
 
 static uint32_t get_tag(paddr_t paddr) {
 	uint32_t res = (uint32_t) paddr;
@@ -20,27 +24,43 @@ static uint32_t get_block_index(paddr_t paddr) {
 	return (res & 0x3F);
 }
 
-void move_to_cache(paddr_t paddr) {
-
-
+static uint32_t move_to_cache(CacheLine cache[][SET_SIZE], paddr_t cur_addr) {
+	uint32_t replace_id = (uint32_t) rand() % SET_SIZE;
+	uint32_t set_index = get_set_index(cur_addr),
+		 new_tag = get_tag(cur_addr);
+	cache[set_index][replace_id].valid_bit = 1;
+	cache[set_index][replace_id].tag = new_tag;
+	// copy from the start of the block
+	paddr_t cur_block_start = (new_tag << (SET_INDEX_BITS + BLOCK_INDEX_BITS)) | (set_index << BLOCK_INDEX_BITS);
+	for(uint32_t block_index=0; block_index<BLOCK_SIZE_B; block_index+=4) {
+		// in order to call hw_mem_read(), emulate real process
+		uint32_t data = hw_mem_read((paddr_t)(cur_block_start+block_index), 4);
+		memcpy(cache[set_index][replace_id].block_data, &data, 4);
+	}
+	// memcpy(cache[set_index][replace_id].block_data, hw_mem + cur_block_start, BLOCK_SIZE_B);
+	return replace_id;
 }
 
 
-uint32_t get_cache_data(uint32_t set_index, uint32_t inner_set_index, uint32_t tag, bool *hit) {
-	// Not Implemented Yet	
-
-
+static bool found_in_cache(CacheLine cache[][SET_SIZE], uint32_t tag, uint32_t set_index, uint32_t inner_set_index) {
+	return cache[set_index][inner_set_index].tag == tag && cache[set_index][inner_set_index].valid_bit;
 }
 
 
-// be careful when some of the data is on another block
-uint32_t cache_read(paddr_t paddr, size_t len, BLOCK cache[][8]) {
+static uint32_t update_res(CacheLine cache[][SET_SIZE], uint32_t res, uint32_t set_index, uint32_t inner_set_index, uint32_t block_index) {
+	return (res << 8) | cache[set_index][inner_set_index].block_data[block_index];
+}
+
+
+uint32_t cache_read(paddr_t paddr, size_t len, CacheLine cache[][SET_SIZE]) {
 	if (len == 0)
 		return 0;
 
 	bool cache_hit = false;
-	uint32_t res = 0, data_tag, data_set_index, data_block_index;
-
+	uint32_t res = 0, data_tag, data_set_index, data_block_index,
+		 inner_set_index = 0, prev_set_index = -1;  // to judge if in the same block
+	
+	// len <= 4
 	for(paddr_t cur_addr = paddr+len-1; cur_addr>=paddr; --cur_addr) {
 		cache_hit = false;
 		data_tag = get_tag(cur_addr);
@@ -51,24 +71,37 @@ uint32_t cache_read(paddr_t paddr, size_t len, BLOCK cache[][8]) {
 			Log("Parsing error! Wrong paddr.");
 			return 0;
 		}
+
+		// if in the same block as before, no need to match again
+		if(data_set_index == prev_set_index) {
+			res = update_res(cache, res, data_set_index, inner_set_index, data_block_index);
+			continue;
+		}
 		
-		for(int i=0; i<8; ++i) {
+		for(inner_set_index=0; inner_set_index<SET_SIZE; ++inner_set_index) {
 			// found data in cache
-			if (cache[data_set_index][i].tag == data_tag && cache[data_set_index][i].valid_bit) {
+			if (found_in_cache(cache, data_tag, data_set_index, inner_set_index)) {
 				cache_hit = true;	
-				res = (res << 8) + cache[data_set_index][i].block_data[data_block_index];
+				res = update_res(cache, res, data_set_index, inner_set_index, data_block_index);
 				break;
 			}
 		}
-		if (!cache_hit)
-	
+		if (!cache_hit) {   // have to move from memory
+			inner_set_index = move_to_cache(cache, cur_addr);
+			res = update_res(cache, res, data_set_index, inner_set_index, data_block_index);
+		}
 	}
-
-
-
-
+	return res;
 }
 
+
+
+
+
+void init_cache() {
+	
+
+}
 
 
 

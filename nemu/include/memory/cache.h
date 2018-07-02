@@ -5,6 +5,7 @@
 
 #define BLOCK_SIZE_B 64
 #define CACHE_LINES 1024
+#define SET_SIZE 8
 #define TAG_BITS 14
 #define SET_INDEX_BITS 7
 #define BLOCK_INDEX_BITS 6
@@ -16,10 +17,10 @@ typedef struct {
 	bool valid_bit;
 	uint32_t tag;
 	uint8_t block_data[BLOCK_SIZE_B];
-} BLOCK;
+} CacheLine;
 
 // 8-way set associative
-extern BLOCK cache[][8];
+extern CacheLine cache[][SET_SIZE];
 
 
 
