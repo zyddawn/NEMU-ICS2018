@@ -97,10 +97,11 @@ uint32_t cache_read(paddr_t paddr, size_t len, CacheLine cache[][SET_SIZE]) {
 
 
 
-
-void init_cache() {
-	
-
+// set all valid bit to be 0
+void init_cache(CacheLine cache[][SET_SIZE]) {
+	for(int i=0; i<(int)(CACHE_LINES/SET_SIZE); ++i)
+		for(int j=0; j<SET_SIZE; ++j)
+			cache[i][j].valid_bit = 0;
 }
 
 
