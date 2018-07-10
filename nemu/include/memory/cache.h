@@ -17,11 +17,12 @@
 // physics addr 27 bits in total
 //  14 (tag) + 7 (set index) + 6 (block index)
 
-struct CacheLine {
+struct CacheLine_t {
 	bool valid_bit;
 	uint32_t tag;
 	uint8_t block_data[BLOCK_SIZE_B];
 };
+typedef struct CacheLine_t CacheLine;
 
 
 // 8-way set associative
