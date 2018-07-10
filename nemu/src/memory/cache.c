@@ -70,7 +70,7 @@ uint32_t cache_read(paddr_t paddr, size_t len, CacheLine cache[][SET_SIZE]) {
 	
 	// len <= 4
 	printf("\nlen = %d\n", len);
-	for(paddr_t cur_addr = paddr+len-1; cur_addr>=paddr; --cur_addr) {
+	for(paddr_t cur_addr = paddr+len-1; cur_addr!=paddr-1; --cur_addr) {
 		printf("cur_addr = 0x%x\n", cur_addr);
 		cache_hit = false;
 		data_tag = get_tag(cur_addr);
