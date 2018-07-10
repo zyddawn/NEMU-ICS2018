@@ -10,7 +10,7 @@ uint8_t hw_mem[MEM_SIZE_B];
 
 uint32_t hw_mem_read(paddr_t paddr, size_t len) {
 	uint32_t ret = 0;
-	if (paddr > 0xf0000000)
+	if (cpu.eip == 0x30200 || cpu.eip == 0x30265)
 		printf("hw_mem: EIP = 0x%x, paddr = 0x%x\n", cpu.eip, paddr);
 	memcpy(&ret, hw_mem + paddr, len);
 	return ret;
