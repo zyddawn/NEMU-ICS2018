@@ -1,4 +1,5 @@
 #include "memory/cache.h"
+#include "cpu/cpu.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
