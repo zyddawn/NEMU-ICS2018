@@ -4,8 +4,8 @@
 #include "nemu.h"
 #include "memory/memory.h"
 #include <memory.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
 

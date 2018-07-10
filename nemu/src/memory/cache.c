@@ -1,7 +1,7 @@
 #include "memory/cache.h"
-#include <time.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 // BUG EXIST!
 
