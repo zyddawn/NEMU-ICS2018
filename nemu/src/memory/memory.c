@@ -9,8 +9,6 @@ uint8_t hw_mem[MEM_SIZE_B];
 
 uint32_t hw_mem_read(paddr_t paddr, size_t len) {
 	uint32_t ret = 0;
-	// if (paddr > 0xf000000)
-	//	printf("hw_mem_read: paddr = 0%x\n", paddr);
 	memcpy(&ret, hw_mem + paddr, len);
 	return ret;
 }
@@ -60,6 +58,9 @@ void vaddr_write(vaddr_t vaddr, uint8_t sreg, size_t len, uint32_t data) {
 void init_mem() {
 	// clear the memory on initiation
 	memset(hw_mem, 0, MEM_SIZE_B);
+#ifdef CACHE_ENABLED
+	init_cache(L1_dcache);
+#endif
 
 #ifdef TLB_ENABLED
 	make_all_tlb();

@@ -1,7 +1,6 @@
 #include "nemu.h"
 #include "monitor/ui.h"
 #include "memory/memory.h"
-#include "memory/cache.h"
 #include "cpu/cpu.h"
 #include "cpu/fpu.h"
 #include "device/sdl.h"
@@ -30,9 +29,6 @@ static void restart(const uint32_t init_eip) {
 	/* Initialize CPU and memory*/
 	init_cpu(init_eip);
 	init_mem();
-#ifdef CACHE_ENABLED
-	init_cache(L1_dcache);    // add cache
-#endif
 	init_bp_list();
 	init_regex();
 #if defined(HAS_DEVICE_TIMER) || defined(HAS_DEVICE_VGA) || defined(HAS_DEVICE_KEYBOARD)
