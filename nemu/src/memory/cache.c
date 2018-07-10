@@ -42,7 +42,7 @@ static uint32_t move_to_cache(CacheLine cache[][SET_SIZE], paddr_t cur_addr) {
 	for(uint32_t block_index=0; block_index<BLOCK_SIZE_B; block_index+=4) {
 		// in order to call hw_mem_read(), emulate real process
 		uint32_t data = hw_mem_read((paddr_t)(cur_block_start+block_index), 4);
-		memcpy(cache[set_index][replace_id].block_data, &data, 4);
+		memcpy(cache[set_index][replace_id].block_data+block_index, &data, 4);
 	}
 	// memcpy(cache[set_index][replace_id].block_data, hw_mem + cur_block_start, BLOCK_SIZE_B);
 	return replace_id;
