@@ -1,5 +1,6 @@
 #include "memory/cache.h"
 
+// BUG EXIST!
 
 CacheLine L1_dcache[CACHE_LINES/SET_SIZE][SET_SIZE];
 srand((unsigned)time(NULL));
