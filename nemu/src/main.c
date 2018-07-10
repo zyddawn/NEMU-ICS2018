@@ -30,7 +30,7 @@ static void restart(const uint32_t init_eip) {
 	init_cpu(init_eip);
 	init_mem();
 #ifdef CACHE_ENABLED
-	init_cache();    // add cache
+	init_cache(L1_dcache);    // add cache
 #endif
 	init_bp_list();
 	init_regex();
