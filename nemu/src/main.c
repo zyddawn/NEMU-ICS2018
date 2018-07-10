@@ -1,6 +1,7 @@
 #include "nemu.h"
 #include "monitor/ui.h"
 #include "memory/memory.h"
+#include "memory/cache.h"
 #include "cpu/cpu.h"
 #include "cpu/fpu.h"
 #include "device/sdl.h"
