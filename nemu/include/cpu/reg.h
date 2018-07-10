@@ -98,7 +98,7 @@ typedef struct {
 			SegReg es, cs, ss, ds, fs, gs;
 		};
 	};
-	CR0 cr0;
+	CR0 cr0;  // control register 0
 
 } CPU_STATE;
 
