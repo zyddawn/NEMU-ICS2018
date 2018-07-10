@@ -35,7 +35,6 @@ void operand_read(OPERAND * opr) {
 			}
 			break;
 		case OPR_SREG:
-			printf("OPR_SREG read...\n");
 
 #ifdef IA32_SEG
 			opr->val = cpu.segReg[opr->addr].val;
@@ -64,7 +63,6 @@ void operand_write(OPERAND * opr) {
 		break;
 	case OPR_REG:
 		// data size here
-		// printf("reg data size = %d, val = %x, addr = %x\n", opr->data_size, opr->val, opr->addr);
 		switch(opr->data_size) {
 		case 8: cpu.gpr[opr->addr % 4]._8[opr->addr / 4] = opr->val; break;
 		case 16: cpu.gpr[opr->addr]._16 = opr->val; break;

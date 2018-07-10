@@ -22,12 +22,25 @@ void init_cpu(const uint32_t init_eip) {
 	cpu.eflags.val = 0x0;
 	fpu.status.val = 0x0;
 	int i=0;
-	for(i = 0; i < 8; i++) {
+	for(i = 0; i < 8; ++i) {
 		cpu.gpr[i].val = 0x0;
 		fpu.regStack[i].val = 0x0;
 	}
 	cpu.eip = init_eip;
 	cpu.esp = (128 << 20) - 16;
+	// init segment register
+	cpu.gdtr.limit = 0x0;
+	cpu.gdtr.base = 0x0;
+	cpu.cr0.val = 0x0;
+	for(i = 0; i < 6; ++i) {
+		// Not sure about the order
+		cpu.segReg[i].val = 0x0;
+		cpu.segReg[i].base = 0x0;
+		cpu.segReg[i].limit = 0x0;
+		cpu.segReg[i].type = 0x0;
+		cpu.segReg[i].privilege_level = 0x0;
+		cpu.segReg[i].soft_use = 0x0;
+	}
 }
 
 bool verbose = false;
