@@ -77,6 +77,7 @@ uint32_t cache_read(paddr_t paddr, size_t len, CacheLine cache[][SET_SIZE]) {
 
 		if (data_tag > 0x4000 || data_set_index > 128 || data_block_index > 64) {
 			printf("Parsing error! Wrong paddr.\n");
+			printf("EIP = 0x%x\n", cpu.eip);
 			printf("cur_addr = 0x%x, tag = 0x%x, set = 0x%x, block = 0x%x\n", cur_addr, data_tag, data_set_index, data_block_index);
 			return 0;
 		}
