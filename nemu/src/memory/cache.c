@@ -6,8 +6,10 @@
 // BUG EXIST!
 
 CacheLine L1_dcache[CACHE_LINES/SET_SIZE][SET_SIZE];
-srand(time(NULL));
 
+static void init_rand() {
+	srand((unsigned)time(NULL));
+}
 
 static uint32_t get_tag(paddr_t paddr) {
 	uint32_t res = (uint32_t) paddr;
@@ -152,6 +154,7 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data, CacheLine cache[][SET
 
 // set all valid bit to be 0
 void init_cache(CacheLine cache[][SET_SIZE]) {
+	init_rand();
 	for(int i=0; i<(int)(CACHE_LINES/SET_SIZE); ++i)
 		for(int j=0; j<SET_SIZE; ++j)
 			cache[i][j].valid_bit = 0;
