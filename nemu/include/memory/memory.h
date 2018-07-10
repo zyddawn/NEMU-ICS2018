@@ -5,6 +5,7 @@
 #include "memory/mmu/segment.h"
 #include "memory/mmu/page.h"
 #include "memory/mmu/tlb.h"
+#include "memory/cache.h"
 
 // 1MB memory
 #define MEM_SIZE_B 128*1024*1024

@@ -29,6 +29,9 @@ static void restart(const uint32_t init_eip) {
 	/* Initialize CPU and memory*/
 	init_cpu(init_eip);
 	init_mem();
+#ifdef CACHE_ENABLED
+	init_cache();    // add cache
+#endif
 	init_bp_list();
 	init_regex();
 #if defined(HAS_DEVICE_TIMER) || defined(HAS_DEVICE_VGA) || defined(HAS_DEVICE_KEYBOARD)
