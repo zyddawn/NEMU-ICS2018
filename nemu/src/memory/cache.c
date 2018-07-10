@@ -139,7 +139,7 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data, CacheLine cache[][SET
 	}
 
 	// write to memory
-	hw_mem_write(paddr_t paddr size_t len, uint32_t data);
+	hw_mem_write(paddr_t paddr, size_t len, uint32_t data);
 }
 
 
