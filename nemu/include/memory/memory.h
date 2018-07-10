@@ -12,8 +12,9 @@
 extern uint8_t hw_mem[];
 extern uint64_t hw_mem_access_time;
 
-// for debug
-// uint32_t hw_mem_read(paddr_t paddr, size_t len);
+// for cache
+uint32_t hw_mem_read(paddr_t paddr, size_t len);
+uint32_t hw_mem_write(paddr_t paddr, size_t, len, uint32_t data);
 
 // read memory with physical address and size of bytes
 uint32_t paddr_read(paddr_t paddr, size_t len);
