@@ -3,7 +3,7 @@
 // BUG EXIST!
 
 CacheLine L1_dcache[CACHE_LINES/SET_SIZE][SET_SIZE];
-srand((unsigned)time(NULL));
+// srand((unsigned)time(NULL));
 
 
 static uint32_t get_tag(paddr_t paddr) {
@@ -23,7 +23,7 @@ static uint32_t get_block_index(paddr_t paddr) {
 
 static uint32_t move_to_cache(CacheLine cache[][SET_SIZE], paddr_t cur_addr) {
 	// randomly replace
-	uint32_t replace_id = (uint32_t) rand() % SET_SIZE;
+	uint32_t replace_id = (uint32_t) randomize() % SET_SIZE;
 	uint32_t set_index = get_set_index(cur_addr),
 		 new_tag = get_tag(cur_addr);
 	cache[set_index][replace_id].valid_bit = 1;
