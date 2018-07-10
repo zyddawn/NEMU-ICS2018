@@ -3,8 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-
-#define DEBUG
+// #define DEBUG
 
 CacheLine L1_dcache[CACHE_LINES/SET_SIZE][SET_SIZE];
 
@@ -30,9 +29,7 @@ static uint32_t get_block_index(paddr_t paddr) {
 static uint32_t move_to_cache(CacheLine cache[][SET_SIZE], paddr_t cur_addr) {
 	// randomly replace
 	uint32_t replace_id = (uint32_t) rand() % SET_SIZE;
-#ifdef DEBUG
-	printf("replace_id = %d\n", replace_id);
-#endif
+	// printf("replace_id = %d\n", replace_id);
 	uint32_t set_index = get_set_index(cur_addr),
 		 new_tag = get_tag(cur_addr);
 	cache[set_index][replace_id].valid_bit = 1;
@@ -50,9 +47,7 @@ static uint32_t move_to_cache(CacheLine cache[][SET_SIZE], paddr_t cur_addr) {
 
 
 static bool found_in_cache(CacheLine cache[][SET_SIZE], uint32_t tag, uint32_t set_index, uint32_t inner_set_index) {
-#ifdef DEBUG
-	printf("want tag = 0x%x, cache tag = 0x%x, valid_bit = %d\n", tag, cache[set_index][inner_set_index].tag, cache[set_index][inner_set_index].valid_bit);
-#endif
+	// printf("want tag = 0x%x, cache tag = 0x%x, valid_bit = %d\n", tag, cache[set_index][inner_set_index].tag, cache[set_index][inner_set_index].valid_bit);
 	return cache[set_index][inner_set_index].valid_bit && cache[set_index][inner_set_index].tag == tag;
 }
 
@@ -63,7 +58,7 @@ static uint32_t update_res(CacheLine cache[][SET_SIZE], uint32_t res, uint32_t s
 
 
 uint32_t cache_read(paddr_t paddr, size_t len, CacheLine cache[][SET_SIZE]) {
-	printf("CACHE READ...\n");
+	// printf("CACHE READ...\n");
 	if (len == 0)
 		return 0;
 
@@ -78,7 +73,7 @@ uint32_t cache_read(paddr_t paddr, size_t len, CacheLine cache[][SET_SIZE]) {
 		data_set_index = get_set_index(cur_addr);
 		data_block_index = get_block_index(cur_addr);
 		
-		printf("cur_addr = 0x%x, tag = 0x%x, set = 0x%x, block = 0x%x\n", cur_addr, data_tag, data_set_index, data_block_index);
+		// printf("cur_addr = 0x%x, tag = 0x%x, set = 0x%x, block = 0x%x\n", cur_addr, data_tag, data_set_index, data_block_index);
 
 		if (data_tag > 0x4000 || data_set_index > 128 || data_block_index > 64) {
 			printf("Parsing error! Wrong paddr.\n");
@@ -95,14 +90,14 @@ uint32_t cache_read(paddr_t paddr, size_t len, CacheLine cache[][SET_SIZE]) {
 		for(inner_set_index=0; inner_set_index<SET_SIZE; ++inner_set_index) {
 			// found data in cache
 			if (found_in_cache(cache, data_tag, data_set_index, inner_set_index)) {
-				printf("HIT IN CACHE!!\n\n");
+				// printf("HIT IN CACHE!!\n\n");
 				cache_hit = true;	
 				res = update_res(cache, res, data_set_index, inner_set_index, data_block_index);
 				break;
 			}
 		}
 		if (!cache_hit) {   // have to move from memory
-			printf("Didn't hit in cache.\n");
+			// printf("Didn't hit in cache.\n");
 			inner_set_index = move_to_cache(cache, cur_addr);
 			res = update_res(cache, res, data_set_index, inner_set_index, data_block_index);
 		}
