@@ -6,7 +6,7 @@
 // BUG EXIST!
 
 CacheLine L1_dcache[CACHE_LINES/SET_SIZE][SET_SIZE];
-srand((unsigned int)time(NULL));
+srand(time(NULL));
 
 
 static uint32_t get_tag(paddr_t paddr) {
