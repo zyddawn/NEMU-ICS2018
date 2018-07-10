@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-
 #define BLOCK_SIZE_B 64
 #define CACHE_LINES 1024
 #define SET_SIZE 8
@@ -18,7 +17,7 @@
 // physics addr 27 bits in total
 //  14 (tag) + 7 (set index) + 6 (block index)
 
-typedef struct CacheLine{
+struct CacheLine {
 	bool valid_bit;
 	uint32_t tag;
 	uint8_t block_data[BLOCK_SIZE_B];
