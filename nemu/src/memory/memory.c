@@ -52,7 +52,7 @@ uint32_t vaddr_read(vaddr_t vaddr, uint8_t sreg, size_t len) {
 	return laddr_read(vaddr, len);
 #else
 	uint32_t laddr = vaddr;
-	if (/*TODO*/) {
+	if (cpu.cr0.pe) {
 		laddr = segment_translate(vaddr, sreg);
 		// Might need to fix many bugs in previous instructions
 	}
@@ -66,7 +66,8 @@ void vaddr_write(vaddr_t vaddr, uint8_t sreg, size_t len, uint32_t data) {
 #ifndef IA32_SEG
 	laddr_write(vaddr, len, data);
 #else
-	if(/*TODO*/) {
+	uint32_t laddr = vaddr;
+	if(cpu.cr0.pe) {
 		laddr = segment_translate(vaddr, sreg);
 		// same as above
 	}
