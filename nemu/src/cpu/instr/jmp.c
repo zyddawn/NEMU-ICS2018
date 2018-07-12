@@ -49,7 +49,9 @@ make_instr_func(jmp_short_) {
 
 
 
-
+make_instr_func(ljmp) {
+	/*TODO*/
+}
 
 
 

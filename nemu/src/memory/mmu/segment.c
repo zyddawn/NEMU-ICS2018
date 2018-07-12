@@ -18,14 +18,18 @@ void load_sreg(uint8_t sreg) {
 	/* TODO: load the invisibile part of the segment register 'sreg' by reading the GDT.
 	 * The visible part of 'sreg' should be assigned by mov or ljmp already.
 	 */
-
 	SegDesc cur_seg = *(cpu.gdtr.base + (cpu.segReg[sreg].index << 3));
-	uint32_t base = (base_31_24 << 24) | (base_23_16<< 16) | base_15_0, 
-		 limit = (limit_19_16 << 16) | limit_15_0;
+	uint32_t base = (cur_seg.base_31_24 << 24) | (cur_seg.base_23_16<< 16) | cur_seg.base_15_0, 
+		 limit = (cur_seg.limit_19_16 << 16) | cur_seg.limit_15_0;
 	cpu.segReg[sreg].base = base;
 	cpu.segReg[sreg].limit = limit;
-	
+	cpu.segReg[sreg].type = cur_seg.type;
+	cpu.segReg[sreg].privilege_level = cur_seg.privilege_level;
+	cpu.segReg[sreg].soft_use = cur_seg.soft_use;	
 	// do some checking
-
-
+	if (!cpu.cr0.pe) {
+		Assert(base == 0, "base != 0 under flat mode!");
+		Assert(limit == 0xfffff, "limit != 0xfffff under flat mode!");
+		Assert(cur_seg.granularity == 1, "granularity != 1 under flat mode!");
+	}
 }	
