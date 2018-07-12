@@ -29,6 +29,7 @@ void init_cpu(const uint32_t init_eip) {
 	cpu.eip = init_eip;
 	cpu.esp = (128 << 20) - 16;
 	// init segment register
+#ifdef IA32_SEG
 	cpu.gdtr.limit = 0x0;
 	cpu.gdtr.base = 0x0;
 	cpu.cr0.val = 0x0;
@@ -41,6 +42,7 @@ void init_cpu(const uint32_t init_eip) {
 		cpu.segReg[i].privilege_level = 0x0;
 		cpu.segReg[i].soft_use = 0x0;
 	}
+#endif
 }
 
 bool verbose = false;
