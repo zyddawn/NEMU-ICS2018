@@ -18,7 +18,11 @@ void load_sreg(uint8_t sreg) {
 	/* TODO: load the invisibile part of the segment register 'sreg' by reading the GDT.
 	 * The visible part of 'sreg' should be assigned by mov or ljmp already.
 	 */
-	SegDesc cur_seg = *((laddr_t)cpu.gdtr.base + (cpu.segReg[sreg].index << 3));
+	SegDesc cur_seg;
+       	laddr_t addr = (laddr_t)cpu.gdtr.base + (cpu.segReg[sreg].index << 3);
+	uint32_t *mem_read = (uint32_t *)&cur_seg;
+	*mem_read = laddr_read(addr, 4);
+	
 	// if(!cur_seg.present) { // not yet in main memory, need to load
 	uint32_t base = (cur_seg.base_31_24 << 24) | (cur_seg.base_23_16<< 16) | cur_seg.base_15_0, 
 		 limit = (cur_seg.limit_19_16 << 16) | cur_seg.limit_15_0;
