@@ -295,7 +295,7 @@ make_instr_func(mov_srm162r_l) {
 make_instr_func(mov_r2crx_v) {
 	printf("Calling mov_r2crx_v.\n");
 	int len = 2;
-	uint32_t tmp = instr_fetch(eip + 2, 1);	
+	uint32_t tmp = instr_fetch(eip + 1, 1);	
 	int cr_index = (tmp >> 3) & 0x7,
 	    reg_index = tmp & 0x7;
 	OPERAND r;
