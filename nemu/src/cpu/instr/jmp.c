@@ -51,6 +51,7 @@ make_instr_func(jmp_short_) {
 
 
 make_instr_func(ljmp) {
+	printf("Calling ljmp.\n");
 	uint32_t new_eip = instr_fetch(eip + 1, 4);
 	uint16_t new_val = instr_fetch(eip + 5, 2);
 	cpu.cs.val = new_val;
