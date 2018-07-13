@@ -58,8 +58,8 @@ make_instr_func(ljmp) {
 	printf("new_val = 0x%x\n", new_val);
 	cpu.cs.val = new_val;
 	load_sreg(1);  // cs register
-	cpu.eip = new_eip - 7;	
-	return 7;
+	cpu.eip = new_eip;	
+	return 0;
 }
 
 
