@@ -6,10 +6,10 @@ uint32_t segment_translate(uint32_t offset, uint8_t sreg) {
 	/* TODO: perform segment translation from virtual address to linear address
 	 * by reading the invisible part of the segment register 'sreg'
 	 */
-	Assert(sreg < 6, "No such sreg.");
-	Assert(cpu.segReg[sreg].ti == 0, "Selecting LDT (not implemented).");
-	Assert((cpu.segReg[sreg].index<<3) < cpu.gdtr.limit, "GDTR range exceeded.");  // seg_desc is 64-bit, thus use 8*index
-	Assert(offset + len < cpu.segReg[sreg].limit, "Segment range exceeded.");
+	assert(sreg < 6);
+	assert(cpu.segReg[sreg].ti == 0);
+	assert((cpu.segReg[sreg].index<<3) < cpu.gdtr.limit);  // seg_desc is 64-bit, thus use 8*index
+	assert(offset + len < cpu.segReg[sreg].limit);
 	// load_sreg(sreg);
 	return cpu.segReg[sreg].base + offset;
 }
@@ -33,8 +33,8 @@ void load_sreg(uint8_t sreg) {
 
 	// do some checking
 	if (!cpu.cr0.pe) {
-		Assert(base == 0, "base != 0 under flat mode!");
-		Assert(limit == 0xfffff, "limit != 0xfffff under flat mode!");
-		Assert(cur_seg.granularity == 1, "granularity != 1 under flat mode!");
+		assert(base == 0);
+		assert(limit == 0xfffff);
+		assert(cur_seg.granularity == 1);
 	}
 }	
