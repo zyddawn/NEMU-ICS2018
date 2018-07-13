@@ -28,7 +28,8 @@ make_instr_func(jmp_near) {
 
 	cpu.eip += offset;
 
-        return 1 + data_size / 8;
+        // return 1 + data_size / 8;
+	return 0;
 }
 
 make_instr_func(jmp_short_) {
