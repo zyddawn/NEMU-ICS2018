@@ -277,7 +277,7 @@ make_instr_func(mov_srm82r_v) {
 }
 
 make_instr_func(mov_srm162r_l) {
-        // int len = 1;
+        int len = 1;
         OPERAND r, rm;
         r.data_size = 32;
         rm.data_size = 16;
@@ -318,7 +318,7 @@ make_instr_func(mov_r2crx_v) {
 // move from control reg to general reg
 make_instr_func(mov_crx2r_v) {
 	printf("Calling mov_crx2r_v.\n");
-	int len = 2;
+	// int len = 2;
 	uint32_t tmp = instr_fetch(eip + 2, 1);	
 	int cr_index = (tmp >> 3) & 0x7,
 	    reg_index = tmp & 0x7;
