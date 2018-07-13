@@ -37,7 +37,7 @@ void init_cpu(const uint32_t init_eip) {
 		// Not sure about the order
 		cpu.segReg[i].val = 0x0;
 		cpu.segReg[i].base = 0x0;
-		cpu.segReg[i].limit = 0x0;
+		cpu.segReg[i].limit = 0xffffff;
 		cpu.segReg[i].type = 0x0;
 		cpu.segReg[i].privilege_level = 0x0;
 		cpu.segReg[i].soft_use = 0x0;
