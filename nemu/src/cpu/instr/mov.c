@@ -303,7 +303,8 @@ make_instr_func(mov_r2crx_v) {
 	r.type = OPR_REG;
 	r.addr = reg_index;
 	operand_read(&r);
-
+	
+	printf("cr_id = %d, reg_id = %d\n", cr_index, reg_index);
 	switch(cr_index) {
 		case 0: cpu.cr0.val = r.val;
 			break;
@@ -327,6 +328,7 @@ make_instr_func(mov_crx2r_v) {
 	r.type = OPR_REG;
 	r.addr = reg_index;
 
+	printf("cr_id = %d, reg_id = %d\n", cr_index, reg_index);
 	switch(cr_index) {
 		case 0: r.val = cpu.cr0.val;
 			break;
