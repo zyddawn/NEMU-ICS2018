@@ -11,7 +11,7 @@ uint32_t segment_translate(uint32_t offset, uint8_t sreg) {
 	assert(sreg < 6);
 	// printf("ti = %d\n", cpu.segReg[sreg].ti);
 	// assert(cpu.segReg[sreg].ti == 0);
-	printf("index = 0x%x, limit = 0x%x\n", cpu.segReg[sreg].index<<3, cpu,gdtr.limit);
+	printf("index = 0x%x, limit = 0x%x\n", cpu.segReg[sreg].index<<3, cpu.gdtr.limit);
 	assert((cpu.segReg[sreg].index<<3) < cpu.gdtr.limit);  // seg_desc is 64-bit, thus use 8*index
 	// load_sreg(sreg);
 	return cpu.segReg[sreg].base + offset;
