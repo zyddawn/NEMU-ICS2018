@@ -311,7 +311,7 @@ make_instr_func(mov_r2crx_v) {
 			 break;
 	}
 
-	return len + 1;
+	return 3;
 }
 
 
@@ -335,7 +335,7 @@ make_instr_func(mov_crx2r_v) {
 	}
 	operand_write(&r);
 
-	return len + 1;
+	return 3;
 }
 
 
