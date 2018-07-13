@@ -294,7 +294,7 @@ make_instr_func(mov_srm162r_l) {
 // move from general reg to control reg
 make_instr_func(mov_r2crx_v) {
 	printf("Calling mov_r2crx_v.\n");
-	// int len = 2;
+	int len = 2;
 	uint32_t tmp = instr_fetch(eip + 2, 1);	
 	int cr_index = (tmp >> 3) & 0x7,
 	    reg_index = tmp & 0x7;
@@ -311,14 +311,14 @@ make_instr_func(mov_r2crx_v) {
 			 break;
 	}
 
-	return 3;
+	return len;
 }
 
 
 // move from control reg to general reg
 make_instr_func(mov_crx2r_v) {
 	printf("Calling mov_crx2r_v.\n");
-	// int len = 2;
+	int len = 2;
 	uint32_t tmp = instr_fetch(eip + 2, 1);	
 	int cr_index = (tmp >> 3) & 0x7,
 	    reg_index = tmp & 0x7;
@@ -335,7 +335,7 @@ make_instr_func(mov_crx2r_v) {
 	}
 	operand_write(&r);
 
-	return 3;
+	return len;
 }
 
 
