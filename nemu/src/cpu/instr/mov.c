@@ -289,3 +289,61 @@ make_instr_func(mov_srm162r_l) {
 	print_asm_2("mov", "", len, &rm, &r);
         return len;
 }
+
+
+// move from general reg to control reg
+make_instr_func(mov_r2crx_v) {
+	int len = 2;
+	uint32_t tmp = instr_fetch(eip + 2, 1);	
+	int cr_index = (tmp >> 3) & 0x7,
+	    reg_index = tmp & 0x7;
+	OPERAND r;
+	r.data_size = 32;
+	r.type = OPR_REG;
+	r.addr = reg_index;
+	operand_read(&r);
+
+	switch(cr_index) {
+		case 0: cpu.cr0.val = r.val;
+			break;
+		default: printf("Unknown control register specified!.\n");
+			 break;
+	}
+
+	return len + 1;
+}
+
+
+// move from control reg to general reg
+make_instr_func(mov_crx2r_v) {
+	int len = 2;
+	uint32_t tmp = instr_fetch(eip + 2, 1);	
+	int cr_index = (tmp >> 3) & 0x7,
+	    reg_index = tmp & 0x7;
+	OPERAND r;
+	r.data_size = 32;
+	r.type = OPR_REG;
+	r.addr = reg_index;
+
+	switch(cr_index) {
+		case 0: r.val = cpu.cr0.val;
+			break;
+		default: printf("Unknown control register specified!.\n");
+			 break;
+	}
+	operand_write(&r);
+
+	return len + 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
