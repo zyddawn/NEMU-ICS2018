@@ -55,10 +55,10 @@ make_instr_func(ljmp) {
 	uint32_t new_eip = instr_fetch(eip + 1, 4);
 	printf("new_eip = 0x%x\n", new_eip);
 	uint16_t new_val = instr_fetch(eip + 5, 2);
-
+	printf("new_val = 0x%x\n", new_val);
 	cpu.cs.val = new_val;
 	load_sreg(1);  // cs register
-	cpu.eip = new_eip;	
+	cpu.eip = new_eip - 7;	
 	return 7;
 }
 
