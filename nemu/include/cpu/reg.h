@@ -43,7 +43,6 @@ typedef struct {
 } SegReg;
 
 
-
 // define the structure of registers
 typedef struct {
 
