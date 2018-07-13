@@ -10,7 +10,7 @@ uint32_t segment_translate(uint32_t offset, uint8_t sreg) {
 	Assert(cpu.segReg[sreg].ti == 0, "Selecting LDT (not implemented).");
 	Assert((cpu.segReg[sreg].index<<3) < cpu.gdtr.limit, "GDTR range exceeded.");  // seg_desc is 64-bit, thus use 8*index
 	Assert(offset + len < cpu.segReg[sreg].limit, "Segment range exceeded.");
-	load_sreg(sreg);  // will check if present is 1
+	// load_sreg(sreg);
 	return cpu.segReg[sreg].base + offset;
 }
 
@@ -20,16 +20,16 @@ void load_sreg(uint8_t sreg) {
 	 * The visible part of 'sreg' should be assigned by mov or ljmp already.
 	 */
 	SegDesc cur_seg = *((laddr_t)cpu.gdtr.base + (cpu.segReg[sreg].index << 3));
-	if(!cur_seg.present) { // not yet in main memory, need to load
-		uint32_t base = (cur_seg.base_31_24 << 24) | (cur_seg.base_23_16<< 16) | cur_seg.base_15_0, 
-			 limit = (cur_seg.limit_19_16 << 16) | cur_seg.limit_15_0;
-		// load invisible part
-		cpu.segReg[sreg].base = base;
-		cpu.segReg[sreg].limit = limit;
-		cpu.segReg[sreg].type = cur_seg.type;
-		cpu.segReg[sreg].privilege_level = cur_seg.privilege_level;
-		cpu.segReg[sreg].soft_use = cur_seg.soft_use;
-	}	
+	// if(!cur_seg.present) { // not yet in main memory, need to load
+	uint32_t base = (cur_seg.base_31_24 << 24) | (cur_seg.base_23_16<< 16) | cur_seg.base_15_0, 
+		 limit = (cur_seg.limit_19_16 << 16) | cur_seg.limit_15_0;
+	// load invisible part
+	cpu.segReg[sreg].base = base;
+	cpu.segReg[sreg].limit = limit;
+	cpu.segReg[sreg].type = cur_seg.type;
+	cpu.segReg[sreg].privilege_level = cur_seg.privilege_level;
+	cpu.segReg[sreg].soft_use = cur_seg.soft_use;
+	// }	
 
 	// do some checking
 	if (!cpu.cr0.pe) {

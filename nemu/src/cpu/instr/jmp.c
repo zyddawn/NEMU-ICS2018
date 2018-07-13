@@ -1,4 +1,5 @@
 #include "cpu/instr.h"
+#include "memory/mmu/segment.h"
 
 make_instr_func(jmp_near_rm) {
 	int len = 0;
@@ -50,7 +51,12 @@ make_instr_func(jmp_short_) {
 
 
 make_instr_func(ljmp) {
-	/*TODO*/
+	uint32_t new_eip = instr_fetch(eip + 1, 4);
+	uint16_t new_val = instr_fetch(eip + 5, 2);
+	cpu.cs.val = new_val;
+	load_sreg(1);  // cs register
+	cpu.eip = new_eip - 7;	
+	return 7;
 }
 
 

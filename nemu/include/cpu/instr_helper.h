@@ -78,9 +78,6 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 
 
 
-
-
-
 /*
 // macro for generating the implementation of pop/push instruction
 #define push_REG_helper(reg_name, reg_addr) \
