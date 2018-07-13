@@ -36,8 +36,12 @@ void load_sreg(uint8_t sreg) {
 
 	// do some checking
 	if (!cpu.cr0.pe) {
+		printf("NOT PE MODE: \n");
+		printf("base = 0x%x\n", base);
 		assert(base == 0);
+		printf("limit = 0x%x\n", limit);
 		assert(limit == 0xfffff);
+		printf("gran = 0x%x\n", cur_seg.granularity);
 		assert(cur_seg.granularity == 1);
 	}
 }	
