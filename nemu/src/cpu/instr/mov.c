@@ -293,7 +293,7 @@ make_instr_func(mov_srm162r_l) {
 
 // move from general reg to control reg
 make_instr_func(mov_r2crx_v) {
-	printf("Calling mov_r2crx_v.\n");
+	// printf("Calling mov_r2crx_v.\n");
 	int len = 2;
 	uint32_t tmp = instr_fetch(eip + 1, 1);	
 	int cr_index = (tmp >> 3) & 0x7,
@@ -304,21 +304,20 @@ make_instr_func(mov_r2crx_v) {
 	r.addr = reg_index;
 	operand_read(&r);
 	
-	printf("cr_id = %d, reg_id = %d\n", cr_index, reg_index);
+	// printf("cr_id = %d, reg_id = %d\n", cr_index, reg_index);
 	switch(cr_index) {
 		case 0: cpu.cr0.val = r.val;
 			break;
 		default: printf("Unknown control register specified!.\n");
 			 break;
 	}
-
 	return len;
 }
 
 
 // move from control reg to general reg
 make_instr_func(mov_crx2r_v) {
-	printf("Calling mov_crx2r_v.\n");
+	// printf("Calling mov_crx2r_v.\n");
 	int len = 2;
 	uint32_t tmp = instr_fetch(eip + 1, 1);	
 	int cr_index = (tmp >> 3) & 0x7,
@@ -328,7 +327,7 @@ make_instr_func(mov_crx2r_v) {
 	r.type = OPR_REG;
 	r.addr = reg_index;
 
-	printf("cr_id = %d, reg_id = %d\n", cr_index, reg_index);
+	// printf("cr_id = %d, reg_id = %d\n", cr_index, reg_index);
 	switch(cr_index) {
 		case 0: r.val = cpu.cr0.val;
 			break;
@@ -336,13 +335,12 @@ make_instr_func(mov_crx2r_v) {
 			 break;
 	}
 	operand_write(&r);
-
 	return len;
 }
 
 
 make_instr_func(mov_rm2sreg_v) {
-	printf("Calling mov_rm2sreg_v.\n");
+	// printf("Calling mov_rm2sreg_v.\n");
 	int len = 1;
 	OPERAND opr_src;
 	opr_src.data_size = 16;
