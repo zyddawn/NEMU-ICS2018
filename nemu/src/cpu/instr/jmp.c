@@ -59,7 +59,7 @@ make_instr_func(ljmp) {
 	cpu.cs.val = new_val;
 	load_sreg(1);  // cs register
 	cpu.eip = new_eip;	
-	return 0;
+	return 1;
 }
 
 
