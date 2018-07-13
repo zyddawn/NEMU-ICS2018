@@ -6,7 +6,10 @@ uint32_t segment_translate(uint32_t offset, uint8_t sreg) {
 	/* TODO: perform segment translation from virtual address to linear address
 	 * by reading the invisible part of the segment register 'sreg'
 	 */
+	printf("Segment translate: \n");
+	printf("sreg = 0x%x", sreg);
 	assert(sreg < 6);
+	printf("ti = %d", cpu.segReg[sreg].ti);
 	assert(cpu.segReg[sreg].ti == 0);
 	assert((cpu.segReg[sreg].index<<3) < cpu.gdtr.limit);  // seg_desc is 64-bit, thus use 8*index
 	// load_sreg(sreg);
@@ -36,12 +39,8 @@ void load_sreg(uint8_t sreg) {
 
 	// do some checking
 	if (!cpu.cr0.pe) {
-		printf("NOT PE MODE: \n");
-		printf("base = 0x%x\n", base);
 		assert(base == 0);
-		printf("limit = 0x%x\n", limit);
 		assert(limit == 0xfffff);
-		printf("gran = 0x%x\n", cur_seg.granularity);
 		assert(cur_seg.granularity == 1);
 	}
 }	
