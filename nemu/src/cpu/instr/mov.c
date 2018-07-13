@@ -337,7 +337,18 @@ make_instr_func(mov_crx2r_v) {
 }
 
 
-
+make_instr_func(mov_rm2sreg_v) {
+	int len = 1;
+	OPERAND opr_src;
+	opr_src.data_size = 16;
+	decode_operand_rm
+	uint8_t sreg_index = instr_fetch(eip + 1, 2);
+	sreg_index = (sreg_index >> 3) & 0x7;
+	cpu.segReg[sreg_index].val = opr_src.val;
+	
+	load_sreg(sreg_index);
+	return len;
+}
 
 
 
