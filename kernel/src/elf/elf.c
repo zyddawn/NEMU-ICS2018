@@ -52,18 +52,12 @@ uint32_t loader() {
 				uint32_t cur_pg_load = PAGE_SIZE - offset;
 				if (cur_pg_load > (ph->p_filesz - total_loaded))  // no need to load from offset to the end of the page
 					cur_pg_load = ph->p_filesz - total_loaded;  // load till reaching the filesz
-
-
-
+				memset((void *)paddr, 0, PAGE_SIZE);
+				memcpy((void *)paddr, (void *)(ph->p_offset + total_loaded), cur_pg_load);
 				vaddr += PAGE_SIZE;   // page size = 4096 Bytes
+				total_loaded += cur_pg_load;
 			}	
-
-
-
 #endif
-
-
-
 
 #ifdef IA32_PAGE
 			/* Record the program break for future use */
