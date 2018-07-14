@@ -41,10 +41,12 @@ uint32_t laddr_read(laddr_t laddr, size_t len) {
 	assert(len == 1 || len == 2 || len == 4);
 	paddr_t hwaddr = laddr;
 	if (cpu.cr0.pg && cpu.cr0.pe) {
-		if (0)  // data not in a same page
+		uint32_t data_start_page = hwaddr & 0xfffff000,
+			 data_end_page = (hwaddr + len - 1) & 0xfffff000;
+		if (data_start_page != data_end_page)  // data not in a same page
 			assert(0);
 		else
-			hwaddr = page_translate(laddr);
+			hwaddr = page_translate(hwaddr);
 	}
 	return paddr_read(hwaddr, len);
 }
@@ -52,12 +54,13 @@ uint32_t laddr_read(laddr_t laddr, size_t len) {
 void laddr_write(laddr_t laddr, size_t len, uint32_t data) {
 	assert(len == 1 || len == 2 || len == 4);
 	paddr_t hwaddr = laddr;
-	
 	if(cpu.cr0.pg && cpu.cr0.pe) {
- 		if (0)   // data not in a same page
+		uint32_t data_start_page = hwaddr & 0xfffff000,
+			 data_end_page = (hwaddr + len - 1) & 0xfffff000;
+ 		if (data_start_page != data_end_page)   // data not in a same page
 			assert(0);
 		else
-			hwaddr = page_translate(laddr);
+			hwaddr = page_translate(hwaddr);
 	}
 	paddr_write(hwaddr, len, data);
 }
