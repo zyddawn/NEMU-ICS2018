@@ -23,7 +23,7 @@ typedef union {
 } CR0;
 
 typedef union {
-	typedef struct {
+	struct {
 		uint32_t reserve :12;
 		uint32_t pdbr :20;
 	};
