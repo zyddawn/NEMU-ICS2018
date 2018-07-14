@@ -309,7 +309,7 @@ make_instr_func(mov_r2crx_v) {
 		case 0: cpu.cr0.val = r.val;
 			break;
 		case 3: cpu.cr3.val = r.val;
-			printf("mov_r2crx for CR3\n");
+			// printf("mov_r2crx for CR3\n");
 			// don't know if need to init_tlb()
 			break;
 		default: printf("Unknown control register specified!.\n");
@@ -336,7 +336,7 @@ make_instr_func(mov_crx2r_v) {
 		case 0: r.val = cpu.cr0.val;
 			break;
 		case 3: r.val = cpu.cr3.val; 
-			printf("mov_crx2r for CR3\n");
+			// printf("mov_crx2r for CR3\n");
 			break;
 		default: printf("Unknown control register specified!.\n");
 			 break;
