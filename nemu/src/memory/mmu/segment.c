@@ -7,10 +7,9 @@ uint32_t segment_translate(uint32_t offset, uint8_t sreg) {
 	 * by reading the invisible part of the segment register 'sreg'
 	 */
 	assert(sreg < 6);
-	printf("ti = %d\n", cpu.segReg[sreg].ti);
-	assert(cpu.segReg[sreg].ti == 0);
-	printf("index<<3 = 0x%x, limit = 0x%x\n", cpu.segReg[sreg].index<<3, cpu.gdtr.limit);
-	assert((cpu.segReg[sreg].index<<3) < cpu.gdtr.limit);  // seg_desc is 64-bit, thus use 8*index
+	// assert(cpu.segReg[sreg].ti == 0);
+	// assert((cpu.segReg[sreg].index<<3) < cpu.gdtr.limit);  // seg_desc is 64-bit, thus use 8*index
+	
 	// load_sreg(sreg);
 	return cpu.segReg[sreg].base + offset;
 }
@@ -35,6 +34,8 @@ void load_sreg(uint8_t sreg) {
 	cpu.segReg[sreg].privilege_level = cur_seg.privilege_level;
 	cpu.segReg[sreg].soft_use = cur_seg.soft_use;
 	// }	
+
+	// LATENT BUG: didn't check present bit
 
 	// do some checking
 	if (!cpu.cr0.pe) {
