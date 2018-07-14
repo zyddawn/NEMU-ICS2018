@@ -9,7 +9,6 @@ uint32_t segment_translate(uint32_t offset, uint8_t sreg) {
 	// assert(sreg < 6);
 	// assert(cpu.segReg[sreg].ti == 0);
 	// assert((cpu.segReg[sreg].index<<3) < cpu.gdtr.limit);  // seg_desc is 64-bit, thus use 8*index
-	
 	// load_sreg(sreg);
 	return cpu.segReg[sreg].base + offset;
 }
