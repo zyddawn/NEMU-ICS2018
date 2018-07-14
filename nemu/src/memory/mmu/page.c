@@ -1,14 +1,17 @@
 #include "cpu/cpu.h"
 #include "memory/memory.h"
 
-static uint32_t get_dir(laddr_t laddr)
+static uint32_t get_dir(laddr_t laddr) {
 	return (laddr >> 22);  // high 10 bits
+}
 
-static uint32_t get_tb(laddr_t laddr) 
+static uint32_t get_tb(laddr_t laddr) { 
 	return (laddr >> 12) & 0x3ff;  // middle 10 bits
+}
 
-static uint32_t get_offset(laddr_t laddr)
+static uint32_t get_offset(laddr_t laddr) {
 	return (laddr & 0xfff);   // lower 12 bits
+}
 
 
 // translate from linear address to physical address
