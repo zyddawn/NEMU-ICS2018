@@ -308,6 +308,8 @@ make_instr_func(mov_r2crx_v) {
 	switch(cr_index) {
 		case 0: cpu.cr0.val = r.val;
 			break;
+		case 3: printf("Not implemented for CR3.\n");
+			assert(0);
 		default: printf("Unknown control register specified!.\n");
 			 break;
 	}
@@ -331,6 +333,8 @@ make_instr_func(mov_crx2r_v) {
 	switch(cr_index) {
 		case 0: r.val = cpu.cr0.val;
 			break;
+		case 3: printf("Not implemented for CR3.\n");
+			assert(0);
 		default: printf("Unknown control register specified!.\n");
 			 break;
 	}
