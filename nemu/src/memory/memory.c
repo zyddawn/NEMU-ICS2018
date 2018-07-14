@@ -43,8 +43,10 @@ uint32_t laddr_read(laddr_t laddr, size_t len) {
 	if (cpu.cr0.pg && cpu.cr0.pe) {
 		uint32_t data_start_page = hwaddr & 0xfffff000,
 			 data_end_page = (hwaddr + len - 1) & 0xfffff000;
-		if (data_start_page != data_end_page)  // data not in a same page
+		if (data_start_page != data_end_page) {  // data not in a same page
+			printf("not in the same page.\n");
 			assert(0);
+		}
 		else
 			hwaddr = page_translate(hwaddr);
 	}
@@ -57,8 +59,10 @@ void laddr_write(laddr_t laddr, size_t len, uint32_t data) {
 	if(cpu.cr0.pg && cpu.cr0.pe) {
 		uint32_t data_start_page = hwaddr & 0xfffff000,
 			 data_end_page = (hwaddr + len - 1) & 0xfffff000;
- 		if (data_start_page != data_end_page)   // data not in a same page
+ 		if (data_start_page != data_end_page) {   // data not in a same page
+			printf("not in the same page.\n");
 			assert(0);
+		}
 		else
 			hwaddr = page_translate(hwaddr);
 	}
