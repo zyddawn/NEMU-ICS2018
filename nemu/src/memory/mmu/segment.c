@@ -21,10 +21,9 @@ void load_sreg(uint8_t sreg) {
 	 */
 	SegDesc cur_seg;
        	laddr_t addr = (laddr_t)cpu.gdtr.base + (cpu.segReg[sreg].index << 3);
-	uint32_t *mem_read = (uint32_t *)&cur_seg;
-	*mem_read = laddr_read(addr, 4);
+	cur_seg.val[0] = laddr_read(addr, 4);
+	cur_seg.val[1] = laddr_read(addr + 4, 4);
 	
-	// if(!cur_seg.present) { // not yet in main memory, need to load
 	uint32_t base = (cur_seg.base_31_24 << 24) | (cur_seg.base_23_16<< 16) | cur_seg.base_15_0, 
 		 limit = (cur_seg.limit_19_16 << 16) | cur_seg.limit_15_0;
 	// load invisible part
@@ -33,7 +32,6 @@ void load_sreg(uint8_t sreg) {
 	cpu.segReg[sreg].type = cur_seg.type;
 	cpu.segReg[sreg].privilege_level = cur_seg.privilege_level;
 	cpu.segReg[sreg].soft_use = cur_seg.soft_use;
-	// }	
 
 	// LATENT BUG: didn't check present bit
 
