@@ -79,7 +79,9 @@ void init_cond() {
 	video_mapping_write_test();
 #endif
 	/* Load the program. */
+	Log("Before loader()");
 	uint32_t eip = loader();
+	Log("After loader()");
 	
 #ifdef HAS_DEVICE_VGA
 	/* Read data in the video memory to check whether 
