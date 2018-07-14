@@ -22,6 +22,8 @@ typedef union {
 	uint32_t val;
 } CR0;
 
+
+
 typedef struct {
 	// 16-bit visible part, i.e., the selector
 	union {
