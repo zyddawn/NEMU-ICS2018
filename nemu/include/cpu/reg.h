@@ -22,6 +22,13 @@ typedef union {
 	uint32_t val;
 } CR0;
 
+typedef union {
+	typedef struct {
+		uint32_t reserve :12;
+		uint32_t pdbr :20;
+	};
+	uint32_t val;
+} CR3;
 
 
 typedef struct {
@@ -99,7 +106,8 @@ typedef struct {
 			SegReg es, cs, ss, ds, fs, gs;
 		};
 	};
-	CR0 cr0;  // control register 0
+	CR0 cr0;  // control register
+	CR3 cr3;
 
 } CPU_STATE;
 

@@ -60,7 +60,6 @@ static uint32_t update_res(CacheLine cache[][SET_SIZE], uint32_t res, uint32_t s
 
 
 uint32_t cache_read(paddr_t paddr, size_t len, CacheLine cache[][SET_SIZE]) {
-	// printf("CACHE READ...\n");
 	if (len == 0)
 		return 0;
 
@@ -69,7 +68,6 @@ uint32_t cache_read(paddr_t paddr, size_t len, CacheLine cache[][SET_SIZE]) {
 		 inner_set_index = 0, prev_set_index = -1;  // to judge if in the same block
 	
 	// len <= 4
-	// printf("\nlen = %d\n", len);
 	for(paddr_t cur_addr = paddr+len-1; cur_addr!=paddr-1; --cur_addr) {
 		// printf("cur_addr = 0x%x\n", cur_addr);
 		cache_hit = false;
@@ -80,9 +78,9 @@ uint32_t cache_read(paddr_t paddr, size_t len, CacheLine cache[][SET_SIZE]) {
 		// printf("cur_addr = 0x%x, tag = 0x%x, set = 0x%x, block = 0x%x\n", cur_addr, data_tag, data_set_index, data_block_index);
 
 		if (data_tag > 0x4000 || data_set_index > 128 || data_block_index > 64) {
-			printf("Parsing error! Wrong paddr.\n");
-			printf("EIP = 0x%x\n", cpu.eip);
-			printf("cur_addr = 0x%x, tag = 0x%x, set = 0x%x, block = 0x%x\n", cur_addr, data_tag, data_set_index, data_block_index);
+			printf("Parsing error! Wrong cache addr.\n");
+			// printf("EIP = 0x%x\n", cpu.eip);
+			// printf("cur_addr = 0x%x, tag = 0x%x, set = 0x%x, block = 0x%x\n", cur_addr, data_tag, data_set_index, data_block_index);
 			return 0;
 		}
 
@@ -132,7 +130,7 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data, CacheLine cache[][SET
 		data_block_index = get_block_index(cur_addr);
 		
 		if (data_tag > 0x4000 || data_set_index > 128 || data_block_index > 64) {
-			printf("Parsing error! Wrong paddr.\n");
+			printf("Parsing error! Wrong cache addr.\n");
 			return ;
 		}
 
@@ -155,7 +153,6 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data, CacheLine cache[][SET
 				cache_hit = false;
 		}
 	}
-
 	// write to memory
 	hw_mem_write(paddr, len, data);
 }
