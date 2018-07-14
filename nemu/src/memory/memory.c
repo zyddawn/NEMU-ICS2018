@@ -40,32 +40,25 @@ void paddr_write(paddr_t paddr, size_t len, uint32_t data) {
 uint32_t laddr_read(laddr_t laddr, size_t len) {
 	assert(len == 1 || len == 2 || len == 4);
 	paddr_t hwaddr = laddr;
-	/*
 	if (cpu.cr0.pg && cpu.cr0.pe) {
-		if (TODO) { // data not in a same page
+		if (0)  // data not in a same page
 			assert(0);
-		}
-		else {
+		else
 			hwaddr = page_translate(laddr);
-		}
 	}
-	 */
 	return paddr_read(hwaddr, len);
 }
 
 void laddr_write(laddr_t laddr, size_t len, uint32_t data) {
 	assert(len == 1 || len == 2 || len == 4);
 	paddr_t hwaddr = laddr;
-	/*
-	 if(cpu.cr0.pg && cpu.cr0.pe) {
-	 	if (TODO) { // data not in a same page
+	
+	if(cpu.cr0.pg && cpu.cr0.pe) {
+ 		if (0)   // data not in a same page
 			assert(0);
-		}
-		else {
+		else
 			hwaddr = page_translate(laddr);
-		}
-	 }
-	 */
+	}
 	paddr_write(hwaddr, len, data);
 }
 
