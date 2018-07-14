@@ -44,8 +44,10 @@ uint32_t laddr_read(laddr_t laddr, size_t len) {
 		uint32_t data_start_page = hwaddr & 0xfffff000,
 			 data_end_page = (hwaddr + len - 1) & 0xfffff000;
 		if (data_start_page != data_end_page) {  // data not in a same page
-			printf("not in the same page.\n");
-			assert(0);
+			uint32_t res = 0;
+			while(len--)
+				res = (res << 8) | laddr_read(hwaddr+len-1, 1);
+			return res;
 		}
 		else
 			hwaddr = page_translate(hwaddr);
@@ -60,8 +62,12 @@ void laddr_write(laddr_t laddr, size_t len, uint32_t data) {
 		uint32_t data_start_page = hwaddr & 0xfffff000,
 			 data_end_page = (hwaddr + len - 1) & 0xfffff000;
  		if (data_start_page != data_end_page) {   // data not in a same page
-			printf("not in the same page.\n");
-			assert(0);
+			uint32_t temp = data;
+			for(uint32_t i=0; i<len; ++i) {
+				laddr_write(hwaddr+i, 1, (temp & 0xff));
+				temp >>= 8;
+			}
+			return ;
 		}
 		else
 			hwaddr = page_translate(hwaddr);
