@@ -52,6 +52,7 @@ uint32_t loader() {
 				paddr = mm_malloc(vaddr, PAGE_SIZE);
 				Log("vaddr = 0x%x", vaddr);
 				Log("paddr = 0x%x", paddr);
+				Log("memsz = 0x%x", ph->p_memsz);
 				uint32_t cur_pg_load = PAGE_SIZE - offset;
 				if (cur_pg_load > (ph->p_filesz - total_loaded))  // no need to load from offset to the end of the page
 					cur_pg_load = ph->p_filesz - total_loaded;  // load till reaching the filesz
