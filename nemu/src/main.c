@@ -49,6 +49,7 @@ static char * testcases[] = {
 	"mov-cmp",	// GOOD
 #endif
 	"mov-c",	// GOOD
+#ifndef IA32_PAGE  // DEBUG
 	"mov-jcc",	// GOOD
 	"add",		// GOOD
 	"add-longlong", // GOOD
@@ -77,6 +78,8 @@ static char * testcases[] = {
 	"string",	// GOOD
 	"hello-str", 	// GOOD
 	"test-float",	// --BAD
+#endif
+
 #ifdef IA32_INTR
 	"hello-inline", // INT not implemented
 #endif
