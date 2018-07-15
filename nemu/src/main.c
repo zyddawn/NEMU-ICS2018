@@ -49,9 +49,9 @@ static char * testcases[] = {
 	"mov-cmp",	// GOOD
 #endif
 	"mov-c",	// GOOD
-#ifndef IA32_PAGE  // DEBUG
 	"mov-jcc",	// GOOD
 	"add",		// GOOD
+#ifndef IA32_PAGE	
 	"add-longlong", // GOOD
 	"if-else",	// GOOD
 	"fib",		// GOOD
