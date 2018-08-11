@@ -74,9 +74,6 @@ void print_asm_3(char * instr, char * suffix, uint8_t len, OPERAND * opr_1, OPER
 		return len; \
 	}
 
-// #define xchg_helper
-
-
 
 /*
 // macro for generating the implementation of pop/push instruction

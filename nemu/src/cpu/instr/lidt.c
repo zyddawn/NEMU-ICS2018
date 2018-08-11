@@ -9,3 +9,4 @@ static void instr_execute_1op() {
 }
 
 make_instr_impl_1op(lidt, rm, v)
+
