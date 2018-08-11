@@ -14,7 +14,7 @@ make_instr_func(iret_v) {
 	
 	cpu.eip = origin_eip;	// recover eip
 	cpu.cs.val = origin_cs;
-	load_sreg();   // reload sreg
+	load_sreg(1);   // reload sreg
 	cpu.eflags.val = origin_eflags;
 	return 1;
 }
