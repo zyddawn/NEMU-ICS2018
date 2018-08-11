@@ -11,7 +11,7 @@ make_instr_func(int_i_b) {
 	raise_sw_intr(intr_no);
 
 	// it will not reach here
-	// assert(0);
+	assert(0);
 	return 0;
 }
 
