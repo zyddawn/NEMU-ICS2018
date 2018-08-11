@@ -14,7 +14,6 @@ void *sbrk(int incr) {
 }
 
 int main() {
-	BREAK_POINT
 	sprintf(buf, "%s", "Hello world!\n");
 	nemu_assert(strcmp(buf, "Hello world!\n") == 0);
 	
