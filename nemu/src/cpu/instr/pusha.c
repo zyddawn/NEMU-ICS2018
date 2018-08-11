@@ -3,7 +3,7 @@
 
 static void push_reg(uint32_t reg_data) {
 	cpu.esp -= 4;
-	vaddr_write(cpu.esp, SS, 4, reg_data);
+	vaddr_write(cpu.esp, SREG_SS, 4, reg_data);
 }
 
 make_instr_func(pusha_r_v) {

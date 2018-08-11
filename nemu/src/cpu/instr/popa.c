@@ -2,7 +2,7 @@
 #include "memory/memory.h"
 
 #define pop_reg(reg_name) \
-	reg_name = vaddr_read(cpu.esp, SS, 4); \
+	reg_name = vaddr_read(cpu.esp, SREG_SS, 4); \
 	cpu.esp += 4;
 	
 make_instr_func(popa_r_v) {
