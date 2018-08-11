@@ -2,7 +2,7 @@
 #include "memory/memory.h"
 
 static uint32_t iret_pop() {
-	uint32_t temp = vaddr_read(cpu.esp, SS, 4);
+	uint32_t temp = vaddr_read(cpu.esp, SREG_SS, 4);
 	cpu.esp -= 4;
 	return temp;
 }
