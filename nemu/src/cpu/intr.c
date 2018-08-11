@@ -5,8 +5,6 @@
 
 extern jmp_buf jbuf;
 
-extern void vaddr_write(vaddr_t vaddr, uint8_t sreg, size_t len, uint32_t data);
-
 #define push_helper(data) \
 	cpu.esp -= 4; \
 	vaddr_write(cpu.esp, SREG_SS, 4, data);
@@ -24,8 +22,8 @@ void raise_intr(uint8_t intr_no) {
 	// Find IDT with "intr_no"
 	laddr_t gd_addr = cpu.idtr.base + (intr_no << 3);
 	GateDesc gd;
-	gd.val[0] = laddr_t(gd_addr, 4);
-	gd.val[1] = laddr_t(gd_addr + 4, 4);
+	gd.val[0] = laddr_read(gd_addr, 4);
+	gd.val[1] = laddr_read(gd_addr + 4, 4);
 	
 	// clear IF if it's interrupt gate (type == 6)
 	if (gd.type == 0x6)
