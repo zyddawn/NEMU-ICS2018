@@ -27,8 +27,8 @@ void raise_intr(uint8_t intr_no) {
 	printf("gd[1] = 0x%x\n", gd.val[1]);
 
 	assert(gd.present == 1);
-	// clear IF if it's interrupt gate (type == 6)
-	if (gd.type == 0x6)
+	// clear IF if it's interrupt gate (type == 0xE)
+	if (gd.type == 0xE)
 		cpu.eflags.IF = 0;
 
 	// set eip to the entry of interrupt handler
