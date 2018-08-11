@@ -7,6 +7,7 @@ static void push_reg(uint32_t reg_data) {
 }
 
 make_instr_func(pusha_r_v) {
+	printf("pusha...\n");
 	uint32_t origin_esp = cpu.esp;
 	push_reg(cpu.eax);
 	push_reg(cpu.edx);
