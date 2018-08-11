@@ -32,6 +32,10 @@ void init_cpu(const uint32_t init_eip) {
 #ifdef IA32_SEG
 	cpu.gdtr.limit = 0x0;
 	cpu.gdtr.base = 0x0;
+#ifdef IA32_INTR
+	cpu.idtr.limit = 0x0;
+	cpu.idtr.base = 0x0;
+#endif
 	cpu.cr0.val = 0x0;
 	for(i = 0; i < 6; ++i) {
 		// Not sure about the order

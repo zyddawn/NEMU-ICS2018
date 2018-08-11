@@ -16,6 +16,8 @@ make_instr_func(iret_v) {
 	cpu.cs.val = origin_cs;
 	load_sreg(1);   // reload sreg
 	cpu.eflags.val = origin_eflags;
+	
+	
 	return 1;
 }
 
