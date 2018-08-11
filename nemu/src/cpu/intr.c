@@ -1,6 +1,7 @@
 #include "cpu/intr.h"
 #include "cpu/instr.h"
 #include "memory/memory.h"
+#include <setjmp.h>
 
 extern jmp_buf jbuf;
 
