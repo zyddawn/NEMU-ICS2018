@@ -44,6 +44,7 @@ static void restart(const uint32_t init_eip) {
 
 
 static char * testcases[] = {
+/*
 #ifndef IA32_PAGE
 	"mov",		// GOOD
 	"mov-cmp",	// GOOD
@@ -77,6 +78,7 @@ static char * testcases[] = {
 	"string",	// GOOD
 	"hello-str", 	// GOOD
 	"test-float",	// --BAD
+*/
 
 #ifdef IA32_INTR
 	"hello-inline", // INT not implemented
