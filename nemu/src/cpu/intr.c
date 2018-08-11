@@ -1,9 +1,6 @@
 #include "cpu/intr.h"
 #include "cpu/instr.h"
 #include "memory/memory.h"
-#include <setjmp.h>
-
-extern jmp_buf jbuf;
 
 #define push_helper(data) \
 	cpu.esp -= 4; \
@@ -36,9 +33,6 @@ void raise_intr(uint8_t intr_no) {
 	cpu.cs.val = new_cs;
 	load_sreg(1);	// reload CS
 	
-	longjmp(jbuf, 1);
-	// will not reach here
-	assert(0);
 #endif
 }
 
