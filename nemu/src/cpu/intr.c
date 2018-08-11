@@ -22,6 +22,7 @@ void raise_intr(uint8_t intr_no) {
 	gd.val[0] = laddr_read(gd_addr, 4);
 	gd.val[1] = laddr_read(gd_addr + 4, 4);
 	
+	printf("gd present = %d\n", gd.present);
 	// clear IF if it's interrupt gate (type == 6)
 	if (gd.type == 0x6)
 		cpu.eflags.IF = 0;
