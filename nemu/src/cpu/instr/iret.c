@@ -18,7 +18,7 @@ make_instr_func(iret_v) {
 	cpu.eflags.val = origin_eflags;
 	
 	
-	return 1;
+	return 0;
 }
 
 
