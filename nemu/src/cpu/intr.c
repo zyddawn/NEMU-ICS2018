@@ -28,7 +28,7 @@ void raise_intr(uint8_t intr_no) {
 
 	assert(idt.present == 1);
 	// clear IF if it's interrupt gate (type == 0xE)
-	if (gd.type == 0xE)
+	if (idt.type == 0xE)
 		cpu.eflags.IF = 0;
 
 	// set eip to the entry of interrupt handler
