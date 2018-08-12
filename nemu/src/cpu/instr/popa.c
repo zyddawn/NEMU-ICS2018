@@ -6,7 +6,7 @@
 	cpu.esp += 4;
 	
 make_instr_func(popa_r_v) {
-	printf("popa...\n");
+	// printf("popa...\n");
 	pop_reg(cpu.edi)
 	pop_reg(cpu.esi)
 	pop_reg(cpu.ebp)
