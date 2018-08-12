@@ -73,7 +73,7 @@ write_idtr(void *addr, uint32_t size) {
 	data[0] = size - 1;
 	data[1] = (uint32_t)addr;
 	data[2] = ((uint32_t)addr) >> 16;
-	printf("idtr data1 = 0x%x, data2 = 0x%x, data3 = 0x%x\n", data[0], data[1], data[2]);
+	Log("idtr data1 = 0x%x, data2 = 0x%x, data3 = 0x%x\n", data[0], data[1], data[2]);
 	asm volatile("lidt (%0)" : : "r"(data));
 }
 
