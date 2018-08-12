@@ -15,7 +15,7 @@ static void instr_execute_1op() {
 }
 
 
-make_instr_impl_1op(lgdt, rm, v)
+make_instr_impl_1op(lgdt, i, v)
 
 
 
