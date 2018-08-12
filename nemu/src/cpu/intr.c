@@ -26,7 +26,7 @@ void raise_intr(uint8_t intr_no) {
 	gd.val[1] = paddr_read(gd_addr + 4, 4);
 	printf("gd[1] = 0x%x\n", gd.val[1]);
 
-	assert(gd.present == 1);
+	// assert(gd.present == 1);
 	// clear IF if it's interrupt gate (type == 0xE)
 	if (gd.type == 0xE)
 		cpu.eflags.IF = 0;
