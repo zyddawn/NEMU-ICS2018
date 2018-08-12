@@ -5,6 +5,7 @@ static void instr_execute_1op() {
 	printf("Calling LGDT.\n");
 	operand_read(&opr_src);
 	laddr_t mem_addr = opr_src.val;
+	printf("addr = 0x%x\n", mem_addr);
 	cpu.gdtr.limit = laddr_read(mem_addr, 2) & 0xffff;
 	printf("gdtr limit = 0x%x\n", cpu.gdtr.limit);
 	cpu.gdtr.base =  laddr_read(mem_addr + 2, 4) & 0xffffffff;
