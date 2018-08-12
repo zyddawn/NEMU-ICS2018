@@ -24,10 +24,10 @@ paddr_t page_walk(laddr_t laddr) {
 
 	PDE pde;
 	pde.val	= paddr_read(pdir_base + addr->pdir_idx * 4, 4);
-	if(!pde.present) {
+	/*if(!pde.present) {
 		printf("eip = %x, lnaddr = %x, pdir_base = %x, pde = %x\n", cpu.eip, laddr, pdir_base, pde.val);
 		assert(0);
-	}
+	}*/
 	assert(pde.present);
 
 	paddr_t pt_base = pde.val & ~PAGE_MASK;

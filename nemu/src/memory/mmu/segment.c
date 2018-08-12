@@ -20,7 +20,6 @@ void load_sreg(uint8_t sreg) {
 	 */
 	SegDesc cur_seg;
        	laddr_t addr = (laddr_t)cpu.gdtr.base + (cpu.segReg[sreg].index << 3);
-	printf("gdtr = 0x%x, sreg_id = 0x%x, addr = 0x%x\n", cpu.gdtr.base, cpu.segReg[sreg].index, addr);
 	cur_seg.val[0] = laddr_read(addr, 4);
 	cur_seg.val[1] = laddr_read(addr + 4, 4);
 	
