@@ -3,7 +3,7 @@
 
 static void instr_execute_1op() {
 	// printf("lgdt...\n");
-	laddr_t mem_addr = opr_src.val;
+	laddr_t mem_addr = opr_src.addr;
 	// printf("mem_addr = 0x%x\n", mem_addr);
 	cpu.gdtr.limit = laddr_read(mem_addr, 2) & 0xffff;
 	// printf("gdtr limit = 0x%x\n", cpu.gdtr.limit);
