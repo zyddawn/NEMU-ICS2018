@@ -83,8 +83,8 @@ void init_idt() {
 	set_intr(idt+32 + 14, SEG_KERNEL_CODE << 3, (uint32_t)irq14, DPL_KERNEL);
 
 	/* the ``idt'' is its virtual address */
-	printf("before: idt.present = %d\n", (*idt).present);
+	Log("before: idt.present = %d\n", (*idt).present);
 	write_idtr(idt, sizeof(idt));
-	printf("after: idt.present = %d\n", (*idt).present);
+	Log("after: idt.present = %d\n", (*idt).present);
 	sti();
 }
