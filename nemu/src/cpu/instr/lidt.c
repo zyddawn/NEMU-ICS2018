@@ -3,7 +3,7 @@
 
 static void instr_execute_1op() {
 	// printf("lidt..\n");
-	OPERAND_READ(&opr_src);
+	operand_read(&opr_src);
 	printf("src.val = 0x%x\n", opr_src.val);
 	laddr_t mem_addr = opr_src.val;
 	// printf("mem_addr = 0x%x\n", mem_addr);
