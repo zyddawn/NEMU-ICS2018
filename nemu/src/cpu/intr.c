@@ -1,9 +1,6 @@
 #include "cpu/intr.h"
 #include "cpu/instr.h"
 #include "memory/memory.h"
-#include <setjmp-dj.h>
-
-extern jmp_buf jbuf;
 
 #define push_helper(data) \
 	cpu.esp -= 4; \
