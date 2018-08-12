@@ -21,9 +21,9 @@ void raise_intr(uint8_t intr_no) {
 	printf("idtr = 0x%08x, intr_no = 0x%x, gd_addr = 0x%x\n", cpu.idtr.base, intr_no, gd_addr);
 
 	GateDesc gd;
-	gd.val[0] = laddr_read(gd_addr, 4);
+	gd.val[0] = paddr_read(gd_addr, 4);
 	printf("gd[0] = 0x%x\n", gd.val[0]);
-	gd.val[1] = laddr_read(gd_addr + 4, 4);
+	gd.val[1] = paddr_read(gd_addr + 4, 4);
 	printf("gd[1] = 0x%x\n", gd.val[1]);
 
 	assert(gd.present == 1);
