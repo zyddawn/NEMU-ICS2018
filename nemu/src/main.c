@@ -44,6 +44,7 @@ static void restart(const uint32_t init_eip) {
 
 
 static char * testcases[] = {
+/*
 #ifndef IA32_PAGE
 	"mov",		// GOOD
 	"mov-cmp",	// GOOD
@@ -67,7 +68,7 @@ static char * testcases[] = {
 	"gotbaha",	// GOOD
 	"leap-year",	// GOOD
 	"matrix-mul-small",	// GOOD
-	// "matrix-mul",	// GOOD
+	"matrix-mul",	// GOOD
 	"mul-longlong", // GOOD
 	"prime",	// GOOD
 	"shuixianhua",	// GOOD
@@ -75,6 +76,7 @@ static char * testcases[] = {
 	"wanshu",	// GOOD
 	"struct",	// GOOD
 	"string",	// GOOD
+*/	
 	"hello-str", 	// GOOD
 	"test-float",	// --BAD
 #ifdef IA32_INTR
