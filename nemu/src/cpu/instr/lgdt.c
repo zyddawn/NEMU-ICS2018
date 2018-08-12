@@ -12,7 +12,7 @@ static void instr_execute_1op() {
 	if (data_size == 16)
 		cpu.gdtr.base &= 0x00ffffff;
 		// not sure if it's correct
-	printf("gdtr: limit = 0x%x, base = 0x%x\n", cpu.gdtr.limit, cpu.gdtr.base)	
+	printf("gdtr: limit = 0x%x, base = 0x%x\n", cpu.gdtr.limit, cpu.gdtr.base);	
 }
 
 
