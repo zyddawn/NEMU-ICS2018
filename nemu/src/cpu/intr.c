@@ -17,23 +17,23 @@ void raise_intr(uint8_t intr_no) {
 	push_helper(cpu.eip)
 
 	// Find IDT with "intr_no"
-	laddr_t gd_addr = cpu.idtr.base | (intr_no << 3);
+	laddr_t idt_addr = (laddr_t)cpu.idtr.base | (intr_no << 3);
 	// printf("idtr = 0x%08x, intr_no = 0x%x, gd_addr = 0x%x\n", cpu.idtr.base, intr_no, gd_addr);
 
-	GateDesc gd;
-	gd.val[0] = laddr_read(gd_addr, 4);
+	GateDesc idt;
+	idt.val[0] = laddr_read(idt_addr, 4);
 	// printf("gd[0] = 0x%x\n", gd.val[0]);
-	gd.val[1] = laddr_read(gd_addr + 4, 4);
+	idt.val[1] = laddr_read(idt_addr + 4, 4);
 	// printf("gd[1] = 0x%x\n", gd.val[1]);
 
-	assert(gd.present == 1);
+	assert(idt.present == 1);
 	// clear IF if it's interrupt gate (type == 0xE)
 	if (gd.type == 0xE)
 		cpu.eflags.IF = 0;
 
 	// set eip to the entry of interrupt handler
-	uint32_t new_eip = (gd.offset_15_0 & 0xffff) | ((gd.offset_31_16 & 0xffff) << 16),
-		 new_cs = gd.selector;
+	uint32_t new_eip = (idt.offset_15_0 & 0xffff) | ((idt.offset_31_16 & 0xffff) << 16),
+		 new_cs = idt.selector;
 	cpu.eip = new_eip;  // update eip
 	cpu.cs.val = new_cs;
 	load_sreg(1);	// reload CS
