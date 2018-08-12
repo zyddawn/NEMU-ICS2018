@@ -2,10 +2,10 @@
 #include "memory/memory.h"
 
 static void instr_execute_1op() {
-	// printf("lidt..\n");
+	printf("lidt..\n");
 	operand_read(&opr_src);
 	printf("src.val = 0x%x\n", opr_src.val);
-	laddr_t mem_addr = opr_src.val;
+	laddr_t mem_addr = opr_src.addr;
 	// printf("mem_addr = 0x%x\n", mem_addr);
 	cpu.idtr.limit = laddr_read(mem_addr, 2) & 0xffff;
 	cpu.idtr.base = laddr_read(mem_addr + 2, 4) & 0xffffffff;
