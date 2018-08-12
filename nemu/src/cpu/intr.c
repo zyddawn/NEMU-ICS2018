@@ -22,9 +22,9 @@ void raise_intr(uint8_t intr_no) {
 
 	GateDesc idt;
 	idt.val[0] = laddr_read(idt_addr, 4);
-	// printf("idt[0] = 0x%x\n", idt.val[0]);
+	printf("idt[0] = 0x%x\n", idt.val[0]);
 	idt.val[1] = laddr_read(idt_addr + 4, 4);
-	// printf("idt[1] = 0x%x\n", idt.val[1]);
+	printf("idt[1] = 0x%x\n", idt.val[1]);
 
 	assert(idt.present == 1);
 	// clear IF if it's interrupt gate (type == 0xE)
