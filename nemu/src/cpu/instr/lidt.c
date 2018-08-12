@@ -1,4 +1,5 @@
 #include "cpu/instr.h"
+#include "memory/memory.h"
 
 static void instr_execute_1op() {
 	printf("lidt..\n");
