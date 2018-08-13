@@ -33,6 +33,9 @@ void init_cpu(const uint32_t init_eip) {
 	cpu.gdtr.limit = 0x0;
 	cpu.gdtr.base = 0x0;
 	cpu.cr0.val = 0x0;
+#ifdef HAS_DEVICE_TIMER
+	cpu.intr = 0;
+#endif
 	for(i = 0; i < 6; ++i) {
 		// Not sure about the order
 		cpu.segReg[i].val = 0x0;
