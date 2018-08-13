@@ -116,9 +116,7 @@ typedef struct {
 	};
 	CR0 cr0;  // control register
 	CR3 cr3;
-#ifdef HAS_DEVICE_TIMER
 	uint8_t intr;
-#endif
 
 } CPU_STATE;
 
