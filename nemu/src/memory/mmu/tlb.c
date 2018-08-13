@@ -28,7 +28,7 @@ paddr_t page_walk(laddr_t laddr) {
 		printf("eip = %x, lnaddr = %x, pdir_base = %x, pde = %x\n", cpu.eip, laddr, pdir_base, pde.val);
 		assert(0);
 	}*/
-	assert(pde.present);
+	// assert(pde.present);
 
 	paddr_t pt_base = pde.val & ~PAGE_MASK;
 	PTE pte;
@@ -37,7 +37,7 @@ paddr_t page_walk(laddr_t laddr) {
 		Log("eip = %x, lnaddr = %x, pt_base = %x, pte = %x", cpu.eip, lnaddr, pt_base, pte.val);
 		assert(0);
 	}*/
-	assert(pte.present);
+	// assert(pte.present);
 
 	return pte.val;
 }
