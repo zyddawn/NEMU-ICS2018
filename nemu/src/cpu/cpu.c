@@ -81,7 +81,7 @@ void exec(uint32_t n) {
 
 		cpu.eip += instr_len;
 		n--;
-
+		
 #ifdef DEBUG
 		if(cpu.eip == 0x30005) {
 			for_debug = true;
@@ -121,8 +121,9 @@ void exec(uint32_t n) {
 		}
 
 #ifdef HAS_DEVICE_TIMER
-		printf("\nPlease call do_intr() here\n");
-		assert(0);
+		do_intr();
+		// printf("\nPlease call do_intr() here\n");
+		// assert(0);
 #endif
 	}
 	if(nemu_state == NEMU_STOP)
