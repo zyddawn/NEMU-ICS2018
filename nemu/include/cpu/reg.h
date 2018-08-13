@@ -116,7 +116,7 @@ typedef struct {
 	};
 	CR0 cr0;  // control register
 	CR3 cr3;
-	// uint8_t intr;
+	uint8_t intr;
 
 } CPU_STATE;
 
