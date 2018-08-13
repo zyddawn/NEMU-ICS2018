@@ -79,7 +79,6 @@ void exec(uint32_t n) {
 
 		// printf("cur eip = 0x%x, instr len = 0x%x, next eip = 0x%x\n", cpu.eip, instr_len, cpu.eip + instr_len);	
 
-		printf("eip = 0x%x\n", cpu.eip);
 		cpu.eip += instr_len;
 		n--;
 		
