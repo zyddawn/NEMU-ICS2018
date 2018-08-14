@@ -8,6 +8,8 @@
 #include "cpu/alu.h"
 #include "cpu/reg_fpu.h"
 
+#include <setjmp.h>
+
 extern CPU_STATE cpu;
 
 extern jmp_buf jmpbuf;
