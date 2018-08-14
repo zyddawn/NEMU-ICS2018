@@ -18,7 +18,7 @@ CPU_STATE cpu;
 FPU fpu;
 int nemu_state;
 
-jmp_buf jbuf;
+jmp_buf jmpbuf;
 
 #define sign(x) ((uint32_t)(x) >> 31)
 
@@ -71,7 +71,7 @@ void exec(uint32_t n) {
 	nemu_state = NEMU_RUN;
 
 	// bool for_debug = false; // FOR DEBUG
-	setjmp(buf);
+	setjmp(jmpbuf);
 
 	while( n > 0 && nemu_state == NEMU_RUN) {
 
