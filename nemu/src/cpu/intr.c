@@ -29,7 +29,7 @@ void raise_intr(uint8_t intr_no) {
 	idt.val[1] = laddr_read((laddr_t)(idt_addr + 4), 4);
 	// printf("idt[1] = 0x%x\n", idt.val[1]);
 
-	assert(idt.present == 1);
+	// assert(idt.present == 1);
 	// clear IF if it's interrupt gate (type == 0xE)
 	if (idt.type == 0xE)
 		cpu.eflags.IF = 0;
