@@ -11,7 +11,7 @@ make_instr_func(in_b) {
 
 
 make_instr_func(in_v) {
-	cpu.eax = pio_read((uint16_t)cpu.edx, 4)
+	cpu.eax = pio_read((uint16_t)cpu.edx, 4);
 	return 1;
 }
 
