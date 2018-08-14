@@ -59,5 +59,7 @@ extern uint8_t data_size;
 #include "cpu/instr/pusha.h"
 #include "cpu/instr/popa.h"
 #include "cpu/instr/iret.h"
+#include "cpu/instr/in.h"
+#include "cpu/instr/out.h"
 
 #endif
