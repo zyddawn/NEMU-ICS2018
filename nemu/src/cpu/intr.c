@@ -2,6 +2,9 @@
 #include "cpu/instr.h"
 #include "memory/memory.h"
 
+#include "cpu/cpu.h"
+extern jmp_buf jmpbuf;
+
 #define push_helper(data) \
 	cpu.esp -= 4; \
 	vaddr_write(cpu.esp, SREG_SS, 4, data);
@@ -38,6 +41,7 @@ void raise_intr(uint8_t intr_no) {
 	cpu.cs.val = new_cs;
 	load_sreg(1);	// reload CS
 	
+	longjmp(jmpbuf, 1);
 #endif
 }
 

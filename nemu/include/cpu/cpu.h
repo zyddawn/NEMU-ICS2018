@@ -10,6 +10,8 @@
 
 extern CPU_STATE cpu;
 
+extern jmp_buf jmpbuf;
+
 // initialize the cpu states
 void init_cpu();
 
