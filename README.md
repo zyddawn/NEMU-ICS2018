@@ -17,6 +17,9 @@ https://cs.nju.edu.cn/wangliang/pa2018_spring.html
 -----------------------------------------------------------------------------------
 ## NEMU Project
 
+<img src="./framework.png" width="75%">.
+
+
 ### NEMU
 NEMU(NJU Emulator) is a simple but complete full-system x86 emulator designed for teaching. It is the main part of this programming assignment. Small x86 programs can run under NEMU. The main features of NEMU include
 * a small monitor with a simple debugger
